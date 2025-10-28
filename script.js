@@ -10,6 +10,7 @@ changeTheme.addEventListener("click", () => {
       '<span style="font-weight: bold;">☾</span> Change theme';
   }
 });
+
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmEmail = document.getElementById("confirm-email");
@@ -39,18 +40,21 @@ if (confirmPassword) {
     }
   });
 }
+
 const showPassword = document.getElementById("show-password");
 const showConfirmPassword = document.getElementById("show-confirm-password");
 
-showPassword.addEventListener("click", () => {
-  password.type === "password"
-    ? (password.type = "text")
-    : (password.type = "password");
+if (showPassword) {
+  showPassword.addEventListener("click", () => {
+    password.type === "password"
+      ? (password.type = "text")
+      : (password.type = "password");
 
-  password.type === "password"
-    ? showPassword.classList.remove("hidden")
-    : showPassword.classList.add("hidden");
-});
+    password.type === "password"
+      ? showPassword.classList.remove("hidden")
+      : showPassword.classList.add("hidden");
+  });
+}
 
 if (showConfirmPassword) {
   showConfirmPassword.addEventListener("click", () => {
@@ -58,10 +62,8 @@ if (showConfirmPassword) {
       ? (confirmPassword.type = "text")
       : (confirmPassword.type = "password");
 
-     confirmPassword.type === "password"
-    ? showConfirmPassword.classList.remove("hidden")
-    : showConfirmPassword.classList.add("hidden");
-
-
+    confirmPassword.type === "password"
+      ? showConfirmPassword.classList.remove("hidden")
+      : showConfirmPassword.classList.add("hidden");
   });
 }
