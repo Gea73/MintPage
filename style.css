@@ -1,0 +1,215 @@
+/* ===================== */
+/*      GLOBAL RESET         */
+/* ===================== */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* ===================== */
+/*       VARIABLES       */
+/* ===================== */
+:root {
+    --color-background: #0E1111;
+    --color-background-glass: rgba(40, 70, 70, 0.4);
+    --font-main: "Rubik", sans-serif;
+    --text-active: aliceblue;
+    --color-main: #00C6A7;
+    --color-text-input: #E6FDF9;
+    --color-border-input: rgba(163, 156, 156, 0.25);
+}
+
+:root.light {
+    --color-background: #F5F7FA;
+    --color-background-glass: rgba(172, 197, 197, 0.15);
+    --color-text-input: #2C3E50;
+    --color-main: #009688;
+    --text-active: #00796B;
+    --color-border-input: #009688;
+}
+
+/* ===================== */
+/*        BODY           */
+/* ===================== */
+body {
+    font-family: var(--font-main);
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+}
+
+/* ===================== */
+/*       LOGO , TITLE    */
+/* ===================== */
+.logo {
+    width: 50%;
+}
+
+.title__container {
+    margin-top: 2rem;
+    color: var(--color-main);
+    text-align: center;
+}
+
+/* ===================== */
+/*   CHANGE THEME       */
+/* ===================== */
+.change-theme {
+    color: var(--color-main);
+    margin-top: 0.5rem;
+    font-size: 0.90rem;
+    transition: transform 0.3s ease, color 0.15s ease;
+}
+
+.change-theme:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.change-theme:active {
+    color: var(--text-active);
+}
+
+/* ===================== */
+/*       FORM CONTAINER  */
+/* ===================== */
+.login-form__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: var(--color-background-glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin-top: 2rem;
+    padding-top: 2rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-bottom: 5rem;
+    border-radius: 15px;
+}
+
+/* ===================== */
+/*       FORM FIELDS     */
+/* ===================== */
+.login-form__field {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+
+}
+
+.login-form__field label {
+    text-transform: uppercase;
+    color: var(--color-main);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.login-form__field input {
+    width: 17rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-input);
+
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-align: center;
+
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+
+    border: 1px solid var(--color-border-input);
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+
+    outline: none;
+}
+
+.login-form__field input::placeholder {
+    font-style: italic;
+}
+
+.login-form__field input:focus {
+    border-color: var(--color-main);
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.07);
+}
+
+.login-form__field input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--color-background-glass) inset;
+    -webkit-text-fill-color: var(--color-text-input);
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ===================== */
+/*      LOGIN BUTTONS     */
+/* ===================== */
+.login-form__buttons {
+    padding: 1rem;
+}
+
+.login-btn {
+    text-transform: uppercase;
+    color: white;
+    font-style: italic;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+    padding: 0.5rem;
+    border: 1px solid var(--color-main);
+    border-radius: 5px;
+    background-color: var(--color-main);
+    transition: transform 0.3s ease, background-color 0.15s ease;
+}
+
+.login-btn:hover {
+    cursor: pointer;
+    transform: scale(1.07);
+    box-shadow: 0 0 5px rgba(2, 227, 200, 0.4);
+}
+
+.login-btn:active {
+    background-color: aliceblue;
+}
+
+/* ===================== */
+/*     FORGOT PASSWORD   */
+/* ===================== */
+.forgot-password {
+    display: inline-block;
+    font-size: small;
+    color: var(--color-main);
+    transition: transform 0.3s ease, color 0.15s ease;
+}
+
+.forgot-password:hover {
+    transform: scale(1.07);
+    cursor: pointer;
+}
+
+.forgot-password:active {
+    color: aliceblue;
+}
+
+.error-message {
+    margin-top: 3px;
+    font-size: small;
+    color: rgb(230, 69, 69);
+    font-style: italic;
+}
+
+
+.password__wrapper{
+    position: relative;
+}
+.show-password-icon {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color:var(--color-main);
+}
