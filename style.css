@@ -76,7 +76,7 @@ body {
 /* ===================== */
 /*       FORM CONTAINER  */
 /* ===================== */
-.login-form__container {
+.form__container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,21 +95,21 @@ body {
 /* ===================== */
 /*       FORM FIELDS     */
 /* ===================== */
-.login-form__field {
+.form__field {
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
 
 }
 
-.login-form__field label {
+.form__field label {
     text-transform: uppercase;
     color: var(--color-main);
     font-style: italic;
     margin-bottom: 1rem;
 }
 
-.login-form__field input {
+.form__field input {
     width: 17rem;
     background-color: rgba(255, 255, 255, 0.05);
     color: var(--color-text-input);
@@ -129,17 +129,17 @@ body {
     outline: none;
 }
 
-.login-form__field input::placeholder {
+.form__field input::placeholder {
     font-style: italic;
 }
 
-.login-form__field input:focus {
+.form__field input:focus {
     border-color: var(--color-main);
     background-color: rgba(255, 255, 255, 0.1);
     transform: scale(1.07);
 }
 
-.login-form__field input:-webkit-autofill {
+.form__field input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px var(--color-background-glass) inset;
     -webkit-text-fill-color: var(--color-text-input);
     transition: background-color 5000s ease-in-out 0s;
@@ -148,11 +148,11 @@ body {
 /* ===================== */
 /*      LOGIN BUTTONS     */
 /* ===================== */
-.login-form__buttons {
+.form__buttons {
     padding: 1rem;
 }
 
-.login-btn {
+.standard-btn {
     text-transform: uppercase;
     color: white;
     font-style: italic;
@@ -165,13 +165,13 @@ body {
     transition: transform 0.3s ease, background-color 0.15s ease;
 }
 
-.login-btn:hover {
+.standard-btn:hover {
     cursor: pointer;
     transform: scale(1.07);
     box-shadow: 0 0 5px rgba(2, 227, 200, 0.4);
 }
 
-.login-btn:active {
+.standard-btn:active {
     background-color: aliceblue;
 }
 
