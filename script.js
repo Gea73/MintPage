@@ -46,6 +46,10 @@ showPassword.addEventListener("click", () => {
   password.type === "password"
     ? (password.type = "text")
     : (password.type = "password");
+
+  password.type === "password"
+    ? showPassword.classList.remove("hidden")
+    : showPassword.classList.add("hidden");
 });
 
 if (showConfirmPassword) {
@@ -53,5 +57,11 @@ if (showConfirmPassword) {
     confirmPassword.type === "password"
       ? (confirmPassword.type = "text")
       : (confirmPassword.type = "password");
+
+     confirmPassword.type === "password"
+    ? showConfirmPassword.classList.remove("hidden")
+    : showConfirmPassword.classList.add("hidden");
+
+
   });
 }
