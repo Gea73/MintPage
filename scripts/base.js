@@ -1,4 +1,6 @@
 const changeTheme = document.querySelector('.change-theme');
+
+if(changeTheme){
 changeTheme.addEventListener("click", () => {
   const root = document.documentElement;
   if (root.classList.contains("light")) {
@@ -10,3 +12,4 @@ changeTheme.addEventListener("click", () => {
       '<span style="font-weight: bold;">☾</span> Change theme';
   }
 });
+}

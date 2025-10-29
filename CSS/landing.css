@@ -4,6 +4,8 @@
 body {
     background-color: var(--color-background);
     font-family: var(--font-main);
+    user-select: none;
+
 }
 
 
@@ -23,9 +25,33 @@ a {
     width: 100%;
     background-color: var(--color-background-glass);
 
+
+
 }
 
+.header__container p {
+    color: var(--color-main);
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(90deg,
+            #00c6a7 0%,
+            #ffffff 50%,
+            #00c6a7 100%);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.7s ease;
+
+}
+
+.header__container p:hover {
+    background-position: 200%;
+    cursor: pointer;
+}
+
+
 .header__logo {
+
     text-align: center;
 }
 
@@ -42,6 +68,8 @@ a {
     margin-top: 1rem;
     text-align: center;
     justify-items: center;
+
+
 }
 
 .nav__container ul {
@@ -49,10 +77,13 @@ a {
     display: flex;
     flex-direction: row;
     gap: 3rem;
+
+
 }
 
 .nav__list {
     color: var(--color-main);
+
 }
 
 .nav__list li {
@@ -61,4 +92,36 @@ a {
 
 .nav__list li:hover {
     transform: scale(1.25);
+}
+
+/*=============================*/
+/*        CAROUSEL               */
+/*=============================*/
+.carousel__container {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel__image {
+    width: 1400px;
+    height: 550px;
+    border: 1px outset var(--color-main);
+}
+
+/*=============================*/
+/*        FOOTER               */
+/*=============================*/
+
+.footer__container {
+    padding: 0.3rem;
+    background-color: var(--color-background-glass);
+    text-align: center;
+}
+
+.footer__text {
+    font-size: small;
+    color: var(--color-main);
 }
