@@ -1,15 +1,3 @@
-const changeTheme = document.querySelector(".change-theme");
-changeTheme.addEventListener("click", () => {
-  const root = document.documentElement;
-  if (root.classList.contains("light")) {
-    root.classList.remove("light");
-    changeTheme.innerHTML = "☀ Change theme";
-  } else {
-    root.classList.add("light");
-    changeTheme.innerHTML =
-      '<span style="font-weight: bold;">☾</span> Change theme';
-  }
-});
 
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -51,8 +39,8 @@ if (showPassword) {
       : (password.type = "password");
 
     password.type === "password"
-      ? showPassword.classList.remove("hidden")
-      : showPassword.classList.add("hidden");
+      ? showPassword.classList.remove("unhidden")
+      : showPassword.classList.add("unhidden");
   });
 }
 
@@ -63,7 +51,7 @@ if (showConfirmPassword) {
       : (confirmPassword.type = "password");
 
     confirmPassword.type === "password"
-      ? showConfirmPassword.classList.remove("hidden")
-      : showConfirmPassword.classList.add("hidden");
+      ? showConfirmPassword.classList.remove("unhidden")
+      : showConfirmPassword.classList.add("unhidden");
   });
 }

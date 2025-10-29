@@ -1,0 +1,64 @@
+/*=============================*/
+/*        BODY                 */
+/*=============================*/
+body {
+    background-color: var(--color-background);
+    font-family: var(--font-main);
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/*=============================*/
+/*        HEADER               */
+/*=============================*/
+
+.header__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--color-background-glass);
+
+}
+
+.header__logo {
+    text-align: center;
+}
+
+.header__logo img {
+    max-width: 60%;
+    height: auto;
+}
+
+/*=============================*/
+/*        NAV               */
+/*=============================*/
+
+.nav__container {
+    margin-top: 1rem;
+    text-align: center;
+    justify-items: center;
+}
+
+.nav__container ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.nav__list {
+    color: var(--color-main);
+}
+
+.nav__list li {
+    transition: transform 0.3s ease;
+}
+
+.nav__list li:hover {
+    transform: scale(1.25);
+}

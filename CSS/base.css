@@ -1,0 +1,101 @@
+/* ===================== */
+/*      GLOBAL RESET         */
+/* ===================== */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+/* ===================== */
+/*       VARIABLES       */
+/* ===================== */
+:root {
+    --color-background: #0E1111;
+    --color-background-glass: rgba(40, 70, 70, 0.4);
+    --font-main: "Rubik", sans-serif;
+    --text-active: aliceblue;
+    --color-main: #00C6A7;
+    --color-text-input: #E6FDF9;
+    --color-border-input: rgba(163, 156, 156, 0.25);
+}
+
+:root.light {
+    --color-background: #F5F7FA;
+    --color-background-glass: rgba(172, 197, 197, 0.15);
+    --color-text-input: #2C3E50;
+    --color-main: #009688;
+    --text-active: #00796B;
+    --color-border-input: #009688;
+}
+
+
+
+/* ===================== */
+/*       LOGO , TITLE    */
+/* ===================== */
+.logo {
+    width: 50%;
+    transition: transform 0.5s ease;
+}
+
+.logo:hover {
+    transform: scale(1.25);
+
+}
+
+.title__container {
+    margin-top: 2rem;
+    color: var(--color-main);
+    text-align: center;
+}
+
+/* ===================== */
+/*   CHANGE THEME       */
+/* ===================== */
+.change-theme {
+    color: var(--color-main);
+    margin-top: 0.5rem;
+    font-size: 0.90rem;
+    transition: transform 0.3s ease, color 0.15s ease;
+}
+
+.change-theme:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.change-theme:active {
+    color: var(--text-active);
+}
+
+
+/* ===================== */
+/*      BUTTONS     */
+/* ===================== */
+.form__buttons {
+    padding: 1rem;
+}
+
+.standard-btn {
+    text-transform: uppercase;
+    color: white;
+    font-style: italic;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+    padding: 0.5rem;
+    border: 1px solid var(--color-main);
+    border-radius: 5px;
+    background-color: var(--color-main);
+    transition: transform 0.3s ease, background-color 0.15s ease;
+}
+
+.standard-btn:hover {
+    cursor: pointer;
+    transform: scale(1.07);
+    box-shadow: 0 0 5px rgba(2, 227, 200, 0.4);
+}
+
+.standard-btn:active {
+    background-color: aliceblue;
+}
