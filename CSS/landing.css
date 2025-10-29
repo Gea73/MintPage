@@ -35,7 +35,7 @@ a {
     font-weight: bold;
     background: linear-gradient(90deg,
             #00c6a7 0%,
-            #ffffff 50%,
+            #bfdfdd 50%,
             #00c6a7 100%);
     background-size: 200%;
     -webkit-background-clip: text;
@@ -87,13 +87,24 @@ a {
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    
-    
+
+
 }
-.nav__btns button{
-   
-font-size: 0.8rem;
-margin:0.10rem 0.15rem 0 0.15rem;
+
+.nav__change-theme {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 1rem;
+    padding-bottom: 0.5rem;
+
+}
+
+.nav__btns button {
+
+    font-size: 0.8rem;
+    margin: 0.10rem 0.15rem 0 0.15rem;
 }
 
 
