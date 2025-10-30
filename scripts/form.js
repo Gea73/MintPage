@@ -1,4 +1,3 @@
-
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const confirmEmail = document.getElementById("confirm-email");
@@ -6,7 +5,15 @@ const confirmPassword = document.getElementById("confirm-password");
 const emailError = document.getElementById("email-error");
 const passwordError = document.getElementById("password-error");
 
-if (confirmEmail) {
+if (email && confirmEmail) {
+  email.addEventListener("input", () => {
+    if (confirmEmail.value === email.value || confirmEmail.value === "") {
+      emailError.textContent = "";
+    } else {
+      emailError.textContent = "Emails don't match";
+    }
+  });
+
   confirmEmail.addEventListener("input", () => {
     if (confirmEmail.value === email.value || confirmEmail.value === "") {
       emailError.textContent = "";
@@ -16,7 +23,18 @@ if (confirmEmail) {
   });
 }
 
-if (confirmPassword) {
+if (password && confirmPassword) {
+  password.addEventListener("input", () => {
+    if (
+      confirmPassword.value === password.value ||
+      confirmPassword.value === ""
+    ) {
+      passwordError.textContent = "";
+    } else {
+      passwordError.textContent = "Passwords don't match";
+    }
+  });
+
   confirmPassword.addEventListener("input", () => {
     if (
       confirmPassword.value === password.value ||
