@@ -51,7 +51,6 @@ a {
 
 
 .header__logo {
-
     text-align: center;
 }
 
@@ -122,30 +121,60 @@ a {
 }
 
 /*=============================*/
+/*        TILE               */
+/*=============================*/
+
+.title__container {
+    margin-top: 2.5rem;
+}
+
+.shiny-text {
+    font-weight: bold;
+    background: linear-gradient(90deg,
+            #00c6a7 0%,
+            #bfdfdd 50%,
+            #00c6a7 100%);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.7s ease;
+}
+
+.shiny-text:hover {
+    background-position: 200%;
+    cursor: pointer;
+}
+
+/*=============================*/
 /*        CAROUSEL               */
 /*=============================*/
 .carousel__container {
     display: flex;
     justify-content: center;
     position: relative;
-    width: 100%;
-    margin-top: 5rem;
+    width: 95%;
+    margin: auto;
+    margin-top: 2rem;
     margin-bottom: 1rem;
     overflow: hidden;
-    height: 40rem;
+    height: 45rem;
+
 }
 
 .carousel__track {
     display: flex;
-    width: 93%;
+    width: 100%;
     transition: transform 0.5s ease-in-out;
 }
 
 .carousel__image {
+    display: flex;
     min-width: 100%;
     object-fit: cover;
-    border: 1px outset var(--color-main);
+
 }
+
+
 
 .carousel__btn {
     position: absolute;
