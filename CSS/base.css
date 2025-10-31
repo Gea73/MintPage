@@ -13,6 +13,7 @@
 :root {
     --color-background: #0E1111;
     --color-background-glass: rgba(40, 70, 70, 0.4);
+    --color-header:rgba(40, 70, 70, 0.4);
     --font-main: "Rubik", sans-serif;
     --text-active: aliceblue;
     --color-main: #00C6A7;
@@ -23,6 +24,7 @@
 :root.light {
     --color-background: #F5F7FA;
     --color-background-glass: rgba(172, 197, 197, 0.15);
+   --color-header:rgba(2, 2, 2, 0.87);
     --color-text-input: #2C3E50;
     --color-main: #009688;
     --text-active: #00796B;
@@ -62,7 +64,7 @@
 
 .change-theme:hover {
     cursor: pointer;
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .change-theme:active {
@@ -80,7 +82,7 @@
 .standard-btn {
     text-transform: uppercase;
     color: white;
-    font-style: italic;
+    font-weight: bolder;
     margin-left: 0.7rem;
     margin-right: 0.7rem;
     padding: 0.5rem;
@@ -92,7 +94,7 @@
 
 .standard-btn:hover {
     cursor: pointer;
-    transform: scale(1.07);
+    transform: scale(1.1);
     box-shadow: 0 0 5px rgba(2, 227, 200, 0.4);
 }
 

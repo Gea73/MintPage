@@ -23,7 +23,7 @@ a {
     align-items: center;
     justify-content: center;
     width: 100%;
-    background-color: var(--color-background-glass);
+    background-color: var(--color-header);
 
 
 
@@ -113,6 +113,7 @@ a {
 }
 
 .nav__list li {
+    font-size: 1.15rem;
     transition: transform 0.3s ease;
 }
 
@@ -154,10 +155,12 @@ a {
     position: relative;
     width: 95%;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 2.1rem;
     margin-bottom: 1rem;
     overflow: hidden;
-    height: 45rem;
+    height: 50rem;
+    border: 1px #bfdfdd hidden;
+    border-radius: 20px;
 
 }
 

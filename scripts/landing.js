@@ -6,8 +6,6 @@ const slides = Array.from(track.children);
 
 let carouselIndex = 0;
 
-
-
 slides.forEach((slide, i) => {
   const dot = document.createElement("button");
   if (i === 0) dot.classList.add("active");
@@ -26,7 +24,7 @@ nextBtn.addEventListener("click", () => {
 prevBtn.addEventListener("click", () => {
   carouselIndex = carouselIndex - 1;
   if (carouselIndex < 0) {
-    carouselIndex = slides.length-1;
+    carouselIndex = slides.length - 1;
   }
   updateCarousel(carouselIndex);
 });
