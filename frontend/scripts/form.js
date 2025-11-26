@@ -36,7 +36,7 @@ function passwordStr(passwordValue) {
 //Login button validation of the form fields
 
 if (loginBtn) {
-  loginBtn.addEventListener("click", () => {
+  loginBtn.addEventListener("click", async () => {
     if (!user.value) {
       userError.textContent = "User is empty";
     }
@@ -53,7 +53,24 @@ if (loginBtn) {
       str >= 3 &&
       password.value.length >= 8
     ) {
-      alert("Login Complete");
+      try {
+        const response = await fetch("http://localhost:5000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user: user.value,
+            email: email.value,
+            password: password.value,
+          }),
+        });
+        if (response.ok) {
+          alert("Login Complete");
+        } else {
+          alert("Login failed");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   });
 }
@@ -61,7 +78,7 @@ if (loginBtn) {
 //Register button validation of the form fields
 
 if (registerBtn) {
-  registerBtn.addEventListener("click", () => {
+  registerBtn.addEventListener("click", async () => {
     if (!user.value) {
       userError.textContent = "User is empty";
     }
@@ -80,7 +97,25 @@ if (registerBtn) {
       str >= 3 &&
       password.value.length >= 8
     ) {
-      alert("Register Complete");
+      try {
+        const response = await fetch("http://localhost:5000/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            user: user.value,
+            email: email.value,
+            password: password.value,
+          }),
+        });
+        if (response.ok) {
+          alert("Register Complete");
+          location.href = "login.html";
+        } else {
+          alert("Register failed");
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   });
 }
