@@ -29,10 +29,12 @@
             <div class="form__field">
                 <label for="user">User</label>
                 <input type="text" name="user" id="user" placeholder="ex:Adriano">
+                  <span class="error-message" id="user-error"></span>
             </div>
             <div class="form__field">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="ex:youremail@.com">
+                  <span class="error-message" id="email-error"></span>
             </div>
 
             <div class="form__field">
@@ -40,13 +42,12 @@
                 <div class="password__wrapper">
                     <input type="password" name="password" id="password">
                     <span class="show-password-icon" id="show-password">&#128065</span>
-
-
                 </div>
+                  <span class="error-message" id="password-error"></span>
             </div>
 
             <div class="form__buttons">
-                <button type="button" class="standard-btn">Login</button>
+                <button type="button" class="standard-btn" id="login-btn">Login</button>
                 <a class="standard-btn" href="register.html">Register</a>        
             </div>
             <a href="forgot-password.html" class="forgot-password">Forgot your password?</a>

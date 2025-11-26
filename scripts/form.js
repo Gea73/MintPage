@@ -1,54 +1,183 @@
+//DOM Elements
+const user = document.getElementById("user");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
+
 const confirmEmail = document.getElementById("confirm-email");
 const confirmPassword = document.getElementById("confirm-password");
+
 const emailError = document.getElementById("email-error");
 const passwordError = document.getElementById("password-error");
+const userError = document.getElementById("user-error");
 
-if (email && confirmEmail) {
-  email.addEventListener("input", () => {
-    if (confirmEmail.value === email.value || confirmEmail.value === "") {
-      emailError.textContent = "";
-    } else {
-      emailError.textContent = "Emails don't match";
-    }
-  });
-
-  confirmEmail.addEventListener("input", () => {
-    if (confirmEmail.value === email.value || confirmEmail.value === "") {
-      emailError.textContent = "";
-    } else {
-      emailError.textContent = "Emails don't match";
-    }
-  });
-}
-
-if (password && confirmPassword) {
-  password.addEventListener("input", () => {
-    if (
-      confirmPassword.value === password.value ||
-      confirmPassword.value === ""
-    ) {
-      passwordError.textContent = "";
-    } else {
-      passwordError.textContent = "Passwords don't match";
-    }
-  });
-
-  confirmPassword.addEventListener("input", () => {
-    if (
-      confirmPassword.value === password.value ||
-      confirmPassword.value === ""
-    ) {
-      passwordError.textContent = "";
-    } else {
-      passwordError.textContent = "Passwords don't match";
-    }
-  });
-}
+const loginBtn = document.querySelector("#login-btn");
+const registerBtn = document.querySelector("#register-btn");
 
 const showPassword = document.getElementById("show-password");
 const showConfirmPassword = document.getElementById("show-confirm-password");
+
+//Password strenght calculation
+let str = 0;
+
+function passwordStr(passwordValue) {
+  strength = 0;
+  if (passwordValue.match(/[A-Z]/)) {
+    strength += 1;
+  }
+  if (passwordValue.match(/[0-9]/)) {
+    strength += 1;
+  }
+  if (passwordValue.match(/[^A-Za-z0-9]/)) {
+    strength += 1;
+  }
+  return strength;
+}
+
+//Login button validation of the form fields
+
+if (loginBtn) {
+  loginBtn.addEventListener("click", () => {
+    if (!user.value) {
+      userError.textContent = "User is empty";
+    }
+    if (!email.value) {
+      emailError.textContent = "Email is empty";
+    }
+    if (!password.value) {
+      passwordError.textContent = "Passwords is empty";
+    }
+    if (
+      user.value &&
+      email.value &&
+      password.value &&
+      str >= 3 &&
+      password.value.length >= 8
+    ) {
+      alert("Login Complete");
+    }
+  });
+}
+
+//Register button validation of the form fields
+
+if (registerBtn) {
+  registerBtn.addEventListener("click", () => {
+    if (!user.value) {
+      userError.textContent = "User is empty";
+    }
+    if (!email.value) {
+      emailError.textContent = "Email is empty";
+    }
+    if (!password.value) {
+      passwordError.textContent = "Passwords is empty";
+    }
+    if (
+      user.value &&
+      email.value &&
+      email.value == confirmEmail.value &&
+      password.value &&
+      password.value == confirmPassword.value &&
+      str >= 3 &&
+      password.value.length >= 8
+    ) {
+      alert("Register Complete");
+    }
+  });
+}
+
+//Event listeners
+
+//User field
+user.addEventListener("input", () => {
+  userError.textContent = "";
+});
+
+//Email field
+email.addEventListener("input", () => {
+  emailError.textContent = "";
+
+  //email match logic
+  if (confirmEmail) {
+    if (confirmEmail.value === email.value || confirmEmail.value === "") {
+      emailError.textContent = "";
+    } else {
+      emailError.textContent = "Emails don't match";
+    }
+  }
+});
+
+//Confirm email field
+if (confirmEmail) {
+  confirmEmail.addEventListener("input", () => {
+    emailError.textContent = "";
+    //email match logic
+    if (confirmEmail.value === email.value || confirmEmail.value === "") {
+      emailError.textContent = "";
+    } else {
+      emailError.textContent = "Emails don't match";
+    }
+  });
+}
+
+//Password field
+password.addEventListener("input", () => {
+  passwordError.textContent = "";
+
+  //update password strength
+  str = passwordStr(password.value);
+
+  //password match logic
+  if (confirmPassword) {
+    if (
+      confirmPassword.value === password.value ||
+      confirmPassword.value === ""
+    ) {
+      passwordError.textContent = "";
+    } else {
+      passwordError.textContent = "Passwords don't match";
+    }
+  }
+  //length validation
+  if (password.value.length < 8 && password.value.length > 0) {
+    passwordError.textContent = "Password too short";
+  } else {
+    //str validation
+    if (str < 3) {
+      passwordError.textContent = "Password too weak";
+    }
+  }
+});
+
+//confirmpassword field
+if (confirmPassword) {
+  confirmPassword.addEventListener("input", () => {
+    passwordError.textContent = "";
+    //update password strength
+    str = passwordStr(password.value);
+
+    //password match logic
+    if (
+      confirmPassword.value === password.value ||
+      confirmPassword.value === ""
+    ) {
+      passwordError.textContent = "";
+    } else {
+      passwordError.textContent = "Passwords don't match";
+    }
+
+    //length validation
+    if (password.value.length < 8 && password.value.length > 0) {
+      passwordError.textContent = "Password too short";
+    } else {
+      //str validation
+      if (str < 3) {
+        passwordError.textContent = "Password too weak";
+      }
+    }
+  });
+}
+
+//Show password eye buttons listeners
 
 if (showPassword) {
   showPassword.addEventListener("click", () => {
