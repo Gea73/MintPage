@@ -63,10 +63,11 @@ if (loginBtn) {
             password: password.value,
           }),
         });
+        const data =  await response.json();
         if (response.ok) {
-          alert("Login Complete");
+          alert(data);
         } else {
-          alert("Login failed");
+          alert(data);
         }
       } catch (error) {
         console.error(error);
@@ -107,11 +108,14 @@ if (registerBtn) {
             password: password.value,
           }),
         });
+        const data = await response.json();
         if (response.ok) {
-          alert("Register Complete");
+          alert(data);
           location.href = "login.html";
+        } else if (response.status === 409 ) {
+          alert(data);
         } else {
-          alert("Register failed");
+          alert(data);
         }
       } catch (error) {
         console.error(error);
