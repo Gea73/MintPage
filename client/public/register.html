@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/CSS/base.css">
+    <link rel="stylesheet" href="/CSS/form.css">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="title__container">
+        <a href="landing-page.html"> <img class="logo" src="./images/leaf.png" alt="logo"></a>
+        <h1>Register</h1>
+        <button class="change-theme" type="button">☀ Change theme</button>
+    </div>
+    <div class="form__container">
+        <form action="">
+            <div class="form__field">
+                <label for="user">User</label>
+                <input type="text" name="user" id="user" placeholder="ex:Adriano">
+                 <span class="error-message" id="user-error"></span>
+            </div>
+            <div class="form__field">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="ex:youremail@.com">
+            </div>
+            <div class="form__field">
+                <label for="confirm-email">Confirm Email</label>
+                <input type="email" name="confirm-email" id="confirm-email" placeholder="ex:youremail@.com">
+                <span class="error-message" id="email-error"></span>
+            </div>
+            <div class="form__field">
+                <label for="password">Password</label>
+                <div class="password__wrapper">
+                    <input type="password" name="password" id="password">
+                    <span class="show-password-icon" id="show-password">&#128065</span>
+                </div>
+            </div>
+            <div class="form__field">
+                <label for="confirm-password">Confirm Password</label>
+                <div class="password__wrapper">
+                    <input type="password" name="confirm-password" id="confirm-password">
+                    <span class="show-password-icon" id="show-confirm-password">&#128065</span>
+                </div>
+                <span class="error-message" id="password-error"></span>
+            </div>
+            <div class="form__buttons">
+                <a href="login.html" class="standard-btn">Login</a>
+                <button type="button" class="standard-btn" id="register-btn">Register</button>
+            </div>
+
+        </form>
+    </div>
+
+  <script src="/utils/base.js"></script>
+   <script src="/services/form.js"></script>
+</body>
+
+</html>
