@@ -16,6 +16,8 @@ const registerBtn = document.querySelector("#register-btn");
 const showPassword = document.getElementById("show-password");
 const showConfirmPassword = document.getElementById("show-confirm-password");
 
+const loader = document.querySelector(".loader-overlay");
+
 //Password strenght calculation
 let str = 0;
 
@@ -46,6 +48,11 @@ if (loginBtn) {
     if (!password.value) {
       passwordError.textContent = "Passwords is empty";
     }
+    if(!emailValidation(email.value)){
+      emailError.textContent = "Invalid email format";
+      return;
+    }
+
     if (
       user.value &&
       email.value &&
@@ -54,6 +61,8 @@ if (loginBtn) {
       password.value.length >= 8
     ) {
       try {
+        showLoader();
+
         const response = await fetch("http://localhost:5000/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -65,12 +74,14 @@ if (loginBtn) {
         });
         const data = await response.json();
         if (response.ok) {
-          alert(data.message);
+          resultLoader(String(data.message));
         } else {
-          alert(data.message);
+          resultLoader(String(data.message));
         }
       } catch (error) {
         console.error(error);
+      }finally{
+        endLoader();
       }
     }
   });
@@ -89,6 +100,10 @@ if (registerBtn) {
     if (!password.value) {
       passwordError.textContent = "Passwords is empty";
     }
+     if(!emailValidation(email.value)){
+      emailError.textContent = "Invalid email format";
+      return;
+    }
     if (
       user.value &&
       email.value &&
@@ -99,6 +114,7 @@ if (registerBtn) {
       password.value.length >= 8
     ) {
       try {
+        showLoader();
         const response = await fetch("http://localhost:5000/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -110,15 +126,18 @@ if (registerBtn) {
         });
         const data = await response.json();
         if (response.ok) {
-          alert(data.message);
+          resultLoader(String(data.message));
           location.href = "login.html";
         } else if (response.status === 409) {
-          alert(data.message);
+          resultLoader(String(data.message));
         } else {
-          alert(data.message);
+          resultLoader(String(data.message));
         }
       } catch (error) {
         console.error(error);
+      }
+      finally{
+        endLoader();
       }
     }
   });
@@ -241,3 +260,31 @@ if (showConfirmPassword) {
       : showConfirmPassword.classList.add("unhidden");
   });
 }
+
+
+function emailValidation(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+function showLoader() {
+  loader.classList.remove("hidden");
+   loader.firstElementChild.textContent = "";
+}
+
+function endLoader() {
+  setTimeout(() => {
+  loader.firstElementChild.classList.remove("loader-box");
+  loader.firstElementChild.classList.add("loader");
+  loader.classList.add("hidden");
+    }, 1500);
+}
+
+function resultLoader(message) {
+  
+    loader.firstElementChild.classList.remove("loader");
+    loader.firstElementChild.classList.add("loader-box");
+    loader.firstElementChild.textContent = message;
+
+}
+

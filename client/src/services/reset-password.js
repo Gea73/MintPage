@@ -8,6 +8,9 @@ const showConfirmPassword = document.getElementById("show-confirm-password");
 
 const resetBtn = document.getElementById("reset-btn");
 //Password strenght calculation
+
+const loader = document.querySelector(".loader-overlay");
+
 let str = 0;
 
 function passwordStr(passwordValue) {
@@ -114,7 +117,7 @@ resetBtn.addEventListener("click", async () => {
   const email = urlParams.get("email");
 
   if (!token || !email) {
-    alert("Invalid link.");
+    resultLoader("Invalid link.");
     return;
   }
 
@@ -123,6 +126,8 @@ resetBtn.addEventListener("click", async () => {
   }
   if (password.value && str >= 3 && password.value.length >= 8) {
     try {
+      showLoader();
+
       const response = await fetch("http://localhost:5000/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -135,14 +140,37 @@ resetBtn.addEventListener("click", async () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("Password reset successful! You can now login.");
+        resultLoader("Password reset successful! You can now login.");
         window.location.href = "login.html";
       } else {
-        alert(data);
+        resultLoader(String(data.message));
       }
     } catch (error) {
       console.error(error);
-      alert("Error resetting password.");
+      resultLoader("Error resetting password.");
+    }finally{
+      endLoader();
     }
   }
 });
+
+function showLoader() {
+  loader.classList.remove("hidden");
+   loader.firstElementChild.textContent = "";
+}
+
+function endLoader() {
+  setTimeout(() => {
+  loader.firstElementChild.classList.remove("loader-box");
+  loader.firstElementChild.classList.add("loader");
+  loader.classList.add("hidden");
+    }, 1500);
+}
+
+function resultLoader(message) {
+  
+    loader.firstElementChild.classList.remove("loader");
+    loader.firstElementChild.classList.add("loader-box");
+    loader.firstElementChild.textContent = message;
+
+}

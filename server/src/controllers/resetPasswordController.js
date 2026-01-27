@@ -13,7 +13,7 @@ const forgotPassword = async (req, res) => {
       email,
     ]);
     if (users.rows.length === 0) {
-      return res.json("Something went wrong");
+      return res.json({message:"Something went wrong"});
     }
 
     const user = users.rows[0];
@@ -41,7 +41,7 @@ const forgotPassword = async (req, res) => {
              <p>Click this link to reset your password: <a href="${resetLink}">Reset Password</a></p>`,
     });
 
-    res.json("Password reset link sent");
+    res.json({message:"Password reset link sent"});
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
@@ -58,14 +58,14 @@ const resetPassword = async (req, res) => {
   );
 
   if (result.rows.length === 0) {
-    return res.status(400).json("Invalid or expired token");
+    return res.status(400).json({message:"Invalid or expired token"});
   }
 
   const dbToken = result.rows[0];
 
   const isValid = await bcrypt.compare(token, dbToken.token_hash);
   if (!isValid) {
-    return res.status(400).json("Invalid token");
+    return res.status(400).json({message:"Invalid token"});
   }
 
   const newPasswordHash = await bcrypt.hash(newPassword, 10);
@@ -78,7 +78,7 @@ const resetPassword = async (req, res) => {
     email,
   ]);
 
-  res.json("Password successfully reset");
+  res.json({message:"Password successfully reset"});
 };
 
 module.exports = {forgotPassword:forgotPassword,resetPassword:resetPassword};
