@@ -8,6 +8,8 @@ const resetBtn = document.getElementById("reset-btn");
 const loader = document.querySelector(".loader-overlay");
 
 
+const API_URL = process.env.API_URL || 
+                "http://localhost:5000";
 
 
 //Password strenght calculation
@@ -134,7 +136,7 @@ resetBtn.addEventListener("click", async () => {
     try {
       showLoader();
 
-      const response = await fetch("http://localhost:5000/reset-password", {
+      const response = await fetch(`${API_URL}/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -5,6 +5,9 @@ const emailError = document.querySelector("#email-error");
 
 const loader = document.querySelector(".loader-overlay");
 
+const API_URL = process.env.API_URL || 
+                "http://localhost:5000";
+
 
 forgotBtn.addEventListener("click", async () => {
   if (!email.value) {
@@ -21,7 +24,7 @@ forgotBtn.addEventListener("click", async () => {
 
       showLoader();
       
-      const response = await fetch("http://localhost:5000/forgot-password", {
+      const response = await fetch(`${API_URL}/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
