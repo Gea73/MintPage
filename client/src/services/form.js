@@ -18,7 +18,7 @@ const showConfirmPassword = document.getElementById("show-confirm-password");
 
 const loader = document.querySelector(".loader-overlay");
 
-const API_URL = "https://mintpage-3qwv.onrender.com/";
+const API_URL = "https://mintpage-3qwv.onrender.com";
     
 
 //Password strenght calculation

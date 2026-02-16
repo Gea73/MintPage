@@ -5,7 +5,7 @@ const emailError = document.querySelector("#email-error");
 
 const loader = document.querySelector(".loader-overlay");
 
-const API_URL = "https://mintpage-3qwv.onrender.com/";
+const API_URL = "https://mintpage-3qwv.onrender.com";
     
 
 
