@@ -1,8 +1,10 @@
+//DOM elements
 const forgotBtn = document.querySelector("#forgot-btn");
 const email = document.querySelector("#email");
 const emailError = document.querySelector("#email-error");
 
 const loader = document.querySelector(".loader-overlay");
+
 
 forgotBtn.addEventListener("click", async () => {
   if (!email.value) {
@@ -16,7 +18,9 @@ forgotBtn.addEventListener("click", async () => {
 
   if (email.value) {
     try {
+
       showLoader();
+      
       const response = await fetch("http://localhost:5000/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,11 +49,6 @@ email.addEventListener("input", () => {
   emailError.textContent = "";
 });
 
-function emailValidation(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
 function showLoader() {
   loader.classList.remove("hidden");
    loader.firstElementChild.textContent = "";
@@ -69,4 +68,9 @@ function resultLoader(message) {
     loader.firstElementChild.classList.add("loader-box");
     loader.firstElementChild.textContent = message;
 
+}
+
+function emailValidation(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
 }

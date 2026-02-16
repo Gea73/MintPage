@@ -1,11 +1,16 @@
 const { Pool } = require("pg");
-const path = require("path");
-require("dotenv").config({path:path.join(__dirname,"../../.env")});
+
+//Version that works with localhost commented
+//const path = require("path");
+
+//require("dotenv").config({path:path.join(__dirname,"../../.env")});
+
 const pool = new Pool({
-  user: process.env.DB_USER,
+  connectionString:process.env.DATABASE_URL
+  /*user: process.env.DB_USER,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASS,
-  port: process.env.DB_PORT,
+  port: process.env.DB_PORT,*/
 });
 module.exports = pool;

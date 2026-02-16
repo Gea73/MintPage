@@ -19,6 +19,7 @@
     --color-main: #00C6A7;
     --color-text-input: #E6FDF9;
     --color-border-input: rgba(163, 156, 156, 0.25);
+    color-scheme: dark;
 }
 
 :root.light {
@@ -29,6 +30,8 @@
     --color-main: #009688;
     --text-active: #92b1ad;
     --color-border-input: #009688;
+
+    color-scheme: light;
 }
 
 
@@ -36,7 +39,9 @@ html {
     scroll-behavior: smooth;
 
 }
-
+.theme-transition *{
+ transition: background-color 0.4s ease, color 0.4s ease;
+}
 
 /* ===================== */
 /*       LOGO , TITLE    */
@@ -83,6 +88,7 @@ html {
 /*      BUTTONS     */
 /* ===================== */
 .form__buttons {
+
     padding: 1rem;
 
 }

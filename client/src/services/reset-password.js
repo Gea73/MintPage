@@ -1,26 +1,28 @@
+//DOM elements
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
-
 const passwordError = document.getElementById("password-error");
-
 const showPassword = document.getElementById("show-password");
 const showConfirmPassword = document.getElementById("show-confirm-password");
-
 const resetBtn = document.getElementById("reset-btn");
-//Password strenght calculation
-
 const loader = document.querySelector(".loader-overlay");
 
-let str = 0;
 
+
+
+//Password strenght calculation
+let str = 0;
 function passwordStr(passwordValue) {
-  strength = 0;
+ let strength = 0;
+  //Upcase
   if (passwordValue.match(/[A-Z]/)) {
     strength += 1;
   }
+  //Number
   if (passwordValue.match(/[0-9]/)) {
     strength += 1;
   }
+  //Special character
   if (passwordValue.match(/[^A-Za-z0-9]/)) {
     strength += 1;
   }
@@ -29,12 +31,13 @@ function passwordStr(passwordValue) {
 
 //Password field
 password.addEventListener("input", () => {
+  //clear error when a new input is typed
   passwordError.textContent = "";
 
-  //update password strength
+  //update password strength real time
   str = passwordStr(password.value);
 
-  //password match logic
+  //check if the password and confirm match
   if (confirmPassword) {
     if (
       confirmPassword.value === password.value ||
@@ -45,11 +48,12 @@ password.addEventListener("input", () => {
       passwordError.textContent = "Passwords don't match";
     }
   }
+
   //length validation
   if (password.value.length < 8 && password.value.length > 0) {
     passwordError.textContent = "Password too short";
   } else {
-    //str validation
+    //strenght validation
     if (str < 3) {
       passwordError.textContent = "Password too weak";
     }
@@ -59,11 +63,13 @@ password.addEventListener("input", () => {
 //confirmpassword field
 if (confirmPassword) {
   confirmPassword.addEventListener("input", () => {
+      //clear error when a new input is typed
     passwordError.textContent = "";
-    //update password strength
+
+    //update password strength real time
     str = passwordStr(password.value);
 
-    //password match logic
+    //check if the password and confirm match
     if (
       confirmPassword.value === password.value ||
       confirmPassword.value === ""

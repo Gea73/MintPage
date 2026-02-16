@@ -1,6 +1,6 @@
 const app = require('./app')
 
-//look if the port 5000 server is initialized
+//start the server
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });

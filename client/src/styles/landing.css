@@ -5,7 +5,7 @@ body {
     background-color: var(--color-background);
     font-family: var(--font-main);
     user-select: none;
-
+   
 }
 
 
@@ -31,7 +31,7 @@ a {
 
 .header__container span {
     color: var(--color-main);
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: bold;
     background: linear-gradient(90deg,
             #00c6a7 0%,
@@ -55,9 +55,26 @@ a {
 }
 
 .header__logo img {
-    max-width: 60%;
+    max-width: 40%;
     height: auto;
 }
+
+.header__btns {
+
+    background-color: var(--color-header);
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    padding: 0 1.5rem 0.5rem 1.5rem;
+
+}
+
+.header__register {
+    display: flex;
+    justify-content: center;
+}
+
 
 /*=============================*/
 /*        NAV               */
@@ -122,7 +139,7 @@ a {
 }
 
 /*=============================*/
-/*        TILE               */
+/*        TITLE               */
 /*=============================*/
 
 .title__container {
@@ -147,8 +164,9 @@ a {
 }
 
 /*=============================*/
-/*        CAROUSEL               */
+/*        CAROUSEL             */
 /*=============================*/
+
 .carousel__container {
     display: flex;
     justify-content: center;
@@ -194,8 +212,7 @@ a {
 }
 
 .carousel__btn:hover {
-    background: rgba(15, 15, 15, 0.863);
-    font-size: 2rem;
+    font-size: 1.7rem;
 }
 
 .carousel__btn.prev {
@@ -237,18 +254,18 @@ a {
 /*        MAIN TEXT               */
 /*=============================*/
 
-.text__container{
-color: var(--color-main);
-padding: 3rem 7rem 3rem 7rem;
-letter-spacing: 1.5px;
-text-align: center;
-word-spacing: 2px;
-line-height: 1.4;
-text-indent: 1rem;
+.text__container {
+    color: var(--color-main);
+    padding: 3rem 7rem 3rem 7rem;
+    letter-spacing: 1.5px;
+    text-align: center;
+    word-spacing: 2px;
+    line-height: 1.4;
+    text-indent: 1rem;
 
 }
 
-.text__container h2{
+.text__container h2 {
     margin: 0.5rem;
 }
 

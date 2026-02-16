@@ -22,7 +22,7 @@ const loader = document.querySelector(".loader-overlay");
 let str = 0;
 
 function passwordStr(passwordValue) {
-  strength = 0;
+  let strength = 0;
   if (passwordValue.match(/[A-Z]/)) {
     strength += 1;
   }
@@ -61,6 +61,7 @@ if (loginBtn) {
       password.value.length >= 8
     ) {
       try {
+
         showLoader();
 
         const response = await fetch("http://localhost:5000/login", {
@@ -72,12 +73,14 @@ if (loginBtn) {
             password: password.value,
           }),
         });
+
         const data = await response.json();
         if (response.ok) {
           resultLoader(String(data.message));
         } else {
           resultLoader(String(data.message));
         }
+
       } catch (error) {
         console.error(error);
       }finally{
@@ -114,6 +117,7 @@ if (registerBtn) {
       password.value.length >= 8
     ) {
       try {
+
         showLoader();
         const response = await fetch("http://localhost:5000/register", {
           method: "POST",
@@ -124,7 +128,9 @@ if (registerBtn) {
             password: password.value,
           }),
         });
+
         const data = await response.json();
+
         if (response.ok) {
           resultLoader(String(data.message));
           location.href = "login.html";
