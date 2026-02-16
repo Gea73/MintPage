@@ -29,7 +29,7 @@ const registerController = async (req, res) => {
     }
 
     console.error(error.message);
-    res.status(500).send("Server Error");
+    res.status(500).json({message:"Server Error"});
   }
 };
 
@@ -49,9 +49,7 @@ const loginController = async (req, res) => {
     const userDb = users.rows[0];
 
     if (userDb.email !== email)
-      return res
-        .status(401)
-        .json({ message: "Email or Password does not match this user" });
+      return res.status(401).json({ message: "Email or Password does not match this user" });
 
     //compare the password sent with the hash on DB
     const validPassword = await bcrypt.compare(password, userDb.password_hash);
@@ -65,7 +63,7 @@ const loginController = async (req, res) => {
     res.json({ message: "Login sucessfull" });
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Server Error");
+    res.status(500).json({message:"Server Error"});
   }
 };
 
