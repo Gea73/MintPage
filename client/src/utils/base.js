@@ -4,6 +4,8 @@ const root = document.documentElement;
 //get localstorage
 const savedTheme = localStorage.getItem("theme");
 
+
+
 //Define theme based on localstorage
 if (savedTheme) {
   if (savedTheme === "dark") {
