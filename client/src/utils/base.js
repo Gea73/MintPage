@@ -45,3 +45,28 @@ if (changeTheme) {
   });
 }
 
+const loader = document.querySelector(".loader-overlay");
+
+ // eslint-disable-next-line no-unused-vars
+ function showLoader() {
+  loader.classList.remove("hidden");
+   loader.firstElementChild.textContent = "";
+}
+
+ // eslint-disable-next-line no-unused-vars
+function hideLoader() {
+  setTimeout(() => {
+  loader.firstElementChild.classList.remove("loader-box");
+  loader.firstElementChild.classList.add("loader");
+  loader.classList.add("hidden");
+    }, 1500);
+}
+
+ // eslint-disable-next-line no-unused-vars
+function messageLoader(message) {
+  
+    loader.firstElementChild.classList.remove("loader");
+    loader.firstElementChild.classList.add("loader-box");
+    loader.firstElementChild.textContent = message;
+
+}

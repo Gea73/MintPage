@@ -3,9 +3,11 @@ const forgotBtn = document.querySelector("#forgot-btn");
 const email = document.querySelector("#email");
 const emailError = document.querySelector("#email-error");
 
-const loader = document.querySelector(".loader-overlay");
+/* global showLoader */
+/* global messageLoader */
+/* global hideLoader */
 
-const API_URL = "https://mintpage-3qwv.onrender.com";
+const API_URL = "http://localhost:5000"//"https://mintpage-3qwv.onrender.com";
     
 
 
@@ -34,15 +36,15 @@ forgotBtn.addEventListener("click", async () => {
       const data = await response.json();
 
       if (response.ok) {
-        resultLoader(String(data.message));
+        messageLoader(String(data.message));
       } else {
-        resultLoader("Email failed");
-        resultLoader(String("Error: " + data.message));
+        messageLoader("Email failed");
+        messageLoader(String("Error: " + data.message));
       }
     } catch (error) {
       console.error(error);
     } finally {
-      endLoader();
+      hideLoader();
     }
   }
 });
@@ -52,26 +54,7 @@ email.addEventListener("input", () => {
   emailError.textContent = "";
 });
 
-function showLoader() {
-  loader.classList.remove("hidden");
-   loader.firstElementChild.textContent = "";
-}
 
-function endLoader() {
-  setTimeout(() => {
-  loader.firstElementChild.classList.remove("loader-box");
-  loader.firstElementChild.classList.add("loader");
-  loader.classList.add("hidden");
-    }, 1500);
-}
-
-function resultLoader(message) {
-  
-    loader.firstElementChild.classList.remove("loader");
-    loader.firstElementChild.classList.add("loader-box");
-    loader.firstElementChild.textContent = message;
-
-}
 
 function emailValidation(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

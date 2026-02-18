@@ -16,27 +16,15 @@ const registerBtn = document.querySelector("#register-btn");
 const showPassword = document.getElementById("show-password");
 const showConfirmPassword = document.getElementById("show-confirm-password");
 
-const loader = document.querySelector(".loader-overlay");
 
-const API_URL = "https://mintpage-3qwv.onrender.com";
+const API_URL = "http://localhost:5000"//"https://mintpage-3qwv.onrender.com";
     
+/* global showLoader */
+/* global messageLoader */
+/* global hideLoader */
 
 //Password strenght calculation
-let str = 0;
-
-function passwordStr(passwordValue) {
-  let strength = 0;
-  if (passwordValue.match(/[A-Z]/)) {
-    strength += 1;
-  }
-  if (passwordValue.match(/[0-9]/)) {
-    strength += 1;
-  }
-  if (passwordValue.match(/[^A-Za-z0-9]/)) {
-    strength += 1;
-  }
-  return strength;
-}
+let passStrength = 0;
 
 //Login button validation of the form fields
 
@@ -60,7 +48,7 @@ if (loginBtn) {
       user.value &&
       email.value &&
       password.value &&
-      str >= 3 &&
+      passStrength >= 3 &&
       password.value.length >= 8
     ) {
       try {
@@ -79,15 +67,15 @@ if (loginBtn) {
 
         const data = await response.json();
         if (response.ok) {
-          resultLoader(String(data.message));
+          messageLoader(String(data.message));
         } else {
-          resultLoader(String(data.message));
+          messageLoader(String(data.message));
         }
 
       } catch (error) {
         console.error(error);
       }finally{
-        endLoader();
+        hideLoader();
       }
     }
   });
@@ -116,7 +104,7 @@ if (registerBtn) {
       email.value == confirmEmail.value &&
       password.value &&
       password.value == confirmPassword.value &&
-      str >= 3 &&
+      passStrength >= 3 &&
       password.value.length >= 8
     ) {
       try {
@@ -135,18 +123,18 @@ if (registerBtn) {
         const data = await response.json();
 
         if (response.ok) {
-          resultLoader(String(data.message));
+          messageLoader(String(data.message));
           location.href = "login.html";
         } else if (response.status === 409) {
-          resultLoader(String(data.message));
+          messageLoader(String(data.message));
         } else {
-          resultLoader(String(data.message));
+          messageLoader(String(data.message));
         }
       } catch (error) {
         console.error(error);
       }
       finally{
-        endLoader();
+        hideLoader();
       }
     }
   });
@@ -191,7 +179,7 @@ password.addEventListener("input", () => {
   passwordError.textContent = "";
 
   //update password strength
-  str = passwordStr(password.value);
+  passStrength = passwordStr(password.value);
 
   //password match logic
   if (confirmPassword) {
@@ -208,8 +196,8 @@ password.addEventListener("input", () => {
   if (password.value.length < 8 && password.value.length > 0) {
     passwordError.textContent = "Password too short";
   } else {
-    //str validation
-    if (str < 3) {
+    //passStrength validation
+    if (passStrength < 3) {
       passwordError.textContent = "Password too weak";
     }
   }
@@ -220,7 +208,7 @@ if (confirmPassword) {
   confirmPassword.addEventListener("input", () => {
     passwordError.textContent = "";
     //update password strength
-    str = passwordStr(password.value);
+    passStrength = passwordStr(password.value);
 
     //password match logic
     if (
@@ -236,8 +224,8 @@ if (confirmPassword) {
     if (password.value.length < 8 && password.value.length > 0) {
       passwordError.textContent = "Password too short";
     } else {
-      //str validation
-      if (str < 3) {
+      //passStrength validation
+      if (passStrength < 3) {
         passwordError.textContent = "Password too weak";
       }
     }
@@ -271,29 +259,23 @@ if (showConfirmPassword) {
 }
 
 
+function passwordStr(passwordValue) {
+  let strength = 0;
+  if (passwordValue.match(/[A-Z]/)) {
+    strength += 1;
+  }
+  if (passwordValue.match(/[0-9]/)) {
+    strength += 1;
+  }
+  if (passwordValue.match(/[^A-Za-z0-9]/)) {
+    strength += 1;
+  }
+  return strength;
+}
+
+
 function emailValidation(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);
-}
-
-function showLoader() {
-  loader.classList.remove("hidden");
-   loader.firstElementChild.textContent = "";
-}
-
-function endLoader() {
-  setTimeout(() => {
-  loader.firstElementChild.classList.remove("loader-box");
-  loader.firstElementChild.classList.add("loader");
-  loader.classList.add("hidden");
-    }, 1500);
-}
-
-function resultLoader(message) {
-  
-    loader.firstElementChild.classList.remove("loader");
-    loader.firstElementChild.classList.add("loader-box");
-    loader.firstElementChild.textContent = message;
-
 }
 
