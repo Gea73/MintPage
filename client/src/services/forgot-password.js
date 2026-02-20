@@ -7,7 +7,7 @@ const emailError = document.querySelector("#email-error");
 /* global messageLoader */
 /* global hideLoader */
 
-const API_URL = "http://localhost:5000"//"https://mintpage-3qwv.onrender.com";
+const API_URL =  "https://mintpage-3qwv.onrender.com"; //"http://localhost:5000" 
     
 
 

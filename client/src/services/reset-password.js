@@ -7,7 +7,7 @@ const showConfirmPassword = document.getElementById("show-confirm-password");
 const resetBtn = document.getElementById("reset-btn");
 
 
-const API_URL = "http://localhost:5000"//"https://mintpage-3qwv.onrender.com";
+const API_URL =  "https://mintpage-3qwv.onrender.com"; //"http://localhost:5000" 
    
 /* global showLoader */
 /* global messageLoader */
@@ -89,8 +89,8 @@ if (showPassword) {
       : (password.type = "password");
 
     password.type === "password"
-      ? showPassword.classList.remove("unhidden")
-      : showPassword.classList.add("unhidden");
+       ? showPassword.setAttribute("src","./images/visibility.svg") //.classList.remove("unhidden")
+      : showPassword.setAttribute("src","./images/visibilityOff.svg") //.classList.add("unhidden");
   });
 }
 
@@ -101,8 +101,8 @@ if (showConfirmPassword) {
       : (confirmPassword.type = "password");
 
     confirmPassword.type === "password"
-      ? showConfirmPassword.classList.remove("unhidden")
-      : showConfirmPassword.classList.add("unhidden");
+      ? showConfirmPassword.setAttribute("src","./images/visibility.svg") //.classList.remove("unhidden")
+      : showConfirmPassword.setAttribute("src","./images/visibilityOff.svg") //.classList.add("unhidden");
   });
 }
 
