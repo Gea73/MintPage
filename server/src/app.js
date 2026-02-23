@@ -1,14 +1,14 @@
-const express = require("express");
-const cors = require("cors");
-const path = require("path");
+import express from "express";
+import cors from "cors";
+import path from "path";
 const app = express();
 
 
 //routers
-const loginRouter = require("../src/routes/loginRoutes");
-const registerRouter = require("../src/routes/registerRoutes");
-const forgotPasswordRouter = require("../src/routes/forgot-passwordRoutes");
-const resetPasswordRouter = require("../src/routes/reset-passwordRoutes");
+import {router as loginRouter} from "../src/routes/loginRoutes.js";
+import {router as registerRouter} from "../src/routes/registerRoutes.js";
+import {router as forgotPasswordRouter} from "./routes/forgotPasswordRoutes.js";
+import {router as resetPasswordRouter} from "./routes/resetPasswordRoutes.js";
 
 //allow app to use json
 app.use(express.json());
@@ -24,10 +24,13 @@ app.use("/forgot-password", forgotPasswordRouter);
 
 app.use("/reset-password", resetPasswordRouter);
 
+
+const __dirname = import.meta.dirname;
 //allow static files 
 app.use(express.static(path.join(__dirname, "../../client/public")));
 app.use("/CSS",express.static(path.join(__dirname, "../../client/src/styles")));
 app.use("/services",express.static(path.join(__dirname, "../../client/src/services")));
 app.use("/utils",express.static(path.join(__dirname, "../../client/src/utils")));
+app.use("/src",express.static(path.join(__dirname, "../../client/src/")));
 
-module.exports = app;
+export {app};

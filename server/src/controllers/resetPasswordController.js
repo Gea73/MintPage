@@ -1,10 +1,10 @@
-const pool = require("../config/db");
-const bcrypt = require("bcrypt");
+import {pool} from "../config/db.js";
+import bcrypt from "bcrypt";
 
 
 
 //ResetPassword controller
-const resetPassword = async (req, res) => {
+const resetPasswordController = async (req, res) => {
   const { email, token, newPassword } = req.body;
 
   // Find the most recent token associate with the email in DB
@@ -50,4 +50,4 @@ const resetPassword = async (req, res) => {
   res.json({ message: "Password successfully reset" });
 };
 
-module.exports = resetPassword;
+export {resetPasswordController};

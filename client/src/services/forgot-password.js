@@ -6,9 +6,7 @@ const emailError = document.querySelector("#email-error");
 /* global showLoader */
 /* global messageLoader */
 /* global hideLoader */
-
-const API_URL =  "https://mintpage-3qwv.onrender.com"; //"http://localhost:5000" 
-    
+/* global API_URL */
 
 
 forgotBtn.addEventListener("click", async () => {

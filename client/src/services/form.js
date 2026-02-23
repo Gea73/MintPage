@@ -15,13 +15,11 @@ const registerBtn = document.querySelector("#register-btn");
 
 const showPassword = document.getElementById("show-password");
 const showConfirmPassword = document.getElementById("show-confirm-password");
-
-
-const API_URL =  "https://mintpage-3qwv.onrender.com"; //"http://localhost:5000" 
     
 /* global showLoader */
 /* global messageLoader */
 /* global hideLoader */
+/* global API_URL */
 
 //Password strenght calculation
 let passStrength = 0;

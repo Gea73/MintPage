@@ -1,5 +1,5 @@
-const pool = require("../config/db");
-const bcrypt = require("bcrypt");
+import {pool} from "../config/db.js";
+import bcrypt from "bcrypt";
 
 const registerController = async (req, res) => {
   try {
@@ -42,4 +42,4 @@ const registerController = async (req, res) => {
   }
 };
 
-module.exports = registerController;
+export {registerController};

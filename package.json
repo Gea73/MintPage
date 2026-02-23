@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./server/src/server.js",
@@ -29,9 +30,9 @@
   },
   "homepage": "https://github.com/Gea73/MintPage#readme",
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "eslint": "^9.39.2",
-    "globals": "^17.2.0",
+    "@eslint/js": "^9.39.3",
+    "eslint": "^10.0.1",
+    "globals": "^17.3.0",
     "nodemon": "^3.1.11"
   }
 }

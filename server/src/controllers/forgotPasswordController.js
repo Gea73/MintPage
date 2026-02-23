@@ -1,10 +1,18 @@
-const pool = require("../config/db");
-const crypto = require("crypto");
-const bcrypt = require("bcrypt");
-const transporter = require("../config/mailer");
+import {pool} from "../config/db.js";
+import crypto from "crypto";
+import bcrypt from "bcrypt";
+import {transporter} from "../config/mailer.js";
+
+import path from "node:path";
+import dotenv from "dotenv";
+
+const __dirname = import.meta.dirname;
+dotenv.config({path:path.join(__dirname,"../../.env")});
+
+const API_URL = process.env.API_URL;
 
 //forgotPassword controller
-const forgotPassword = async (req, res) => {
+const forgotPasswordController = async (req, res) => {
   try {
     const { email } = req.body;
     //get email from body
@@ -34,7 +42,7 @@ const forgotPassword = async (req, res) => {
     );
 
     //set the reset url with the token and email
-    const resetLink = `http://localhost:5000/reset-password.html?token=${token}&email=${email}`;
+    const resetLink = `${API_URL}/reset-password.html?token=${token}&email=${email}`;
 
     //use nodemailer to send the email
     await transporter.sendMail({
@@ -52,5 +60,4 @@ const forgotPassword = async (req, res) => {
   }
 };
 
-
-module.exports = forgotPassword;
+export  {forgotPasswordController};
