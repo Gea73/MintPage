@@ -31,6 +31,6 @@ app.use(express.static(path.join(__dirname, "../../client/public")));
 app.use("/CSS",express.static(path.join(__dirname, "../../client/src/styles")));
 app.use("/services",express.static(path.join(__dirname, "../../client/src/services")));
 app.use("/utils",express.static(path.join(__dirname, "../../client/src/utils")));
-app.use("/src",express.static(path.join(__dirname, "../../client/src/")));
+app.use("/config",express.static(path.join(__dirname, "../../client/src/config")));
 
 export {app};

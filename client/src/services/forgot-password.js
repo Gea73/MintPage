@@ -1,15 +1,20 @@
 //DOM elements
 const forgotBtn = document.querySelector("#forgot-btn");
+
 const email = document.querySelector("#email");
+
 const emailError = document.querySelector("#email-error");
 
+//globals
 /* global showLoader */
 /* global messageLoader */
 /* global hideLoader */
 /* global API_URL */
 
 
+//email send request
 forgotBtn.addEventListener("click", async () => {
+
   if (!email.value) {
     emailError.textContent = "Email field empty";
     return;
@@ -47,13 +52,14 @@ forgotBtn.addEventListener("click", async () => {
   }
 });
 
-//Email field
+
+//Email error message update in input
 email.addEventListener("input", () => {
   emailError.textContent = "";
 });
 
 
-
+//frontend email validation
 function emailValidation(email) {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return regex.test(email);

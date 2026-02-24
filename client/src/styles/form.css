@@ -127,8 +127,8 @@ body {
 .show-password-icon {
     cursor: pointer;
     position: absolute;
-    top: 50%;
-    right: 10px;
+    top: 52%;
+    right: 3%;
     transform: translateY(-50%);
     color: var(--color-main);
     transition: transform 0.5s ease;
