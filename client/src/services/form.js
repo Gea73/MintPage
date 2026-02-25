@@ -10,7 +10,9 @@ const confirmPassword = document.getElementById("confirm-password");
 
 //error messages
 const emailError = document.getElementById("email-error");
+const confirmEmailError = document.getElementById("confirm-email-error");
 const passwordError = document.getElementById("password-error");
+const confirmPasswordError = document.getElementById("confirm-password-error");
 const userError = document.getElementById("user-error");
 
 //buttons
@@ -41,12 +43,14 @@ if (loginBtn) {
     if (!email.value) {
       emailError.textContent = "Email is empty";
     }
-    if (!password.value) {
-      passwordError.textContent = "Passwords is empty";
+    if (!confirmEmail.value) {
+      confirmEmailError.textContent = "Confirm Email is empty";
     }
-    if (!emailValidation(email.value)) {
-      emailError.textContent = "Invalid email format";
-      return;
+    if (!password.value) {
+      passwordError.textContent = "Password is empty";
+    }
+    if (!confirmPassword.value) {
+      confirmPasswordError.textContent = "Confirm Password is empty";
     }
 
     if (
@@ -94,13 +98,16 @@ if (registerBtn) {
     if (!email.value) {
       emailError.textContent = "Email is empty";
     }
+    if (!confirmEmail.value) {
+      confirmEmailError.textContent = "Confirm Email is empty";
+    }
     if (!password.value) {
-      passwordError.textContent = "Passwords is empty";
+      passwordError.textContent = "Password is empty";
     }
-    if (!emailValidation(email.value)) {
-      emailError.textContent = "Invalid email format";
-      return;
+    if (!confirmPassword.value) {
+      confirmPasswordError.textContent = "Confirm Password is empty";
     }
+
     if (
       user.value &&
       email.value &&
@@ -153,57 +160,65 @@ email.addEventListener("input", () => {
   //email error message update in input
   emailError.textContent = "";
 
-  //confirm email match logic
-  if (confirmEmail) {
-    if (confirmEmail.value === email.value || confirmEmail.value === "") {
-      emailError.textContent = "";
-    } else {
-      emailError.textContent = "Emails don't match";
-    }
+  if (!email.value) {
+    return;
+  }
+
+  if (!emailValidation(email.value)) {
+    emailError.textContent = "Invalid email format";
+    return;
+  }
+
+  if (confirmEmail.value && email.value !== confirmEmail.value) {
+    //confirm email match logic
+    emailError.textContent = "Emails don't match";
   }
 });
 
 //Confirm email field
 if (confirmEmail) {
   confirmEmail.addEventListener("input", () => {
-      //email error message update in input
-    emailError.textContent = "";
+    //email error message update in input
+    confirmEmailError.textContent = "";
 
-    //email match logic
-    if (confirmEmail.value === email.value || confirmEmail.value === "") {
-      emailError.textContent = "";
-    } else {
-      emailError.textContent = "Emails don't match";
+    if (!confirmEmail.value) {
+      return;
+    }
+    if (!emailValidation(confirmEmail.value)) {
+      confirmEmailError.textContent = "Invalid email format";
+      return;
+    }
+    if (email.value && confirmEmail.value !== email.value) {
+      //confirm email match logic
+      confirmEmailError.textContent = "Emails don't match";
     }
   });
 }
 
 //Password field
 password.addEventListener("input", () => {
-   //password error message update in input
+  //password error message update in input
   passwordError.textContent = "";
 
   //update password strength value
   passStrength = passwordStr(password.value);
 
-  //confirm password match logic
-  if (confirmPassword) {
-    if (
-      confirmPassword.value === password.value ||
-      confirmPassword.value === ""
-    ) {
-      passwordError.textContent = "";
-    } else {
-      passwordError.textContent = "Passwords don't match";
-    }
-  }
   //password length validation
   if (password.value.length < 8 && password.value.length > 0) {
     passwordError.textContent = "Password too short";
-  } else {
-    //passStrength validation
-    if (passStrength < 3) {
-      passwordError.textContent = "Password too weak";
+    return;
+  }
+  if (passStrength < 3) {
+    passwordError.textContent = "Password too weak";
+    return;
+  }
+
+  //confirm password match logic
+  if (confirmPassword) {
+    if (!confirmPassword.value) return;
+
+    if (confirmPassword.value !== password.value) {
+      confirmPasswordError.textContent = "Passwords don't match";
     }
   }
 });
@@ -211,30 +226,26 @@ password.addEventListener("input", () => {
 //confirm password field
 if (confirmPassword) {
   confirmPassword.addEventListener("input", () => {
-     //password error message update in input
-    passwordError.textContent = "";
+    //password error message update in input
+    confirmPasswordError.textContent = "";
 
     //update password strength
-    passStrength = passwordStr(password.value);
+    passStrength = passwordStr(confirmPassword.value);
 
-    //password match logic
-    if (
-      confirmPassword.value === password.value ||
-      confirmPassword.value === ""
-    ) {
-      passwordError.textContent = "";
-    } else {
-      passwordError.textContent = "Passwords don't match";
+    //password length validation
+    if (confirmPassword.value.length < 8 && confirmPassword.value.length > 0) {
+      confirmPasswordError.textContent = "Password too short";
+      return;
+    }
+    if (passStrength < 3) {
+      confirmPasswordError.textContent = "Password too weak";
+      return;
     }
 
-    //length validation
-    if (password.value.length < 8 && password.value.length > 0) {
-      passwordError.textContent = "Password too short";
-    } else {
-      //passStrength validation
-      if (passStrength < 3) {
-        passwordError.textContent = "Password too weak";
-      }
+    //password match logic
+    if (!password.value) return;
+    if (confirmPassword.value !== password.value) {
+      confirmPasswordError.textContent = "Passwords don't match";
     }
   });
 }
@@ -248,7 +259,7 @@ if (showPassword) {
       ? (password.type = "text")
       : (password.type = "password");
 
-      //change the visibility eye icon
+    //change the visibility eye icon
     password.type === "password"
       ? changePasswordVisibility(showPassword, true)
       : changePasswordVisibility(showPassword, false);
@@ -257,13 +268,13 @@ if (showPassword) {
 
 //ConfirmPassword visibilty listeners
 if (showConfirmPassword) {
-   //change input field type
+  //change input field type
   showConfirmPassword.addEventListener("click", () => {
     confirmPassword.type === "password"
       ? (confirmPassword.type = "text")
       : (confirmPassword.type = "password");
 
-        //change the visibility eye icon
+    //change the visibility eye icon
     confirmPassword.type === "password"
       ? changePasswordVisibility(showConfirmPassword, true)
       : changePasswordVisibility(showConfirmPassword, false);

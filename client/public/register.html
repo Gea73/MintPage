@@ -18,7 +18,7 @@
 <body>
     <div class="title__container">
         <a href="landing-page.html"> <img class="logo" src="./images/leaf.png" alt="logo"></a>
-        <h1>Register</h1>
+        <h1>Sign Up</h1>
         <button class="change-theme" type="button">☀ Change theme</button>
     </div>
 
@@ -30,41 +30,52 @@
         <form action="">
             <div class="form__field">
                 <label for="user">User</label>
-                <input type="text" name="user" id="user" placeholder="ex:Adriano">
+                <input type="text" name="user" id="user" placeholder="Username">
                 <span class="error-message" id="user-error"></span>
             </div>
             <div class="form__field">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="ex:youremail@.com">
+                <input type="email" name="email" id="email" placeholder="E-mail">
+                 <span class="error-message" id="email-error"></span>
             </div>
             <div class="form__field">
                 <label for="confirm-email">Confirm Email</label>
-                <input type="email" name="confirm-email" id="confirm-email" placeholder="ex:youremail@.com">
-                <span class="error-message" id="email-error"></span>
+                <input type="email" name="confirm-email" id="confirm-email" placeholder="Confirm E-mail">
+                <span class="error-message" id="confirm-email-error"></span>
             </div>
             <div class="form__field">
                 <label for="password">Password</label>
                 <div class="password__wrapper">
-                    <input type="password" name="password" id="password">
-                     <svg class="show-password-icon" id="show-password" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#009688"><path d="M607.5-372.5Q660-425 660-500t-52.5-127.5Q555-680 480-680t-127.5 52.5Q300-575 300-500t52.5 127.5Q405-320 480-320t127.5-52.5Zm-204-51Q372-455 372-500t31.5-76.5Q435-608 480-608t76.5 31.5Q588-545 588-500t-31.5 76.5Q525-392 480-392t-76.5-31.5ZM214-281.5Q94-363 40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200q-146 0-266-81.5ZM480-500Zm207.5 160.5Q782-399 832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280q113 0 207.5-59.5Z"/></svg>
+                    <input type="password" name="password" id="password" placeholder="Password">
+                    <svg class="show-password-icon" id="show-password" xmlns="http://www.w3.org/2000/svg" height="20px"
+                        viewBox="0 -960 960 960" width="20px" fill="#009688">
+                        <path
+                            d="M607.5-372.5Q660-425 660-500t-52.5-127.5Q555-680 480-680t-127.5 52.5Q300-575 300-500t52.5 127.5Q405-320 480-320t127.5-52.5Zm-204-51Q372-455 372-500t31.5-76.5Q435-608 480-608t76.5 31.5Q588-545 588-500t-31.5 76.5Q525-392 480-392t-76.5-31.5ZM214-281.5Q94-363 40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200q-146 0-266-81.5ZM480-500Zm207.5 160.5Q782-399 832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280q113 0 207.5-59.5Z" />
+                    </svg>
                 </div>
+                <span class="error-message" id="password-error"></span>
             </div>
             <div class="form__field">
                 <label for="confirm-password">Confirm Password</label>
                 <div class="password__wrapper">
-                    <input type="password" name="confirm-password" id="confirm-password">
-                   <svg class="show-password-icon" id="show-confirm-password" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#009688"><path d="M607.5-372.5Q660-425 660-500t-52.5-127.5Q555-680 480-680t-127.5 52.5Q300-575 300-500t52.5 127.5Q405-320 480-320t127.5-52.5Zm-204-51Q372-455 372-500t31.5-76.5Q435-608 480-608t76.5 31.5Q588-545 588-500t-31.5 76.5Q525-392 480-392t-76.5-31.5ZM214-281.5Q94-363 40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200q-146 0-266-81.5ZM480-500Zm207.5 160.5Q782-399 832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280q113 0 207.5-59.5Z"/></svg>
+                    <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password">
+                    <svg class="show-password-icon" id="show-confirm-password" xmlns="http://www.w3.org/2000/svg"
+                        height="20px" viewBox="0 -960 960 960" width="20px" fill="#009688">
+                        <path
+                            d="M607.5-372.5Q660-425 660-500t-52.5-127.5Q555-680 480-680t-127.5 52.5Q300-575 300-500t52.5 127.5Q405-320 480-320t127.5-52.5Zm-204-51Q372-455 372-500t31.5-76.5Q435-608 480-608t76.5 31.5Q588-545 588-500t-31.5 76.5Q525-392 480-392t-76.5-31.5ZM214-281.5Q94-363 40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200q-146 0-266-81.5ZM480-500Zm207.5 160.5Q782-399 832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280q113 0 207.5-59.5Z" />
+                    </svg>
                 </div>
-                <span class="error-message" id="password-error"></span>
+                <span class="error-message" id="confirm-password-error"></span>
             </div>
             <div class="form__buttons">
+                <button type="button" class="standard-btn" id="register-btn">Sign Up</button>
                 <a href="login.html" class="standard-btn">Login</a>
-                <button type="button" class="standard-btn" id="register-btn">Register</button>
+
             </div>
 
         </form>
     </div>
- <script src="/config/config.js"></script>
+    <script src="/config/config.js"></script>
     <script src="/utils/base.js"></script>
     <script src="/services/form.js"></script>
 </body>
