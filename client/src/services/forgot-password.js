@@ -1,18 +1,22 @@
-//DOM elements
-const forgotBtn = document.querySelector("#forgot-btn");
-
-const email = document.querySelector("#email");
-
-const emailError = document.querySelector("#email-error");
-
 //globals
-/* global showLoader */
-/* global messageLoader */
-/* global hideLoader */
 /* global API_URL */
 
+//imports
+import { emailValidation } from "../utils/base.js";
+import {showLoader,hideLoader,messageLoader} from "../utils/loader.js";
 
-//email send request
+//DOM elements
+
+//form fields
+const email = document.querySelector("#email");
+
+//error messages
+const emailError = document.querySelector("#email-error");
+
+//buttons
+const forgotBtn = document.querySelector("#forgot-btn");
+
+//email send request on click
 forgotBtn.addEventListener("click", async () => {
 
   if (!email.value) {
@@ -52,15 +56,18 @@ forgotBtn.addEventListener("click", async () => {
   }
 });
 
-
-//Email error message update in input
+//Email field validation
 email.addEventListener("input", () => {
+  //email error message update in input
   emailError.textContent = "";
+
+  if (!email.value) {
+    return;
+  }
+
+  if (!emailValidation(email.value)) {
+    emailError.textContent = "Invalid email format";
+    return;
+  }
+
 });
-
-
-//frontend email validation
-function emailValidation(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}

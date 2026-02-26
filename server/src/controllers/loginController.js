@@ -13,7 +13,7 @@ const loginController = async (req, res) => {
 
     //if dont find any
     if (users.rows.length === 0)
-      return res.status(401).json({ message: "User not registered" });
+      return res.status(401).json({ message: "Error User not registered" });
 
     const userDb = users.rows[0];
 

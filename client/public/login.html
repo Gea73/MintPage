@@ -25,12 +25,11 @@
         <button class="change-theme" type="button">☀ Change theme</button>
     </div>
 
-    <div class="loader-overlay hidden">
-        <div class="loader"></div>
-    </div>
-
+    <span class="loader-overlay hidden"></span>
+    <span class="error-message-box hidden"></span>
     <div class="form__container">
-        <form action="">
+
+        <form>
             <div class="form__field">
                 <label for="user">User</label>
                 <input type="text" name="user" id="user" placeholder="Username">
@@ -66,8 +65,8 @@
     </div>
 
     <script src="/config/config.js"></script>
-    <script src="/utils/base.js"></script>
-    <script src="/services/form.js"></script>
+    <script src="/utils/theme.js"></script>
+    <script type="module" src="/services/login.js"></script>
 </body>
 
 </html>

@@ -148,7 +148,7 @@ a.standard-btn {
     z-index: 9999;
 }
 
-.loader {
+.loader-wheel {
     border: 16px solid var(--color-text-input);
     border-top: 16px solid var(--color-main);
     border-radius: 50%;
@@ -158,21 +158,30 @@ a.standard-btn {
 
 }
 
-.loader-box {
+.error-message-box{
+    color: white;
+    border: 1px solid #b40707;
+    background-color: #ce1622;
+    padding: 1rem 4rem 1rem 4rem;
+    border-radius: 7px;
+    margin-top: 0.5rem;
+}
+/*
+.loader-message-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    border: 1px solid var(--color-border-input);
+    border: 2px solid var(--color-border-input);
+    font-size: 1.5rem;
     font-weight: bolder;
     border-radius: 15px;
-    padding: 3rem;
+    padding: 5rem;
     margin-bottom: 15%;
     background: var(--color-background-glass);
     color: var(--color-text-input);
-    text-transform: uppercase;
 
-}
+}*/
 
 
 @keyframes spin {
