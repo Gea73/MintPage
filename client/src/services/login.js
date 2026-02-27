@@ -64,7 +64,8 @@ loginBtn.addEventListener("click", async () => {
 
       const data = await response.json();
       if (response.ok) {
-        messageLoader(String(data.message));
+      messageLoader(String(data.message));
+         window.location.href = "/dashboard";
       } else {
         messageLoader(String(data.message));
       }
@@ -73,6 +74,7 @@ loginBtn.addEventListener("click", async () => {
     } finally {
       hideLoader();
     }
+
   }
 });
 
@@ -112,7 +114,8 @@ password.addEventListener("input", () => {
 
   //password strength validation error message
   if (password.value && passwordStrength(password.value) < 3) {
-    passwordError.textContent = "Password must include an uppercase letter, number, and special character";
+    passwordError.textContent =
+      "Password must include an uppercase letter, number, and special character";
     return;
   }
 });
@@ -121,9 +124,9 @@ password.addEventListener("input", () => {
 //change input field type
 showPasswordEye.addEventListener("click", () => {
   //change the visibility eye icon
-  
-  const isHidden = password.type === "password"; 
+
+  const isHidden = password.type === "password";
 
   changeEyeIcon(showPasswordEye, !isHidden);
-   password.type = isHidden ? "text" : "password";
+  password.type = isHidden ? "text" : "password";
 });

@@ -1,6 +1,6 @@
-import {pool} from "../config/db.js";
+import { pool } from "../config/db.js";
 import bcrypt from "bcrypt";
-
+import { generateToken } from "../utils/generateToken.js";
 
 const loginController = async (req, res) => {
   try {
@@ -31,11 +31,21 @@ const loginController = async (req, res) => {
         .json({ message: "Email or Password does not match this user" });
     }
 
-    res.json({ message: "Login successful" });
+    const token = generateToken(userDb.id);
+
+    res
+      .cookie("token", token, {
+        maxAge: 180000,
+        httpOnly: true,
+        sameSite: "strict",
+      })
+      .status(200)
+      .json({ message: "Login successful" });
+      
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ message: "Server Error" });
   }
 };
 
- export {loginController};
+export { loginController };

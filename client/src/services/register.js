@@ -75,7 +75,7 @@ registerBtn.addEventListener("click", async () => {
 
       if (response.ok) {
         messageLoader(String(data.message));
-        location.href = "login.html";
+          location.href = "/login";
       } else if (response.status === 409) {
         messageLoader(String(data.message));
       } else {
@@ -86,6 +86,8 @@ registerBtn.addEventListener("click", async () => {
     } finally {
       hideLoader();
     }
+
+   
   }
 });
 
@@ -142,12 +144,16 @@ password.addEventListener("input", () => {
   //update password strength value
 
   //password length validation
+  //password length validation error message
   if (password.value.length < 8 && password.value.length > 0) {
-    passwordError.textContent = "Password too short";
+    passwordError.textContent = "Password must be at least 8 long";
     return;
   }
-  if (passwordStrength(password.value) < 3) {
-    passwordError.textContent = "Password too weak";
+
+  //password strength validation error message
+  if (password.value && passwordStrength(password.value) < 3) {
+    passwordError.textContent =
+      "Password must include an uppercase letter, number, and special character";
     return;
   }
 

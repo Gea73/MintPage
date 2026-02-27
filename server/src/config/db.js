@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 const __dirname = import.meta.dirname;
 dotenv.config({path:path.join(__dirname,"../../.env")});
 
-console.log(process.env.NODE_ENV);
 
 let pool;
 
