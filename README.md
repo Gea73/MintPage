@@ -80,20 +80,20 @@ MintPage/
 
 ## Installation
 
-### 1. Clone the repository
+### Clone the repository
 
 ```
 git clone https://github.com/Gea73/MintPage.git
 cd MintPage
 ```
 
-### 2. Install dependencies:
+### Install dependencies:
 
 ```
 npm install
 ```
 
-### 3. Setup PostgreSQL database and create .env file:
+### Setup PostgreSQL database and create .env file:
 
 ```
 #Database Config
@@ -113,12 +113,34 @@ API_URL= ex:http://localhost:5000
 #Secret
 JWT_SECRET=JWT secret
 ```
+### Run the following SQL commands to create the database schema:
 
-### 4. Run the server:
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE password_reset_tokens (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    token_hash TEXT NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires TIMESTAMP NOT NULL,
+
+    FOREIGN KEY (email)
+        REFERENCES users(email)
+        ON DELETE CASCADE
+);
+```
+### Run the server:
 
     npm start
 
-### 5. Open your browser and go to:
+### Open your browser and go to:
 
     http://localhost:5000 (or the custom URL you have configured)
 
@@ -198,16 +220,16 @@ MintPage/
 
 ## Instalação
 
-### 1. Clonar o repositório
+### Clonar o repositório
 
     git clone https://github.com/Gea73/MintPage.git
     cd MintPage
 
-### 2. Instalar dependências
+### Instalar dependências
 
     npm install
 
-### 3. Configurar banco de dados PostgreSQL e criar arquivo .env:
+### Configurar banco de dados PostgreSQL e criar arquivo .env:
 
     # Configuração do banco de dados
     DB_USER=Seu usuário do PostgreSQL
@@ -226,11 +248,35 @@ MintPage/
     # Secret
     JWT_SECRET=Segredo para JWT
 
-### 4. Executar o servidor:
+### Rode os seguintes comandos SQL para criar o schema do banco de dados:
+
+```sql
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE password_reset_tokens (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL,
+    token_hash TEXT NOT NULL,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires TIMESTAMP NOT NULL,
+
+    FOREIGN KEY (email)
+        REFERENCES users(email)
+        ON DELETE CASCADE
+);
+```
+
+### Executar o servidor:
 
     npm start
 
-### 5. Abra o navegador e acesse:
+### Abra o navegador e acesse:
 
     http://localhost:5000 (Ou o url que você tenha configurado)
 
