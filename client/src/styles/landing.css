@@ -5,7 +5,7 @@ body {
     background-color: var(--color-background);
     font-family: var(--font-main);
     user-select: none;
-   
+
 }
 
 
@@ -73,11 +73,34 @@ a {
 .header__register {
     display: flex;
     justify-content: center;
+    gap: 1rem;
 }
 
+/*=============================*/
+/*        BUTTONS              */
+/*=============================*/
+
+.register__btn {
+    border: 1px solid var(--color-main);
+    border-radius: 5px;
+    color: white;
+    background: var(--color-main);
+    text-decoration: none;
+    display: inline-block;
+    font: 700 13.3333px Arial;
+    padding: 1rem;
+    transition: transform 0.5s ease, background-color 0.15s ease;
+
+}
+
+.register__btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(2, 227, 200, 0.4);
+}
 
 /*=============================*/
-/*        NAV               */
+/*        NAV                  */
 /*=============================*/
 
 .nav__container {
