@@ -1,6 +1,6 @@
 import { pool } from "../config/db.js";
-import bcrypt from "bcrypt";
 import { generateToken } from "../utils/generateToken.js";
+import argon2id from "argon2";
 
 const loginController = async (req, res) => {
   try {
@@ -20,15 +20,15 @@ const loginController = async (req, res) => {
     if (userDb.email !== email)
       return res
         .status(401)
-        .json({ message: "Email or Password does not match this user" });
+        .json({ message: "Invalid email or password" });
 
     //compare the password sent with the hash on DB
-    const validPassword = await bcrypt.compare(password, userDb.password_hash);
+    const validPassword = await argon2id.verify(userDb.password_hash,password);
 
     if (!validPassword) {
       return res
         .status(401)
-        .json({ message: "Email or Password does not match this user" });
+        .json({ message: "Invalid email or password" });
     }
 
     const token = generateToken(userDb.id);

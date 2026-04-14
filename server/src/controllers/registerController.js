@@ -1,5 +1,5 @@
-import {pool} from "../config/db.js";
-import bcrypt from "bcrypt";
+import { pool } from "../config/db.js";
+import argon2id from "argon2";
 
 const registerController = async (req, res) => {
   try {
@@ -14,10 +14,13 @@ const registerController = async (req, res) => {
       return res.status(400).json({ message: "Your password is not valid" });
     }
 
-    //create a password salt
-    const salt = await bcrypt.genSalt(10);
     //hash the password
-    const hashPassword = await bcrypt.hash(password, salt);
+    const hashPassword = await await argon2id.hash("password", {
+      type: argon2id.argon2id,
+      memoryCost: 64 * 1024,
+      timeCost: 3,
+      parallelism: 1,
+    });
 
     //insert the new user on DB
     const newUser = await pool.query(
@@ -42,4 +45,4 @@ const registerController = async (req, res) => {
   }
 };
 
-export {registerController};
+export { registerController };
