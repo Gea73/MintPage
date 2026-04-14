@@ -1,13 +1,13 @@
-import {pool} from "../config/db.js";
-import crypto from "crypto";
-import bcrypt from "bcrypt";
-import {transporter} from "../config/mailer.js";
+import { transporter } from "../config/mailer.js";
 
 import path from "node:path";
 import dotenv from "dotenv";
+import { findUserByEmail } from "../models/userModel.js";
+import { generateResetTokenHash } from "../utils/generateResetToken.js";
+import { createResetToken } from "../models/resetTokenModel.js";
 
 const __dirname = import.meta.dirname;
-dotenv.config({path:path.join(__dirname,"../../.env")});
+dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 const API_URL = process.env.API_URL;
 
@@ -18,31 +18,22 @@ const forgotPasswordController = async (req, res) => {
     //get email from body
 
     //look for users with that email
-    const users = await pool.query("SELECT * FROM users WHERE email = $1", [
-      email,
-    ]);
+    const user = findUserByEmail(email);
 
     //if query didnt find
-    if (users.rows.length === 0) {
+    if (!user) {
       return res.json({ message: "Something went wrong" });
     }
 
     //create a token for unique forgot password link
     //define a random hexadecimal token
-    const token = crypto.randomBytes(32).toString("hex");
-    //hash the token
-    const tokenHash = await bcrypt.hash(token, 10);
+    const tokenHash = generateResetTokenHash();
     //create a 30 min expiration
-    const expirationDate = new Date(Date.now() + 1800000);
-
     //insert the token on database
-    await pool.query(
-      "INSERT INTO password_reset_tokens (email,token_hash,expires) VALUES($1,$2,$3)",
-      [email, tokenHash, expirationDate],
-    );
+    createResetToken(email, tokenHash);
 
     //set the reset url with the token and email
-    const resetLink = `${API_URL}/reset-password.html?token=${token}&email=${email}`;
+    const resetLink = `${API_URL}/reset-password.html?token=${tokenHash}&email=${email}`;
 
     //use nodemailer to send the email
     await transporter.sendMail({
@@ -56,8 +47,8 @@ const forgotPasswordController = async (req, res) => {
     res.json({ message: "Password reset link sent" });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({messafe:"Server Error"});
+    res.status(500).json({ messafe: "Server Error" });
   }
 };
 
-export  {forgotPasswordController};
+export { forgotPasswordController };

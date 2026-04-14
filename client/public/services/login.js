@@ -56,7 +56,7 @@ loginBtn.addEventListener("click", async () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user: user.value,
+          username: user.value,
           email: email.value,
           password: password.value,
         }),

@@ -1,5 +1,5 @@
-import { pool } from "../config/db.js";
-import argon2id from "argon2";
+import { createUser } from "../models/userModel";
+
 
 const registerController = async (req, res) => {
   try {
@@ -14,19 +14,10 @@ const registerController = async (req, res) => {
       return res.status(400).json({ message: "Your password is not valid" });
     }
 
-    //hash the password
-    const hashPassword = await await argon2id.hash("password", {
-      type: argon2id.argon2id,
-      memoryCost: 64 * 1024,
-      timeCost: 3,
-      parallelism: 1,
-    });
+ 
 
     //insert the new user on DB
-    const newUser = await pool.query(
-      "INSERT INTO users (username,email,password_hash) VALUES ($1,$2,$3) RETURNING *",
-      [user, email, hashPassword],
-    );
+    const newUser = await createUser(user, email,password) 
 
     if (newUser) {
       res.json({ message: "User Registred Successfully" });
@@ -38,8 +29,6 @@ const registerController = async (req, res) => {
     if (error.code === "23505") {
       return res.status(409).json({ message: "User or email already used" });
     }
-
-    console.error(error.message);
 
     res.status(500).json({ message: "Server Error" });
   }
