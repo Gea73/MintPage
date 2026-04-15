@@ -9,7 +9,7 @@ async function createUser(user, email, password) {
       [user, email, hashUserPassword(password)],
     );
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -18,14 +18,14 @@ async function findUser(user) {
     "SELECT * FROM users WHERE username = $1",
     [user],
   );
-  return userQuery[0];
+  return userQuery.rows[0];
 }
 
 async function findUserByEmail(email) {
   const userQuery = await pool.query("SELECT * FROM users WHERE email = $1", [
     email,
   ]);
-  return userQuery[0];
+  return userQuery.rows[0];
 }
 
 async function hashUserPassword(password) {
@@ -37,7 +37,7 @@ async function hashUserPassword(password) {
       parallelism: 1,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -46,14 +46,14 @@ async function verifyUserPassword(passwordHash, password) {
 }
 
 async function resetUserPassword(newPassword, email) {
-  const user = findUserByEmail(email);
+  const user = await findUserByEmail(email);
 
   const isEqualPassword = verifyUserPassword(user.password_hash, newPassword);
   if (isEqualPassword) {
     throw new error("The new password is equal to the old");
   }
 
-  const newPasswordHash = hashUserPassword(newPassword);
+  const newPasswordHash = await hashUserPassword(newPassword);
 
   await pool.query("UPDATE users SET password_hash = $1 WHERE email = $2", [
     newPasswordHash,

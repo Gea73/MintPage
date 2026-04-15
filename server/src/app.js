@@ -15,7 +15,7 @@ import { router as forgotPasswordRouter } from "./routes/forgotPasswordRoutes.js
 import { router as resetPasswordRouter } from "./routes/resetPasswordRoutes.js";
 import { router as dashboardRouter } from "./routes/dashboardRoutes.js";
 
-//use helmet to more safe http headers
+//use helmet to more safe http headers and prevent against xss
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "prod") {
     }),
   );
 }
-//only accept the real origin
+//only accept the real origin cors
 app.use(
   cors({
     origin: `${process.env.API_URL}`,
@@ -51,8 +51,7 @@ app.use(
     credentials: true,
   }),
 );
-
-//rate limiter to limit max 10 requests at each 15 minutes
+//slow down rate limiter to limit max 10 requests at each 15 minutes
 app.use(
   slowDown({
     windowMs: 15 * 60 * 1000,
@@ -60,7 +59,6 @@ app.use(
     delayMs: (hits) => hits * hits * 500,
   }),
 );
-
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
@@ -78,9 +76,9 @@ app.use(
   }),
 );
 
-// to function with proxies and see the ips of clients not of the proxy
+// to work with proxies and see the client ips and not the proxy ip
 app.set("trust proxy", 1);
-
+//remove x powereb by express
 app.disable("x-powered-by");
 //limits json paylod to 10kb
 app.use(express.json({ limit: "10kb" }));

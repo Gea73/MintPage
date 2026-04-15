@@ -1,37 +1,35 @@
 import findUser, { verifyUserPassword } from "../models/userModel.js";
-import { generateToken } from "../utils/generateRefreshToken.js";
+import { generateAccessToken } from "../utils/generateAccessToken.js";
 
 const loginController = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    //select the user whom username is equal
     const user = await findUser(username);
 
-    //if dont find any
     if (!user)
-      return res.status(401).json({ message: "Error User not registered" });
+      return res.status(401).json({ message: "Invalid credentials" });
 
     if (user.email !== email)
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid credentials" });
 
-    //compare the password sent with the hash on DB
     const IsValidPassword = await verifyUserPassword(
       user.password_hash,
       password,
     );
 
     if (!IsValidPassword) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const token = generateToken(user.id);
+    const accessToken = await generateAccessToken(user.id);
 
     res
-      .cookie("token", token, {
-        maxAge: 180000,
+      .cookie("accessToken", accessToken, {
+        maxAge: 15*60*1000,
         httpOnly: true,
         sameSite: "strict",
+        secure:true
       })
       .status(200)
       .json({ message: "Login successful" });

@@ -15,24 +15,16 @@ const API_URL = process.env.API_URL;
 const forgotPasswordController = async (req, res) => {
   try {
     const { email } = req.body;
-    //get email from body
 
-    //look for users with that email
-    const user = findUserByEmail(email);
+    const user = await findUserByEmail(email);
 
-    //if query didnt find
     if (!user) {
       return res.json({ message: "Something went wrong" });
     }
 
-    //create a token for unique forgot password link
-    //define a random hexadecimal token
-    const tokenHash = generateResetTokenHash();
-    //create a 30 min expiration
-    //insert the token on database
-    createResetToken(email, tokenHash);
+    const tokenHash = await generateResetTokenHash();
+   await createResetToken(email, tokenHash);
 
-    //set the reset url with the token and email
     const resetLink = `${API_URL}/reset-password.html?token=${tokenHash}&email=${email}`;
 
     //use nodemailer to send the email

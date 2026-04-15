@@ -10,7 +10,7 @@ const resetPasswordController = async (req, res) => {
   const { email, token, newPassword } = req.body;
 
   // Find the most recent token associate with the email in DB
-  const dbToken = findResetToken(email);
+  const dbToken = await findResetToken(email);
 
   if (!dbToken) {
     return res.status(400).json({ message: "Invalid or expired token" });
@@ -32,9 +32,9 @@ const resetPasswordController = async (req, res) => {
 
   try {
     //update the user password with the same email
-    resetUserPassword(newPassword, email);
+   await resetUserPassword(newPassword, email);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.json({ message: `Error ${error}` });
   }
 

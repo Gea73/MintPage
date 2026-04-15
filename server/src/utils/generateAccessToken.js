@@ -12,9 +12,9 @@ const JWT_SECRET = process.env.JWT_SECRET;
 if(!JWT_SECRET){
   throw new error("JWT Secret not founded");
 }
-function generateRefreshToken(userId) {
+function generateAcessToken(userId) {
    
   return jwt.sign({ sub: userId }, JWT_SECRET, { expiresIn: "3min" });
 }
 
-export { generateRefreshToken };
+export { generateAcessToken };
