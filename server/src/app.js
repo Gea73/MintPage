@@ -75,7 +75,6 @@ app.use(
     },
   }),
 );
-
 // to work with proxies and see the client ips and not the proxy ip
 app.set("trust proxy", 1);
 //remove x powereb by express
@@ -83,6 +82,7 @@ app.disable("x-powered-by");
 //limits json paylod to 10kb
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
+
 
 app.use("/register", registerRouter);
 
