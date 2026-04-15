@@ -1,4 +1,4 @@
-import { error } from "node:console";
+
 import argon2id from "argon2";
 
 export class UserService {
@@ -23,7 +23,7 @@ export class UserService {
 
   async hashUserPassword(password) {
     try {
-      return await await argon2id.hash(password, {
+      return await argon2id.hash(password, {
         type: argon2id.argon2id,
         memoryCost: 64 * 1024,
         timeCost: 3,
@@ -35,18 +35,18 @@ export class UserService {
   }
 
   async verifyUserPassword(passwordHash, password) {
-    await argon2id.verify(passwordHash, password);
+     return await argon2id.verify(passwordHash, password);
   }
 
   async resetUserPassword(newPassword, email) {
     const user = await this.userRepo.findByEmail(email);
 
-    const isEqualPassword = this.verifyUserPassword(
+    const isEqualPassword =await this.verifyUserPassword(
       user.password_hash,
       newPassword,
     );
     if (isEqualPassword) {
-      throw new error("The new password is equal to the old");
+      throw new Error("The new password is equal to the old");
     }
 
     const newPasswordHash = await this.hashUserPassword(newPassword);
