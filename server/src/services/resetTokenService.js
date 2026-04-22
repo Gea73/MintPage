@@ -6,11 +6,11 @@ export class ResetTokenService {
   }
 
   async createResetToken(email, tokenHash) {
-    await this.deleteResetToken(email);
+    
     return await this.resetTokenRepo.create(
       email,
       tokenHash,
-      new Date(Date.now() + 1800000),
+      new Date(Date.now() +  30*60*1000),
     );
   }
 
@@ -19,11 +19,11 @@ export class ResetTokenService {
   }
 
   async generateResetToken() {
-    return await crypto.randomBytes(32).toString("hex");
+    return  crypto.randomBytes(32).toString("hex");
   }
 
   async hashResetToken(token) {
-    return await crypto.createHash("sha256").update(token).digest("hex");
+    return crypto.createHash("sha256").update(token).digest("hex");
   }
 
   async verifyResetToken(token, dbTokenHash) {

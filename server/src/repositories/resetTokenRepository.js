@@ -3,10 +3,23 @@ export class ResetTokenRepo {
     this.pool = pool;
   }
   async create(email, tokenHash, expiration) {
-    await this.pool.query(
-      "INSERT INTO password_reset_tokens (email,token_hash,expires) VALUES($1,$2,$3)",
-      [email, tokenHash, expiration],
-    );
+    const client = await this.pool.query("BEGIN");
+
+    try {
+      await this.deleteByEmail(email);
+      
+      await this.pool.query(
+        "INSERT INTO password_reset_tokens (email,token_hash,expires) VALUES($1,$2,$3)",
+        [email, tokenHash, expiration],
+      );
+
+      await client.query("COMMIT");
+    } catch (error) {
+      await client.query("ROLLBACK");
+      console.log(error);
+    } finally {
+      client.release();
+    }
   }
 
   async findOneByEmail(email) {
