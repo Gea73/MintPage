@@ -1,9 +1,7 @@
-
-import argon2id from "argon2";
-
 export class UserService {
-  constructor({ userRepo }) {
+  constructor({ userRepo, passwordHasher }) {
     this.userRepo = userRepo;
+    this.passwordHasher = passwordHasher;
   }
   async createUser(user, email, password) {
     return await this.userRepo.create(
@@ -22,28 +20,21 @@ export class UserService {
   }
 
   async hashUserPassword(password) {
-   
-      return await argon2id.hash(password, {
-        type: argon2id.argon2id,
-        memoryCost: 64 * 1024,
-        timeCost: 3,
-        parallelism: 1,
-      });
-  
+    return await this.passwordHasher.hash(password);
   }
 
   async verifyUserPassword(passwordHash, password) {
-     return await argon2id.verify(passwordHash, password);
+    return await this.passwordHasher.verify(passwordHash, password);
   }
 
   async resetUserPassword(newPassword, email) {
     const user = await this.userRepo.findByEmail(email);
 
-    if(!user){
+    if (!user) {
       throw new Error("User not found");
     }
 
-    const isEqualPassword =await this.verifyUserPassword(
+    const isEqualPassword = await this.verifyUserPassword(
       user.password_hash,
       newPassword,
     );
