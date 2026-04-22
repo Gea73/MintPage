@@ -17,11 +17,11 @@ export class RegisterController {
       //insert the new user on DB
       const newUser = await this.userService.createUser(user, email, password);
 
-      if (newUser) {
-        res.json({ message: "User Registred Successfully" });
-      } else {
-        res.json({ message: "User register failed" });
+      if (!newUser) {
+          res.status(500).json({ message: "User register failed" });      
+      
       }
+       res.status(201).json({ message: "User Registred Successfully" });
     } catch (error) {
       //if a user or email is already in db
       if (error.code === "23505") {

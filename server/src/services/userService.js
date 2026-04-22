@@ -9,7 +9,7 @@ export class UserService {
     return await this.userRepo.create(
       user,
       email,
-      this.hashUserPassword(password),
+      await this.hashUserPassword(password),
     );
   }
 
@@ -22,16 +22,14 @@ export class UserService {
   }
 
   async hashUserPassword(password) {
-    try {
+   
       return await argon2id.hash(password, {
         type: argon2id.argon2id,
         memoryCost: 64 * 1024,
         timeCost: 3,
         parallelism: 1,
       });
-    } catch (error) {
-      console.error(error);
-    }
+  
   }
 
   async verifyUserPassword(passwordHash, password) {
@@ -40,6 +38,10 @@ export class UserService {
 
   async resetUserPassword(newPassword, email) {
     const user = await this.userRepo.findByEmail(email);
+
+    if(!user){
+      throw new Error("User not found");
+    }
 
     const isEqualPassword =await this.verifyUserPassword(
       user.password_hash,

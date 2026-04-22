@@ -4,14 +4,13 @@ export class UserRepo {
   }
 
   async create(user, email, passwordHash) {
-    try {
-      return await this.pool.query(
-        "INSERT INTO users (username,email,password_hash) VALUES ($1,$2,$3) RETURNING *",
+   
+      const result =  await this.pool.query(
+        "INSERT INTO users (username,email,password_hash) VALUES ($1,$2,$3) RETURNING id,username,email",
         [user, email, passwordHash],
       );
-    } catch (error) {
-      console.error(error);
-    }
+      return result.rows[0];
+  
   }
 
   async findByUsername(user) {
