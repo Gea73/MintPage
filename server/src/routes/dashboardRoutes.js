@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
-import { dashboardController } from "../controllers/dashboardController.js";
 import { authenticateToken } from "../middleware/authenticateToken.js";
+import { dashboardController } from "../config/container.js";
 
 //calls the controller
-router.get('/',authenticateToken,dashboardController);
+router.get('/',authenticateToken,(req,res)=>dashboardController.handler(req,res));
 
 
 export {router};

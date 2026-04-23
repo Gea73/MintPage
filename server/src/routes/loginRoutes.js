@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-import {loginController} from "../controllers/loginController.js";
+import { loginController } from "../config/container.js";
 
 //calls the controller
-router.post('/',loginController);
+router.post('/',(req,res)=>loginController.handler(req,res));
 
 export {router};

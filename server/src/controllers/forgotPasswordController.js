@@ -14,7 +14,7 @@ export class ForgotPasswordController {
     this.resetTokenService = resetTokenService;
   }
 
-  async handle(req, res) {
+  async handler(req, res) {
     try {
       const { email } = req.body;
 

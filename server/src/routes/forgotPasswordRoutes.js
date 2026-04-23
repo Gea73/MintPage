@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-import {forgotPasswordController} from "../controllers/forgotPasswordController.js";
+import { forgotPasswordController } from "../config/container.js";
 
 //calls the controller
-router.post('/',forgotPasswordController);
+router.post('/',(req,res)=>forgotPasswordController.handler(req,res));
 
 export {router};

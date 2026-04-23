@@ -1,8 +1,7 @@
 import express from "express";
 const router = express.Router();
-import {registerController} from "../controllers/registerController.js";
+import { registerController } from "../config/container.js";
 
-//calls the controller
-router.post('/',registerController);
-
+;
+router.post('/',(req,res)=>registerController.handler(req,res));
 export {router};

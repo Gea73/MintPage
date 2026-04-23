@@ -7,7 +7,7 @@ export class ResetTokenRepo {
 
     try {
       await this.deleteByEmail(email);
-      
+
       await this.pool.query(
         "INSERT INTO password_reset_tokens (email,token_hash,expires) VALUES($1,$2,$3)",
         [email, tokenHash, expiration],
