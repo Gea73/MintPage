@@ -15,8 +15,8 @@ const userSchema = z.object({
 
 const resetPasswordSchema = z.object({
   email: z.email(),
-  token: z.string().regex(/[^[a-fA-F0-9]{32}$]/),
-  password: z
+  token: z.string().regex(/[^[a-fA-F0-9]{64}$]/),
+  newPassword: z
     .string()
     .min(8)
     .max(50)
