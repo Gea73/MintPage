@@ -1,5 +1,5 @@
 export class UserService {
-  constructor({ userRepo, passwordHasher }) {
+  constructor( userRepo, passwordHasher ) {
     this.userRepo = userRepo;
     this.passwordHasher = passwordHasher;
   }
@@ -11,8 +11,8 @@ export class UserService {
     );
   }
 
-  async findUser(user) {
-    return await this.userRepo.findByUsername(user);
+  async findUser(username) {
+    return await this.userRepo.findByUsername(username);
   }
 
   async findUserByEmail(email) {

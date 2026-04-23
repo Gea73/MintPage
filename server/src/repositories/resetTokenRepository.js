@@ -1,5 +1,5 @@
 export class ResetTokenRepo {
-  constructor({ pool }) {
+  constructor( pool ) {
     this.pool = pool;
   }
   async create(email, tokenHash, expiration) {

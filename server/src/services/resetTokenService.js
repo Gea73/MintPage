@@ -1,7 +1,7 @@
 import crypto from "crypto";
 
 export class ResetTokenService {
-  constructor({ resetTokenRepo }) {
+  constructor( resetTokenRepo ) {
     this.resetTokenRepo = resetTokenRepo;
   }
 

@@ -1,5 +1,5 @@
 export class UserRepo {
-  constructor({ pool }) {
+  constructor( pool ) {
     this.pool = pool;
   }
 
