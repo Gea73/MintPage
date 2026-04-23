@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import helmet from "helmet";
 import { rateLimit, ipKeyGenerator } from "express-rate-limit";
 import slowDown from "express-slow-down";
-
 const app = express();
 
 //routers
@@ -15,6 +14,27 @@ import { router as forgotPasswordRouter } from "./routes/forgotPasswordRoutes.js
 import { router as resetPasswordRouter } from "./routes/resetPasswordRoutes.js";
 import { router as dashboardRouter } from "./routes/dashboardRoutes.js";
 
+const __dirname = import.meta.dirname;
+
+//only public direct is serving static files
+app.use(
+  express.static(path.join(__dirname, "../../client/public"), { index: false }),
+);
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/public/landing-page.html"));
+});
+
+app.use("/register", registerRouter);
+
+app.use("/login", loginRouter);
+
+app.use("/forgot-password", forgotPasswordRouter);
+
+app.use("/reset-password", resetPasswordRouter);
+
+app.use("/dashboard", dashboardRouter);
+
 //use helmet to more safe http headers and prevent against xss
 app.use(
   helmet.contentSecurityPolicy({
@@ -22,7 +42,7 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
       objectSrc: ["'none'"],
-      styleSrc: ["'self'"],
+      styleSrc: ["'self'", "https://fonts.googleapis.com"],
       imgSrc: ["'self'", "data:"],
       connectSrc: ["'self'", process.env.API_URL],
       frameAncestors: ["'none'"],
@@ -60,14 +80,14 @@ app.set("trust proxy", 1);
 app.use(
   slowDown({
     windowMs: 15 * 60 * 1000,
-    delayAfter: 3,
-    delayMs: (hits) => hits * hits * 500,
+    delayAfter: 10,
+    delayMs: (hits) => hits * hits * 150,
   }),
 );
 app.use(
   rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 12,
+    max: 20,
     keyGenerator: (req) => {
       const ip = ipKeyGenerator(req.ip);
       const userId = req.user?.id || "guest";
@@ -86,20 +106,5 @@ app.disable("x-powered-by");
 //limits json paylod to 10kb
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
-
-app.use("/register", registerRouter);
-
-app.use("/login", loginRouter);
-
-app.use("/forgot-password", forgotPasswordRouter);
-
-app.use("/reset-password", resetPasswordRouter);
-
-app.use("/dashboard", dashboardRouter);
-
-const __dirname = import.meta.dirname;
-//only public direct is serving static files
-app.use(express.static(path.join(__dirname, "../../client/public")));
-
 
 export { app };
