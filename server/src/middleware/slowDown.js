@@ -4,5 +4,5 @@ import slowDown from "express-slow-down";
 export const slowDowner = slowDown({
   windowMs: 15 * 60 * 1000,
   delayAfter: 10,
-  delayMs: (hits) => hits * hits * 150,
+  delayMs: (hits) => hits * 700,
 });

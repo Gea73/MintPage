@@ -10,7 +10,7 @@ const API_URL = process.env.API_URL;
 //forgotPassword controller
 
 export class ForgotPasswordController {
-  constructor( userService, resetTokenService ) {
+  constructor(userService, resetTokenService) {
     this.userService = userService;
     this.resetTokenService = resetTokenService;
   }
@@ -18,6 +18,10 @@ export class ForgotPasswordController {
   async handler(req, res) {
     try {
       const { email } = emailSchema.parse(req.body);
+
+      if (!email) {
+        return res.status(400).json({ message: "Your data is not valid" });
+      }
 
       const user = await this.userService.findUserByEmail(email);
 

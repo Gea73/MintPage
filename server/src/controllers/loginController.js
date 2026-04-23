@@ -2,12 +2,17 @@ import { generateAccessToken } from "../utils/generateAccessToken.js";
 import { userSchema } from "../schemas/zodSchemas.js";
 
 export class LoginController {
-  constructor(userService ) {
+  constructor(userService) {
     this.userService = userService;
   }
   async handler(req, res) {
     try {
       const { username, email, password } = userSchema.parse(req.body);
+
+      if (!username || !email || !password) {
+        return res.status(400).json({ message: "Your data is not valid" });
+      }
+
       const user = await this.userService.findUser(username);
 
       if (!user)

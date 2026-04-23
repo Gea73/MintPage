@@ -3,9 +3,10 @@ export class ResetTokenRepo {
     this.pool = pool;
   }
   async create(email, tokenHash, expiration) {
-    const client = await this.pool.query("BEGIN");
+    const client = await this.pool.connect();
 
     try {
+      client.query("BEGIN");
       await this.deleteByEmail(email);
 
       await this.pool.query(
@@ -16,7 +17,7 @@ export class ResetTokenRepo {
       await client.query("COMMIT");
     } catch (error) {
       await client.query("ROLLBACK");
-      console.log(error);
+      console.error(error);
     } finally {
       client.release();
     }

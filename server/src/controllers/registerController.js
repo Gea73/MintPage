@@ -1,35 +1,34 @@
 import { userSchema } from "../schemas/zodSchemas.js";
 
 export class RegisterController {
-  constructor( userService ) {
+  constructor(userService) {
     this.userService = userService;
   }
   async handler(req, res) {
     try {
-       const { username, email, password } = userSchema.parse(req.body);
+      const { username, email, password } = userSchema.parse(req.body);
       //request the variables from body html
 
-      if (
-        !password.match(/[A-Z]/) ||
-        !password.match(/[0-9]/) ||
-        !password.match(/[^A-Za-z0-9]/)
-      ) {
-        return res.status(400).json({ message: "Your password is not valid" });
+      if (!username || !email || !password) {
+        return res.status(400).json({ message: "Your data is not valid" });
       }
       //insert the new user on DB
-      const newUser = await this.userService.createUser(username, email, password);
+      const newUser = await this.userService.createUser(
+        username,
+        email,
+        password,
+      );
 
       if (!newUser) {
-          res.status(500).json({ message: "User register failed" });      
-      
+        return res.status(500).json({ message: "User register failed" });
       }
-       res.status(201).json({ message: "User Registred Successfully" });
+      return res.status(201).json({ message: "User Registred Successfully" });
     } catch (error) {
       //if a user or email is already in db
       if (error.code === "23505") {
         return res.status(409).json({ message: "User or email already used" });
       }
-      console.log(error)
+      console.error(error);
       res.status(500).json({ message: "Server Error" });
     }
   }

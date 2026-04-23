@@ -85,7 +85,13 @@ app.use("/reset-password", requestLimiter, resetPasswordRouter);
 
 app.use("/dashboard", requestLimiter, dashboardRouter);
 
-app.use((req,res)=>{
-  res.status(404).json({message:"Not Found"})
-})
+app.use((req, res) => {
+  res.status(404).json({ message: "Not Found" });
+});
+// eslint-disable-next-line no-unused-vars
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ message: "Server Error" });
+});
+
 export { app };
