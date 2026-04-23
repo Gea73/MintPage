@@ -1,6 +1,7 @@
 import { transporter } from "../config/mailer.js";
 import path from "node:path";
 import dotenv from "dotenv";
+import { emailSchema } from "../schemas/zodSchemas.js";
 
 const __dirname = import.meta.dirname;
 dotenv.config({ path: path.join(__dirname, "../../.env") });
@@ -9,14 +10,14 @@ const API_URL = process.env.API_URL;
 //forgotPassword controller
 
 export class ForgotPasswordController {
-  constructor({ userService, resetTokenService }) {
+  constructor( userService, resetTokenService ) {
     this.userService = userService;
     this.resetTokenService = resetTokenService;
   }
 
   async handler(req, res) {
     try {
-      const { email } = req.body;
+      const { email } = emailSchema.parse(req.body);
 
       const user = await this.userService.findUserByEmail(email);
 

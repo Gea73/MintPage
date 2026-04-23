@@ -1,10 +1,12 @@
+import { userSchema } from "../schemas/zodSchemas.js";
+
 export class RegisterController {
-  constructor({ userService }) {
+  constructor( userService ) {
     this.userService = userService;
   }
   async handler(req, res) {
     try {
-      const { user, email, password } = req.body;
+       const { username, email, password } = userSchema.parse(req.body);
       //request the variables from body html
 
       if (
@@ -15,7 +17,7 @@ export class RegisterController {
         return res.status(400).json({ message: "Your password is not valid" });
       }
       //insert the new user on DB
-      const newUser = await this.userService.createUser(user, email, password);
+      const newUser = await this.userService.createUser(username, email, password);
 
       if (!newUser) {
           res.status(500).json({ message: "User register failed" });      
@@ -27,7 +29,7 @@ export class RegisterController {
       if (error.code === "23505") {
         return res.status(409).json({ message: "User or email already used" });
       }
-
+      console.log(error)
       res.status(500).json({ message: "Server Error" });
     }
   }

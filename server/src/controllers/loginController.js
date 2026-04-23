@@ -1,13 +1,13 @@
 import { generateAccessToken } from "../utils/generateAccessToken.js";
+import { userSchema } from "../schemas/zodSchemas.js";
 
 export class LoginController {
-  constructor({ userService }) {
+  constructor(userService ) {
     this.userService = userService;
   }
   async handler(req, res) {
     try {
-      const { username, email, password } = req.body;
-
+      const { username, email, password } = userSchema.parse(req.body);
       const user = await this.userService.findUser(username);
 
       if (!user)

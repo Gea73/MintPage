@@ -1,12 +1,13 @@
-//ResetPassword controller
+import { resetPasswordSchema } from "../schemas/zodSchemas.js";
+
 export class ResetPasswordController {
-  constructor({ userService, resetTokenService }) {
+  constructor( userService, resetTokenService ) {
     this.userService = userService;
     this.resetTokenService = resetTokenService;
   }
 
   async handler(req, res) {
-    const { email, token, newPassword } = req.body;
+    const { email, token, newPassword } = resetPasswordSchema.parse(req.body);
 
     // Find the most recent token associate with the email in DB
     const dbToken = await this.resetTokenService.findResetToken(email);
