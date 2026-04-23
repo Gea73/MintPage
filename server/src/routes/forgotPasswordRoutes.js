@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { forgotPasswordController } from "../config/container.js";
+import { forgotPasswordController } from "../container.js";
 
 //calls the controller
 router.post('/',(req,res)=>forgotPasswordController.handler(req,res));
