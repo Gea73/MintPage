@@ -61,7 +61,7 @@ describe("Reset Password Schema validation tests", () => {
     expect(result.success).toBe(false);
   });
 
-  test("Rejects a token with the wrong size", () => {
+  test("Rejects a token with the wrong length", () => {
     const result = resetPasswordSchema.safeParse({
       email: "email@email.com",
       token: "a9f3c7a1e4b8d2c6f5a0e9b7d3cd4b0c9f7a3e1d5c8b2f6a4e0d9c3b7",
@@ -70,7 +70,7 @@ describe("Reset Password Schema validation tests", () => {
     expect(result.success).toBe(false);
   });
 
-  test("Rejects a token with the invalid chars size", () => {
+  test("Rejects a token with the invalid characters", () => {
     const result = resetPasswordSchema.safeParse({
       email: "email@email.com",
       token: "a!@.c7a1e4b8d2c6f5a0e9b7d3c1f8a2e6d4b0c9f7a3e1d5c8b2f6a4e0d9c3b7",

@@ -4,12 +4,11 @@ import path from "path";
 import dotenv from "dotenv";
 
 const __dirname = import.meta.dirname;
-dotenv.config({path:path.join(__dirname,"../../.env")});
-
+dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 let pool;
 
-if (process.env.NODE_ENV == "dev") {
+if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
   pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -25,4 +24,4 @@ if (process.env.NODE_ENV == "dev") {
     },
   });
 }
-export {pool};
+export { pool };
