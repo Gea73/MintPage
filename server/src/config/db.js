@@ -6,6 +6,14 @@ import dotenv from "dotenv";
 const __dirname = import.meta.dirname;
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
+
+if (
+  process.env.NODE_ENV !== "development" &&
+  process.env.NODE_ENV !== "production" && process.env.NODE_ENV !== "test"
+) {
+  throw new Error("Node environment not defined");
+}
+
 let pool;
 
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
