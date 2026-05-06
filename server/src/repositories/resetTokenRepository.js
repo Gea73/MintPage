@@ -7,9 +7,9 @@ export class ResetTokenRepo {
 
     try {
       client.query("BEGIN");
-      await this.deleteByEmail(email);
+      await this.deleteByEmail(client,email);
 
-      await this.pool.query(
+      await client.query(
         "INSERT INTO password_reset_tokens (email,token_hash,expires) VALUES($1,$2,$3)",
         [email, tokenHash, expiration],
       );
@@ -31,8 +31,8 @@ export class ResetTokenRepo {
     return tokenQuery.rows[0];
   }
 
-  async deleteByEmail(email) {
-    await this.pool.query(
+  async deleteByEmail(client,email) {
+    await client.query(
       "DELETE FROM password_reset_tokens WHERE email = $1",
       [email],
     );
