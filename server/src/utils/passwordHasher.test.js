@@ -1,4 +1,4 @@
-import { passwordHasher } from "../utils/passwordHasher.js";
+import { passwordHasher } from "./passwordHasher.js";
 import { expect, test } from "@jest/globals";
 /* eslint-disable no-undef */
 describe("Password hasher test", () => {
