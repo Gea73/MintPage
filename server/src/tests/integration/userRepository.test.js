@@ -1,21 +1,17 @@
 import { UserRepo } from "../../repositories/userRepository.js";
 import { pool } from "../../config/db.js";
-import { afterAll, afterEach, beforeEach, expect, test } from "@jest/globals";
-let client = await pool.connect();
-const repo = new UserRepo(client);
+import { expect, test } from "@jest/globals";
+
+const repo = new UserRepo(pool);
 /* eslint-disable no-undef */
 
 describe("Tests critical queries in repository", () => {
-  beforeEach(async () => {
-     client = await pool.connect();
-    await client.query("BEGIN");
-  });
-  afterEach(async () => {
-    await client.query("ROLLBACK");
-  });
   afterAll(async () => {
-    await client.release();
+    await pool.query("DELETE FROM users WHERE email = $1", [
+      "emailteste@email.com",
+    ]);
   });
+
   test("User is created and return the right rows", async () => {
     const user = await repo.create(
       "testuser",
@@ -29,7 +25,7 @@ describe("Tests critical queries in repository", () => {
     });
   });
   test("Password is reseted correctly", async () => {
-    repo.setPasswordByEmail("rerere", "newhashpassword");
+   await repo.setPasswordByEmail("rerere", "newhashpassword");
     const user = await repo.findByEmail("rerere");
     expect(user.password_hash).toBe("newhashpassword");
   });
