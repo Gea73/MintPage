@@ -6,8 +6,8 @@ import helmet from "helmet";
 const app = express();
 
 //routers
-import { router as loginRouter } from "../src/routes/loginRoutes.js";
-import { router as registerRouter } from "../src/routes/registerRoutes.js";
+import { router as loginRouter } from "./routes/loginRoutes.js";
+import { router as registerRouter } from "./routes/registerRoutes.js";
 import { router as forgotPasswordRouter } from "./routes/forgotPasswordRoutes.js";
 import { router as resetPasswordRouter } from "./routes/resetPasswordRoutes.js";
 import { router as dashboardRouter } from "./routes/dashboardRoutes.js";
@@ -66,11 +66,11 @@ app.use(cookieParser());
 
 //only public direct is serving static files
 app.use(
-  express.static(path.join(__dirname, "../../client/public"), { index: false }),
+  express.static(path.join(__dirname, "../client/public"), { index: false }),
 );
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/public/landing-page.html"));
+  res.sendFile(path.join(__dirname, "../client/public/landing-page.html"));
 });
 
 const requestLimiter = [slowDowner, rateLimiter];

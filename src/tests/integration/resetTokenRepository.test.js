@@ -1,7 +1,9 @@
-import { ResetTokenRepo } from "../../repositories/resetTokenRepository.js";
-import { pool } from "../../config/db.js";
+import { ResetTokenRepo } from "../../server/repositories/resetTokenRepository.js";
+import { pool } from "../../server/config/db.js";
 import { afterAll, expect, test } from "@jest/globals";
 /* eslint-disable no-undef */
+
+
 
 const repo = new ResetTokenRepo(pool);
 

@@ -1,5 +1,5 @@
-import { UserRepo } from "../../repositories/userRepository.js";
-import { pool } from "../../config/db.js";
+import { UserRepo } from "../../server/repositories/userRepository.js";
+import { pool } from "../../server/config/db.js";
 import { expect, test } from "@jest/globals";
 
 const repo = new UserRepo(pool);
