@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { userSchema, resetPasswordSchema } from "./zodSchemas.js";
+import { userSchema, resetPasswordSchema } from "../../../server/schemas/zodSchemas.js";
 import { expect, test } from "@jest/globals";
 
 describe("Password Schema validation tests", () => {
