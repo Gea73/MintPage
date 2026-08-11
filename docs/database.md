@@ -1,1 +1,3 @@
-## Here is where database ERD,schemas and migrations will be put 
+## Entity Relationship
+
+![Local Image](Database%20ER.png)
