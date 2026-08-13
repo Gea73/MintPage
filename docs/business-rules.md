@@ -1,13 +1,13 @@
 ## Business Rules
-- BR001 Passwords must have 8 length plus a number and a special character
-- BR002 Emails must be unique
-- BR003 Users cannot login until verify the account via email
-- BR004 Users cannot change the password to the same as the current one
-- BR005 The board's owner can add and remove members of a board
-- BR006 The board's owner can asign and remove roles to members
-- BR007 The board's owner cannot be assigned to a lower role
-- BR008 Admins can add other members and asign and revoke roles in the board
-- BR009 Admins cannot revoke admin role from other admins
-- BR010 Only board's owner and admins can give admin role
-- BR011 Admins cannot remove other admins of the board
-- BR012 Only board's owner can delete the board
+- BR001 Passwords must be at least 8 characters long and contain at least one number and one special character
+- BR002 Email addresses must be unique
+- BR003 Users cannot login until they verify their account via email
+- BR004 Users cannot change their password to the same password as their current one
+- BR005 The board's owner can add and remove members from the board
+- BR006 The board's owner can asign and remove roles from board members
+- BR007 The board's owner cannot be assigned to a lower-level role
+- BR008 Admins can add other members and assign or revoke roles on the board
+- BR009 Admins cannot revoke the admin role from other admins
+- BR010 Only the board's owner and admins can assign the admin role
+- BR011 Admins cannot remove other admins from the board
+- BR012 Only the board's owner can delete the board
