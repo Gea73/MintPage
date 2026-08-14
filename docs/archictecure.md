@@ -64,7 +64,7 @@ Concurrent modifications will not lead to inconsistent data or ovewrite newer ch
 
 ### Context
 
-A user may want to change the position of an item by moving it between two other items, this would normally require reordering the items in the column
+A user may want to change the position of an item by moving it between two other items, this would normally require reordering the items in the list
 
 ### Decision
 
@@ -72,7 +72,7 @@ Use Fractional Indexing,where each item is assigned a key instead of an integer 
 
 ### Consequences
 
-When the order of cards in a column changes it is not necessary to recalculate and update the position of every card, only the moved card needs to be updated
+When the order of cards in a list changes it is not necessary to recalculate and update the position of every card, only the moved card needs to be updated
 
 ## ADR004 Use PostgreSQL as Database
 

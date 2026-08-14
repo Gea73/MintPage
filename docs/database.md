@@ -60,6 +60,17 @@ Outdated
 | created  | timestamp   | NOT NULL    | DEFAULT NOW() |
 | updated  | timestamp   | NOT NULL    | DEFAULT NOW() |
 
+### lists
+
+| Column   | Type        | Constraints | Notes         |
+| -------- | ----------- | ----------- | ------------- |
+| id       | UUID        | PK          |               |
+| board_id | UUID        | FK          |               |
+| user_id  | UUID        | FK          |               |
+| role     | member_role | NOT NULL    |               |
+| created  | timestamp   | NOT NULL    | DEFAULT NOW() |
+| updated  | timestamp   | NOT NULL    | DEFAULT NOW() |
+
 ## Referential Integry Rules
 
 ## Enums

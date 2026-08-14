@@ -7,10 +7,10 @@ A application for managing Kanban Boards online, where multiple users can view a
 - FR002 Users can create,edit and delete boards
 - FR003 Users can share boards with other users
 - FR004 Users have different roles in each board (Admin / Editor / Reader)
-- FR005 Users can create,edit and delete columns/lists on a board
+- FR005 Users can create,edit and delete lists on a board
 - FR006 Users can create,edit and delete cards in the lists
-- FR007 Users can change the position of columns on the board
-- FR008 Users can change the position of cards within the current column or move them to other columns
+- FR007 Users can change the position of lists on the board
+- FR008 Users can change the position of cards within the current list or move them to other lists
 - FR009 Users can create,edit and delete labels on a board
 - FR010 Users can add and remove labels from cards
 - FR011 User can mark cards as completed
