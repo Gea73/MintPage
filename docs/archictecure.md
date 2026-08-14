@@ -22,6 +22,8 @@ flowchart TD
 
 ## Entity Relationship
 
+Maybe
+outdated
 ![Local Image](Domain%20Entities%20Flowchart.png)
 
 ## Application Flow
@@ -71,3 +73,17 @@ Use Fractional Indexing,where each item is assigned a key instead of an integer 
 ### Consequences
 
 When the order of cards in a column changes it is not necessary to recalculate and update the position of every card, only the moved card needs to be updated
+
+## ADR004 Use PostgreSQL as Database
+
+### Context
+
+The application needs a database that ensures integrity, supports relationships between entities and handles concurrency
+
+### Decision
+
+Use PostgreSQL for its support to transactions, ACID compliance, custom data types, Write-Ahead Logging and flexibility
+
+### Consequences
+
+The database creation will be based upon a PostgreSQL Database which favor data integrity, structure, concurrency and flexibility. Nonetheless is not ideal for horizontal scaling, caching, real-time analytics and ultra-high-rate data stream.
