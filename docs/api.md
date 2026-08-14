@@ -27,9 +27,8 @@ Response Example
 {
 
   "title": "Register Succeed",
-  "status": 200,
+  "status": 201,
   "detail": "User Registered Successfully",
-  "instance: "/auth/register"
 
 }
 ```
@@ -42,7 +41,7 @@ Error Example
   "title": "Register Failed",
   "status": 422,
   "detail": "One or more fields failed validation checks.",
-  "instance: "/auth/register",
+  "instance": "/auth/register",
   "errors": [
     {
         "field": "email",
@@ -179,7 +178,7 @@ DELETE /boards/{boardId}/lists/{listId}
 PUT /boards/{boardId}/lists/{listId}/position
 ```
 
-### Get a card
+### Get all card
 
 ```
 GET /boards/{boardId}/lists/{listId}/cards
@@ -194,19 +193,19 @@ POST /boards/{boardId}/lists/{listId}/cards
 ### Update a card
 
 ```
-PUT /boards/{boardId}/lists/cards/{cardId}
+PUT /boards/{boardId}/lists/{listId}/cards/{cardId}
 ```
 
 ### Delete a card
 
 ```
-DELETE /boards/{boardId}/lists/cards/{cardId}
+DELETE /boards/{boardId}/lists/{listId}/cards/{cardId}
 ```
 
 ### Change the position or reorder a card
 
 ```
-PUT /boards/{boardId}/lists/cards/{cardId}/position
+PUT /boards/{boardId}/lists/{listId}/cards/{cardId}/position
 ```
 
 ### Get the card labels
@@ -224,7 +223,7 @@ POST /boards/{boardId}/lists/cards/{cardId}/labels
 ### Remove a label from the card
 
 ```
-DELETE /boards/{boardId}/lists/cards/{cardId}/labels
+DELETE /boards/{boardId}/lists/cards/{cardId}/labels/{cardLabelId}
 ```
 
 ## WebSocket
