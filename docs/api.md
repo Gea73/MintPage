@@ -228,6 +228,33 @@ DELETE /boards/{boardId}/lists/cards/{cardId}/labels/{cardLabelId}
 
 ## WebSocket
 
+## Events
+
+### Board
+
+- board.edited
+
+### List
+
+- list.created
+- list.moved
+- list.edited
+
+### Card
+
+- card.created
+- card.edited
+- card.moved
+- card.deleted
+
+### Label
+
+- label.created
+- label.edited
+- label.deleted
+- abel.added
+- label.removed
+
 ## Error Format
 
 The API error format follows the Standard RFC 9457 Format
