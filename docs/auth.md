@@ -21,14 +21,15 @@
 
 ### Access Token
 
+- Lifespan: 30 minutes
 - JWT
-- Lifespan:30 minutes
-- Stored in an httpOnly Cookie
-- SameSite=Strict
+- Token Bearer
 
 ### Session Token
 
-- Lifespan:7 days
+- Lifespan: 7 days
+- Stored in an httpOnly Cookie
+- SameSite = Strict
 
 ## Protected Routes
 

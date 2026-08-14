@@ -65,6 +65,12 @@ POST /auth/login
 POST /auth/verify-email
 ```
 
+### Refresh Access Token
+
+```
+POST /auth/refresh
+```
+
 ### Logout a user
 
 ```
