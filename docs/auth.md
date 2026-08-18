@@ -23,11 +23,14 @@
 
 - Lifespan: 30 minutes
 - JWT
-- Token Bearer
+- Stored in an httpOnly Cookie
+- SameSite = Strict
 
 ### Session Token
 
 - Lifespan: 7 days
+- Session Secret (256 bits of cryptographically secure randomness)
+- Database store the hash of the session secret
 - Stored in an httpOnly Cookie
 - SameSite = Strict
 
