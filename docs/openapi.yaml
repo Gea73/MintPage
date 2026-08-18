@@ -1,0 +1,171 @@
+openapi: 3.2.0
+info:
+  title: "Mint Page"
+  version: "0.0.1"
+  description:
+    REST API for user authentication and management of boards, columns, cards,
+    labels and board members.
+servers:
+  - url: "http://localhost:5000/v1"
+    description: Development
+
+tags:
+  - name: Auth
+  - name: Boards
+  - name: Board Members
+  - name: Labels
+  - name: Lists
+  - name: Cards
+  - name: Card Labels
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+
+      responses:
+        "201":
+          description: User Registered Successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "409":
+          description: Username or email already exists
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
+        "422":
+          description: Validation Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ValidationProblem"
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: User Logged in Successfully
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+                example: session_id=abcde12345; HttpOnly; Secure; SameSite=Strict; # Path=/; Max-Age=3600
+              description: httpOnly session cookie used for subsequent authenticated requests.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+        "401":
+          description: Invalid Credentials
+          content:
+            application/problem+json:
+              schema:
+              $ref: "#/components/schemas/Problem"
+
+        "422":
+          description: Validation Failed
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ValidationProblem"
+
+components:
+  schemas:
+    # Requests
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 3
+          maxLength: 32
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 100
+          description: Passwords must be at least 8 characters long and contain at least one number and one special character
+      required: [username, email, password]
+    LoginRequest:
+      email:
+        type: string
+        format: email
+      password:
+        type: string
+        format: password
+        minLength: 8
+        maxLength: 100
+        description: Passwords must be at least 8 characters long and contain at least one number and one special character
+      required: [email, password]
+
+    # Reponses
+    SuccessResponse:
+      type: object
+      description: Non-error RFC 9457-shaped response used for simple success
+      properties:
+        title:
+          type: string
+        status:
+          type: integer
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri-reference
+      required: [title, status, detail, instance]
+    # Problems
+    Problem:
+      type: object
+      description: RFC 9457 Problem Details object.
+      properties:
+        title:
+          type: string
+          description: Short, human-readable summary that does not change between occurrences
+        status:
+          type: integer
+          description: HTTP status code for this occurrence.
+        detail:
+          type: string
+          description: Human-readable explanation specific to this occurrence.
+        instance:
+          type: string
+          format: uri-reference
+      required: [title, status, detail, instance]
+    ValidationProblem:
+      allOf:
+        - $ref: "#/components/schemas/Problem"
+        - type: object
+      type: object
+      description: Field Validation Problem object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+            required: [field, message]
+      required: [errors]
