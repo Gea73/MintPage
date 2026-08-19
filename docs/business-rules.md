@@ -11,3 +11,4 @@
 - BR010 Only the board's owner and admins can assign the admin role
 - BR011 Admins cannot remove other admins from the board
 - BR012 Only the board's owner can delete the board
+- BR013 The board's owner can transfer the ownership to one of the admins of the board

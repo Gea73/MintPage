@@ -24,11 +24,11 @@ flowchart TD
 
 Maybe
 outdated
-![Local Image](Domain%20Entities%20Flowchart.png)
+![Local Image](./images/Domain%20Entities%20Flowchart.png)
 
 ## Application Flow
 
-![Local Image](AppFlow.png)
+![Local Image](./images/AppFlow.png)
 
 # Architecture Decision Records
 
@@ -87,3 +87,15 @@ Use PostgreSQL for its support to transactions, ACID compliance, custom data typ
 ### Consequences
 
 The database creation will be based upon a PostgreSQL Database which favor data integrity, structure, concurrency and flexibility. Nonetheless is not ideal for horizontal scaling, caching, real-time analytics and ultra-high-rate data stream.
+
+### ADR005 Authentication Method
+
+### Context
+
+The application needs to authenticate users, guarantee their data safety and prevent unauthenticated users from having access to the system
+
+### Decision
+
+Use a two token approach,an access token used to access protected routes being short-lived and stored in the httpOnly cookies of the user request,and a session token used to request access tokens and persist the user's session being long-lived and stored in the database. The session tokens can be revoked and access tokens of revoked sessions will not be valid , the access token consist in a JWT of the user id,while the session token is a random 256 bits in the client, and hashed in the database
+
+### Consequences
