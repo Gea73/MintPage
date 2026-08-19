@@ -1,0 +1,53 @@
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    ports:
+      - "5000"
+      #Expose the internal port of each server instance to a external random port
+    environment:
+    #server .env
+      NODE_ENV: production
+      API_URL: http://localhost:5000
+      JWT_SECRET: secret
+      DB_USER: user
+      DB_HOST: db
+      DB_NAME: mint
+      DB_PASS: 12345
+      DB_PORT: 5432
+      EMAIL_USER: email
+      EMAIL_PASS: 12345
+
+  #run server only when db is healthy
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+  #creates a postgres instance
+    image: postgres:18-bookworm
+    container_name: postgres_database
+
+  # restart always unless manually stopped
+    restart: unless-stopped
+
+    environment:
+    #set the database config
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: mint
+    volumes:
+    # db persistent data path
+      - db-data:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d mint" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+volumes:
+ # persist data even after containers downed
+  db-data:
+
