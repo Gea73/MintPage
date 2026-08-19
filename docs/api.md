@@ -70,6 +70,12 @@ POST /auth/verify-email
 POST /auth/refresh
 ```
 
+### Reset Password
+
+```
+POST /auth/reset-password
+```
+
 ### Logout a user
 
 ```
