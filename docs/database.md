@@ -1,7 +1,7 @@
 ## Entity Relationship
 
 Outdated
-![Local Image](Database%20ER.png)
+![Local Image](./images/Database%20ER.png)
 
 ## Schema Reference
 
