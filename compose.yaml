@@ -6,11 +6,11 @@ services:
       dockerfile: Dockerfile
     
     ports:
-      - "5000"
+      - "5000:5000"
       #Expose the internal port of each server instance to a external random port
     environment:
     #server .env
-      NODE_ENV: production
+      NODE_ENV: development
       API_URL: http://localhost:5000
       JWT_SECRET: secret
       DB_USER: user

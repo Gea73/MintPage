@@ -14,7 +14,7 @@ if (!JWT_SECRET) {
 function authenticateToken(req, res, next) {
   // const authHeader = req.headers["authorization"];
   //const token = authHeader && authHeader.split(" ")[1];
-  const cookieToken = req.cookies?.accesstoken;
+  const cookieToken = req.cookies?.accessToken;
 
   if (!cookieToken) return res.status(401).json({ message: "Invalid Token" });
 
