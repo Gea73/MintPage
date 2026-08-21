@@ -56,5 +56,5 @@ Whenever the client attempts to access a protected route, the middleware checks 
 
 1. If the Access Token is valid, the client can access the protected resource or route.
 2. If the Access Token is invalid, client sends the Session Token.
-3. If the Session Token is valid, the server issues a new Access Token and Rotate the Session Token.
+3. If the Session Token is valid, the server issues a new Access Token and Rotate the hash of the Session Token.
 4. If the Session Token is invalid, the client is logged out.

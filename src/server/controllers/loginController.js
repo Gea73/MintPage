@@ -1,4 +1,4 @@
-import { generateAccessToken } from "../utils/generateAccessToken.js";
+import { generateAccessToken } from "../utils/accessToken.js";
 import { userSchema } from "../schemas/zodSchemas.js";
 
 export class LoginController {
