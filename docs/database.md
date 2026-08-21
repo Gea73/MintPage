@@ -1,6 +1,5 @@
 ## Entity Relationship
 
-Outdated
 ![Local Image](./images/Database%20ER.png)
 
 ## Schema Reference
@@ -26,7 +25,8 @@ Outdated
 | user_id    | UUID         | FK          | References users.id               |
 | created_at | timestamp    | NOT NULL    | DEFAULT NOW()                     |
 | expires_at | timestamp    | NOT NULL    | DEFAULT NOW() + INTERVAL '7 days' |
-| valid      | boolean      | NOT NULL    |
+| used_at    | timestamp    | NOT NULL    |                                   |
+| valid      | token_status | NOT NULL    |
 
 ### password_reset_tokens
 
@@ -37,7 +37,8 @@ Outdated
 | user_id    | UUID         | FK          | References users.id               |
 | created_at | timestamp    | NOT NULL    | DEFAULT NOW()                     |
 | expires_at | timestamp    | NOT NULL    | DEFAULT NOW() + INTERVAL '1 hour' |
-| valid      | boolean      | NOT NULL    |
+| used_at    | timestamp    | NOT NULL    |                                   |
+| valid      | token_status | NOT NULL    |
 
 ### boards
 
@@ -212,6 +213,12 @@ ON cards (list_id, position COLLATE "C");
 
 - pending (Unmarked)
 - done (Marked)
+
+### token_status
+
+- valid
+- expired
+- revoked
 
 ## Triggers
 
