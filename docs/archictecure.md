@@ -20,12 +20,6 @@ flowchart TD
     BL --> DB
 ```
 
-## Entity Relationship
-
-Maybe
-outdated
-![Local Image](./images/Domain%20Entities%20Flowchart.png)
-
 ## Application Flow
 
 ![Local Image](./images/AppFlow.png)
