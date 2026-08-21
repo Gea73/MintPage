@@ -86,10 +86,12 @@ The database creation will be based upon a PostgreSQL Database which favor data 
 
 ### Context
 
-The application needs to authenticate users, guarantee their data safety and prevent unauthenticated users from having access to the system
+The application needs to authenticate users, guarantee their data safety and prevent unauthenticated and unauthorized users from having access to the system
 
 ### Decision
 
-Use a two token approach,an access token used to access protected routes being short-lived and stored in the httpOnly cookies of the user request,and a session token used to request access tokens and persist the user's session being long-lived and stored in the database. The session tokens can be revoked and access tokens of revoked sessions will not be valid , the access token consist in a JWT of the user id,while the session token is a random 256 bits in the client, and hashed in the database
+Use a dual-token system, Access Token used to access protected routes being short-lived and a Session Token used to request access tokens and persist the user's session being long-lived and stored in the database.The Access Token Consists on a JWT stored in the httpOnly cookies of the client. The Session Tokens are a 256 random bits that in the server are hashed. The Session Tokens can be revoked and Access Tokens of revoked sessions will not be valid.Every time a client send a request with a invalid/expire Access Token the server will request the Session Token of the client ,hash and compare with the one stored in the database, if valid the Session Token going to be rotated and new Access Token will be issued and sent to the client.
 
 ### Consequences
+
+Sessions can be managed and revoked more easily to mitigate an stolen Access or Session token. Access Token are short-lived to reduce damages if one of them is stolen. The server will need to call database often to verify Session Tokens.
