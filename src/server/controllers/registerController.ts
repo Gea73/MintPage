@@ -1,10 +1,13 @@
+import { Request, Response } from "express";
 import { userSchema } from "../schemas/zodSchemas.js";
+import { UserService } from "../services/userService.js";
 
 export class RegisterController {
-  constructor(userService) {
+  userService;
+  constructor(userService: UserService) {
     this.userService = userService;
   }
-  async handler(req, res) {
+  async handler(req: Request, res: Response) {
     try {
       const { username, email, password } = userSchema.parse(req.body);
       //request the variables from body html
@@ -23,7 +26,7 @@ export class RegisterController {
         return res.status(500).json({ message: "User register failed" });
       }
       return res.status(201).json({ message: "User Registred Successfully" });
-    } catch (error) {
+    } catch (error:any) {
       //if a user or email is already in db
       if (error.code === "23505") {
         return res.status(409).json({ message: "User or email already used" });

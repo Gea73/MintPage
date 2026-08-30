@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
@@ -25,7 +25,7 @@ app.use(
       objectSrc: ["'none'"],
       styleSrc: ["'self'", "https://fonts.googleapis.com"],
       imgSrc: ["'self'", "data:"],
-      connectSrc: ["'self'", process.env.API_URL],
+      connectSrc: ["'self'", String(process.env.API_URL)],
       frameAncestors: ["'none'"],
     },
   }),
@@ -89,7 +89,7 @@ app.use((req, res) => {
   res.status(404).json({ message: "Not Found" });
 });
 // eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
   res.status(500).json({ message: "Server Error" });
 });

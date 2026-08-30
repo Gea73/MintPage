@@ -1,11 +1,12 @@
 
 
+import { NextFunction, Request, Response } from "express";
 import { verifyAccessToken } from "../utils/accessToken.js";
 
 
 
 
-function authenticateToken(req, res, next) {
+function authenticateToken(req: Request, res: Response, next: NextFunction) {
   // const authHeader = req.headers["authorization"];
   //const token = authHeader && authHeader.split(" ")[1];
   try {

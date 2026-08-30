@@ -1,11 +1,14 @@
 import { generateAccessToken } from "../utils/accessToken.js";
 import { userSchema } from "../schemas/zodSchemas.js";
+import { UserService } from "../services/userService.js";
+import { Request, Response } from "express";
 
 export class LoginController {
-  constructor(userService) {
+  userService
+  constructor(userService: UserService) {
     this.userService = userService;
   }
-  async handler(req, res) {
+  async handler(req: Request, res: Response) {
     try {
       const { username, email, password } = userSchema.parse(req.body);
 
@@ -41,7 +44,7 @@ export class LoginController {
         })
         .status(200)
         .json({ message: "Login successful" });
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.message);
       res.status(500).json({ message: "Server Error" });
     }

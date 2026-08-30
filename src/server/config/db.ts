@@ -14,7 +14,7 @@ if (
   throw new Error("Node environment not defined");
 }
 
-let pool;
+let pool:Pool;
 
 if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
   pool = new Pool({
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
     host: process.env.DB_HOST,
     database: process.env.DB_NAME,
     password: process.env.DB_PASS,
-    port: process.env.DB_PORT,
+    port: Number(process.env.DB_PORT),
   });
 } else {
   pool = new Pool({

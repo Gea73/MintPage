@@ -1,25 +1,30 @@
+import { Pool } from "pg";
+
 export class UserRepo {
-  constructor( pool ) {
+  pool: Pool;
+  constructor(pool: Pool) {
     this.pool = pool;
   }
 
-  async create(user, email, passwordHash) {
+
+
+  async create(username: string, email: string, passwordHash: string) {
     const result = await this.pool.query(
       "INSERT INTO users (username,email,password_hash) VALUES ($1,$2,$3) RETURNING id,username,email",
-      [user, email, passwordHash],
+      [username, email, passwordHash],
     );
     return result.rows[0];
   }
 
-  async findByUsername(user) {
+  async findByUsername(username: string) {
     const userQuery = await this.pool.query(
       "SELECT * FROM users WHERE username = $1",
-      [user],
+      [username],
     );
     return userQuery.rows[0];
   }
 
-  async findByEmail(email) {
+  async findByEmail(email: string) {
     const userQuery = await this.pool.query(
       "SELECT * FROM users WHERE email = $1",
       [email],
@@ -27,7 +32,7 @@ export class UserRepo {
     return userQuery.rows[0];
   }
 
-  async setPasswordByEmail(email, passwordHash) {
+  async setPasswordByEmail(email: string, passwordHash: string) {
     return await this.pool.query(
       "UPDATE users SET password_hash = $1 WHERE email = $2",
       [passwordHash, email],

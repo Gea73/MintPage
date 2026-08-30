@@ -1,12 +1,17 @@
+import { Request, Response } from "express";
 import { resetPasswordSchema } from "../schemas/zodSchemas.js";
+import { ResetTokenService } from "../services/resetTokenService.js";
+import { UserService } from "../services/userService.js";
 
 export class ResetPasswordController {
-  constructor(userService, resetTokenService) {
+  userService;
+  resetTokenService;
+  constructor(userService: UserService, resetTokenService: ResetTokenService) {
     this.userService = userService;
     this.resetTokenService = resetTokenService;
   }
 
-  async handler(req, res) {
+  async handler(req: Request, res: Response) {
     try {
       const { email, token, newPassword } = resetPasswordSchema.parse(req.body);
 
