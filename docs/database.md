@@ -23,10 +23,11 @@
 | id         | UUID         | PK          |                                   |
 | hash       | varchar(255) | NOT NULL    | SHA-256                           |
 | user_id    | UUID         | FK          | References users.id               |
+| status     | token_status | NOT NULL    |
 | created_at | timestamp    | NOT NULL    | DEFAULT NOW()                     |
 | expires_at | timestamp    | NOT NULL    | DEFAULT NOW() + INTERVAL '7 days' |
 | used_at    | timestamp    | NOT NULL    |                                   |
-| valid      | token_status | NOT NULL    |
+
 
 ### password_reset_tokens
 
@@ -35,10 +36,11 @@
 | id         | UUID         | PK          |                                   |
 | hash       | varchar(255) | NOT NULL    | SHA-256                           |
 | user_id    | UUID         | FK          | References users.id               |
+| status     | token_status | NOT NULL    |
 | created_at | timestamp    | NOT NULL    | DEFAULT NOW()                     |
 | expires_at | timestamp    | NOT NULL    | DEFAULT NOW() + INTERVAL '1 hour' |
 | used_at    | timestamp    | NOT NULL    |                                   |
-| valid      | token_status | NOT NULL    |
+
 
 ### boards
 
