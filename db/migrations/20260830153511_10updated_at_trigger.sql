@@ -19,7 +19,7 @@ FOR EACH ROW
 EXECUTE FUNCTION update_updated_at();
 
 CREATE TRIGGER board_members_update_updated_at
-BEFORE UPDATE ON "board-members"
+BEFORE UPDATE ON board_members
 FOR EACH ROW
 EXECUTE FUNCTION update_updated_at();
 
@@ -43,7 +43,7 @@ EXECUTE FUNCTION update_updated_at();
 DROP FUNCTION IF EXISTS update_updated_at() CASCADE;
 DROP TRIGGER IF EXISTS users_update_updated_at ON users;
 DROP TRIGGER IF EXISTS boards_update_updated_at ON boards;
-DROP TRIGGER IF EXISTS board_members_update_updated_at ON "board-members";
+DROP TRIGGER IF EXISTS board_members_update_updated_at ON board_members;
 DROP TRIGGER IF EXISTS lists_update_updated_at ON lists;
 DROP TRIGGER IF EXISTS cards_update_updated_at ON cards;
 DROP TRIGGER IF EXISTS labels_update_updated_at ON labels;

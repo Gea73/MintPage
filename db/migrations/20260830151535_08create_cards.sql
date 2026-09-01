@@ -12,7 +12,7 @@ CREATE TABLE cards(
 ALTER TABLE
     cards ADD PRIMARY KEY(id);
 ALTER TABLE
-    cards ADD CONSTRAINT cards_list_id_foreign FOREIGN KEY(list_id) REFERENCES lists(id);
+    cards ADD CONSTRAINT cards_list_id_foreign FOREIGN KEY(list_id) REFERENCES lists(id) ON DELETE CASCADE;
 
 
 -- migrate:down

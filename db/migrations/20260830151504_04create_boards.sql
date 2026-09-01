@@ -9,7 +9,7 @@ CREATE TABLE boards(
 ALTER TABLE
     boards ADD PRIMARY KEY(id);
 ALTER TABLE
-    boards ADD CONSTRAINT boards_owner_id_foreign FOREIGN KEY(owner_id) REFERENCES users(id);
+    boards ADD CONSTRAINT boards_owner_id_foreign FOREIGN KEY(owner_id) REFERENCES users(id) ON DELETE CASCADE;
 
 -- migrate:down
 DROP TABLE IF EXISTS boards CASCADE

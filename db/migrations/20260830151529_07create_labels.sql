@@ -10,7 +10,7 @@ CREATE TABLE labels(
 ALTER TABLE
     labels ADD PRIMARY KEY(id);
 ALTER TABLE
-    labels ADD CONSTRAINT labels_board_id_foreign FOREIGN KEY(board_id) REFERENCES boards(id);
+    labels ADD CONSTRAINT labels_board_id_foreign FOREIGN KEY(board_id) REFERENCES boards(id) ON DELETE CASCADE;
 
 -- migrate:down
 DROP TABLE IF EXISTS labels CASCADE

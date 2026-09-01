@@ -10,7 +10,7 @@ CREATE TABLE lists(
 ALTER TABLE
     lists ADD PRIMARY KEY(id);
 ALTER TABLE
-    lists ADD CONSTRAINT lists_board_id_foreign FOREIGN KEY(board_id) REFERENCES boards(id);
+    lists ADD CONSTRAINT lists_board_id_foreign FOREIGN KEY(board_id) REFERENCES boards(id) ON DELETE CASCADE;
 
 -- migrate:down
 DROP TABLE IF EXISTS lists CASCADE

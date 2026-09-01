@@ -10,7 +10,7 @@ CREATE TABLE session_tokens(
 ALTER TABLE
     session_tokens ADD PRIMARY KEY(id);
 ALTER TABLE
-    session_tokens ADD CONSTRAINT session_tokens_user_id_foreign FOREIGN KEY(user_id) REFERENCES users(id);
+    session_tokens ADD CONSTRAINT session_tokens_user_id_foreign FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 CREATE TABLE password_reset_tokens(
     id UUID NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE password_reset_tokens(
 ALTER TABLE
     password_reset_tokens ADD PRIMARY KEY(id);
 ALTER TABLE
-    password_reset_tokens ADD CONSTRAINT password_reset_tokens_user_id_foreign FOREIGN KEY(user_id) REFERENCES users(id);
+    password_reset_tokens ADD CONSTRAINT password_reset_tokens_user_id_foreign FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE;
 
 -- migrate:down
 DROP TABLE IF EXISTS session_tokens CASCADE;
