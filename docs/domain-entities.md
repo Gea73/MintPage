@@ -38,7 +38,9 @@ Represents a user account within the system.
 |---|---|
 | `verifyUser()` | Verifies the user's account |
 | `changeUsername()` | Changes the user's username |
-| `deleteAccount()` | Deletes or deactivates the user's account |
+| `changePassword()` | Changes the user's password |
+| `suspendUser()` | Suspends the user's account |
+| `deleteUser()` | Deletes the user's account |
 
 ## Relationships
 
@@ -60,14 +62,15 @@ Represents an authenticated session belonging to a user.
 | `id` | UUID | Unique identifier for the session token |
 | `userId` | UUID | ID of the associated user |
 | `hash` | String | Hashed session token |
+| `status` | TokenStatus | Current token status |
 
 ## Behavior
 
 | Method | Description |
 |---|---|
 | `isValid()` | Determines whether the session token is valid |
-| `revoke()` | Revokes the session token |
-| `refresh()` | Refreshes the session token |
+| `revokeToken()` | Revokes the session token |
+| `refreshToken()` | Refreshes the session token |
 
 ## Relationships
 
@@ -87,13 +90,14 @@ Represents a token used to authenticate a password reset operation.
 | `id` | UUID | Unique identifier for the reset token |
 | `userId` | UUID | ID of the associated user |
 | `hash` | String | Hashed password reset token |
+| `status` | TokenStatus | Current token status |
 
 ## Behavior
 
 | Method | Description |
 |---|---|
 | `isValid()` | Determines whether the reset token is valid |
-| `revoke()` | Revokes the reset token |
+| `revokeToken()` | Revokes the reset token |
 
 ## Relationships
 
@@ -150,7 +154,7 @@ Represents a user's membership in a board and their role within that board.
 | `id` | UUID | Unique identifier for the membership |
 | `boardId` | UUID | ID of the associated board |
 | `userId` | UUID | ID of the associated user |
-| `role` | BoardMemberRole | Role of the user on the board |
+| `role` | MemberRole | Role of the user on the board |
 
 ## Relationships
 
@@ -172,7 +176,7 @@ Represents a list containing cards within a board.
 | `id` | UUID | Unique identifier for the list |
 | `boardId` | UUID | ID of the board containing the list |
 | `name` | String | Name of the list |
-| `position` | Integer | Position of the list within the board |
+| `position` | String | Position of the list within the board |
 | `version` | Integer | Version used for tracking list changes |
 
 ## Behavior
@@ -205,7 +209,7 @@ Represents an individual task or item within a list.
 | `title` | String | Title of the card |
 | `description` | String | Description of the card |
 | `status` | CardStatus | Current status of the card |
-| `position` | Integer | Position of the card within its list |
+| `position` | String | Position of the card within its list |
 | `version` | Integer | Version used for tracking card changes |
 
 ## Behavior
