@@ -9,6 +9,7 @@ import { showLoader, hideLoader, messageLoader } from "../utils/loader.js";
 
 //DOM Elements
 //form fields
+const form = document.querySelector("form");
 const user = document.getElementById("user");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -23,7 +24,7 @@ const passwordError = document.getElementById("password-error");
 const confirmPasswordError = document.getElementById("confirm-password-error");
 
 //buttons
-const registerBtn = document.querySelector("#register-btn");
+// const registerBtn = document.querySelector("#register-btn");
 
 //password visibility eye
 const showPasswordEye = document.getElementById("show-password");
@@ -31,7 +32,10 @@ const showConfirmPasswordEye = document.getElementById("show-confirm-password");
 
 //Register button validation of the form fields and request
 
-registerBtn.addEventListener("click", async () => {
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+
   if (!user.value) {
     userError.textContent = "User is empty";
   }
@@ -75,7 +79,7 @@ registerBtn.addEventListener("click", async () => {
 
       if (response.ok) {
         messageLoader(String(data.message));
-          location.href = "/login";
+        location.href = "/login.html";
       } else if (response.status === 409) {
         messageLoader(String(data.message));
       } else {
@@ -86,10 +90,10 @@ registerBtn.addEventListener("click", async () => {
     } finally {
       hideLoader();
     }
-
-   
   }
 });
+
+// registerBtn.addEventListener("click", async () => {});
 
 //Event listeners
 

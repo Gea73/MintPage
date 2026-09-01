@@ -9,6 +9,7 @@ import { showLoader, hideLoader, messageLoader } from "../utils/loader.js";
 
 //DOM Elements
 //form fields
+const form = document.querySelector("form");
 const user = document.getElementById("user");
 const email = document.getElementById("email");
 const password = document.getElementById("password");
@@ -20,14 +21,15 @@ const passwordError = document.getElementById("password-error");
 
 //buttons
 
-const loginBtn = document.querySelector("#login-btn");
+ // const loginBtn = document.querySelector("#login-btn");
 
 //password visibility eye
 const showPasswordEye = document.getElementById("show-password");
 
 //Login button validation of the form fields and request
 
-loginBtn.addEventListener("click", async () => {
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
   if (!user.value) {
     userError.textContent = "User is empty";
   }
@@ -64,8 +66,8 @@ loginBtn.addEventListener("click", async () => {
 
       const data = await response.json();
       if (response.ok) {
-      messageLoader(String(data.message));
-         window.location.href = "/dashboard";
+        messageLoader(String(data.message));
+        window.location.href = "/dashboard";
       } else {
         messageLoader(String(data.message));
       }
@@ -74,9 +76,10 @@ loginBtn.addEventListener("click", async () => {
     } finally {
       hideLoader();
     }
-
   }
 });
+
+// loginBtn.addEventListener("click", async () => {});
 
 //User field validation
 user.addEventListener("input", () => {
