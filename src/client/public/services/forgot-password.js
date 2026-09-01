@@ -3,22 +3,24 @@
 
 //imports
 import { emailValidation } from "../utils/base.js";
-import {showLoader,hideLoader,messageLoader} from "../utils/loader.js";
+import { showLoader, hideLoader, messageLoader } from "../utils/loader.js";
 
 //DOM elements
 
 //form fields
+const form = document.querySelector("form");
 const email = document.querySelector("#email");
 
 //error messages
 const emailError = document.querySelector("#email-error");
 
 //buttons
-const forgotBtn = document.querySelector("#forgot-btn");
+//const forgotBtn = document.querySelector("#forgot-btn");
 
 //email send request on click
-forgotBtn.addEventListener("click", async () => {
 
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
   if (!email.value) {
     emailError.textContent = "Email field empty";
     return;
@@ -30,9 +32,8 @@ forgotBtn.addEventListener("click", async () => {
 
   if (email.value) {
     try {
-
       showLoader();
-      
+
       const response = await fetch(`${API_URL}/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -56,6 +57,10 @@ forgotBtn.addEventListener("click", async () => {
   }
 });
 
+//forgotBtn.addEventListener("click", async () => {
+
+//});
+
 //Email field validation
 email.addEventListener("input", () => {
   //email error message update in input
@@ -69,5 +74,4 @@ email.addEventListener("input", () => {
     emailError.textContent = "Invalid email format";
     return;
   }
-
 });

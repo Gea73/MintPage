@@ -22,7 +22,8 @@ function hideLoader() {
     //removes the loader message box and adds the a hidden loader wheel
     errorMessageBox.textContent = "";
     errorMessageBox.classList.add("hidden");
-    loaderOverlay.removeChild(loaderOverlay.firstChild);
+    loaderOverlay.replaceChildren()
+   // loaderOverlay.removeChild(loaderOverlay.firstChild);
   }, 3300);
 }
 //Show the message box

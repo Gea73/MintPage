@@ -8,6 +8,7 @@ import { showLoader, hideLoader, messageLoader } from "../utils/loader.js";
 //DOM elements
 
 //form fields
+const form = document.querySelector("form");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
 
@@ -16,7 +17,7 @@ const passwordError = document.getElementById("password-error");
 const confirmPasswordError = document.getElementById("confirm-password-error");
 
 //buttons
-const resetBtn = document.getElementById("reset-btn");
+//const resetBtn = document.getElementById("reset-btn");
 
 //password visibility eye
 const showPasswordEye = document.getElementById("show-password");
@@ -40,13 +41,12 @@ password.addEventListener("input", () => {
   }
 
   //confirm password match logic
-  
-    if (!confirmPassword.value) return;
 
-    if (confirmPassword.value !== password.value) {
-      confirmPasswordError.textContent = "Passwords don't match";
-    }
-  
+  if (!confirmPassword.value) return;
+
+  if (confirmPassword.value !== password.value) {
+    confirmPasswordError.textContent = "Passwords don't match";
+  }
 });
 
 //confirm password field
@@ -73,8 +73,8 @@ confirmPassword.addEventListener("input", () => {
   }
 });
 
-//password reset on click logic
-resetBtn.addEventListener("click", async () => {
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
   const urlParams = new URLSearchParams(window.location.search);
   const token = urlParams.get("token");
   const email = urlParams.get("email");
@@ -88,7 +88,11 @@ resetBtn.addEventListener("click", async () => {
   if (!password.value) {
     passwordError.textContent = "Passwords is empty";
   }
-  if (password.value && passwordStrength(password.value) >= 3 && password.value.length >= 8) {
+  if (
+    password.value &&
+    passwordStrength(password.value) >= 3 &&
+    password.value.length >= 8
+  ) {
     try {
       showLoader();
 
@@ -117,6 +121,10 @@ resetBtn.addEventListener("click", async () => {
     }
   }
 });
+//password reset on click logic
+//resetBtn.addEventListener("click", async () => {
+
+//});
 
 //Show password visibility eye buttons listener
 
