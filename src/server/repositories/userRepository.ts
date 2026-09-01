@@ -8,10 +8,10 @@ export class UserRepo {
 
 
 
-  async create(username: string, email: string, passwordHash: string) {
+  async create(id: string, username: string, email: string, passwordHash: string) {
     const result = await this.pool.query(
-      "INSERT INTO users (username,email,password_hash) VALUES ($1,$2,$3) RETURNING id,username,email",
-      [username, email, passwordHash],
+      "INSERT INTO users (id,username,email,password_hash) VALUES ($1,$2,$3,$4) RETURNING id,username,email",
+      [id, username, email, passwordHash],
     );
     return result.rows[0];
   }

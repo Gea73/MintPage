@@ -5,26 +5,26 @@ export class ResetTokenRepo {
   constructor(pool: Pool) {
     this.pool = pool;
   }
-  async create(email: string, tokenHash: string, expiration: Date) {
+  async create(id: string, userId: string, tokenHash: string, expiration: Date) {
     await this.pool.query(
-      "INSERT INTO password_reset_tokens (email,token_hash,expires) VALUES($1,$2,$3)",
-      [email, tokenHash, expiration],
+      "INSERT INTO password_reset_tokens (id,hash,user_id,status) VALUES($1,$2,$3,$4)",
+      [id, tokenHash, userId, "valid"],
     );
   }
 
 
-  async findOneByEmail(email: string) {
+  async findOne(userId: string) {
     const tokenQuery = await this.pool.query(
-      "SELECT * FROM password_reset_tokens WHERE email = $1 AND expires > NOW() ORDER BY created DESC LIMIT 1",
-      [email],
+      "SELECT * FROM password_reset_tokens WHERE user_id = $1 AND expires > NOW() ORDER BY created DESC LIMIT 1",
+      [userId],
     );
     return tokenQuery.rows[0];
   }
 
-  async deleteByEmail(email: string) {
+  async deleteOne(userId: string) {
     await this.pool.query(
-      "DELETE FROM password_reset_tokens WHERE email = $1",
-      [email],
+      "DELETE FROM password_reset_tokens WHERE user_id = $1",
+      [userId],
     );
   }
 }

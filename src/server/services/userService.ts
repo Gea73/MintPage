@@ -1,3 +1,4 @@
+import { uuidv7 } from "uuidv7";
 import { UserRepo } from "../repositories/userRepository.js";
 
 export class UserService {
@@ -8,7 +9,8 @@ export class UserService {
     this.passwordHasher = passwordHasher;
   }
   async createUser(username: string, email: string, password: string) {
-    return await this.userRepo.create(
+    const uuid = uuidv7()
+    return await this.userRepo.create(uuid,
       username,
       email,
       await this.hashUserPassword(password),

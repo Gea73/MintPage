@@ -1,40 +1,43 @@
 import crypto from "crypto";
 import { ResetTokenRepo } from "../repositories/resetTokenRepository.js";
+import { uuidv7 } from "uuidv7";
 
 export class ResetTokenService {
   resetTokenRepo;
-  constructor( resetTokenRepo:ResetTokenRepo ) {
+  constructor(resetTokenRepo: ResetTokenRepo) {
     this.resetTokenRepo = resetTokenRepo;
   }
 
-  async createResetToken(email:string, tokenHash:string) {
-    
+  async createResetToken(userId: string, tokenHash: string) {
+    const id = uuidv7()
     return await this.resetTokenRepo.create(
-      email,
+      id,
+      userId,
       tokenHash,
-      new Date(Date.now() +  30*60*1000),
+      new Date(Date.now() + 30 * 60 * 1000),
     );
   }
 
-  async findResetToken(email:string) {
-    return await this.resetTokenRepo.findOneByEmail(email);
+  async findResetToken(userId: string) {
+    return await this.resetTokenRepo.findOne(userId);
   }
 
   async generateResetToken() {
-    return  crypto.randomBytes(32).toString("hex");
+    return crypto.randomBytes(32).toString("hex");
   }
 
-  async hashResetToken(token:string) {
+  async hashResetToken(token: string) {
     return crypto.createHash("sha256").update(token).digest("hex");
   }
 
-  async verifyResetToken(token:string, dbTokenHash:string) {
+  async verifyResetToken(token: string, dbTokenHash: string) {
     const tokenHash = await this.hashResetToken(token);
-    return tokenHash === dbTokenHash;
- 
+
+    return crypto.timingSafeEqual(Buffer.from(tokenHash), Buffer.from(dbTokenHash))
+
   }
 
-  async deleteResetToken(email:string) {
-    return await this.resetTokenRepo.deleteByEmail(email);
+  async deleteResetToken(userId: string) {
+    return await this.resetTokenRepo.deleteOne(userId);
   }
 }
