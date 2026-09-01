@@ -11,6 +11,7 @@ ALTER TABLE
     lists ADD PRIMARY KEY(id);
 ALTER TABLE
     lists ADD CONSTRAINT lists_board_id_foreign FOREIGN KEY(board_id) REFERENCES boards(id) ON DELETE CASCADE;
-
+ALTER TABLE
+    lists ADD CONSTRAINT board_lists_position_unique UNIQUE (board_id, position);
 -- migrate:down
 DROP TABLE IF EXISTS lists CASCADE
