@@ -1,10 +1,6 @@
 import { Pool } from "pg";
-import path from "path";
-
-import dotenv from "dotenv";
 
 const __dirname = import.meta.dirname;
-dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 
 if (

@@ -1,12 +1,15 @@
 import nodemailer from "nodemailer";
-import path from "node:path";
-import dotenv from "dotenv";
+
 
 const __dirname = import.meta.dirname;
-dotenv.config({ path: path.join(__dirname, "../../.env") });
 
-if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+try {
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
   throw new Error("Nodemailer Email User or Password not defined");
+}
+
+} catch (error) {
+  console.error(error)
 }
 
 const transporter = nodemailer.createTransport({
