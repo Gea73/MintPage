@@ -156,6 +156,14 @@ Represents a user's membership in a board and their role within that board.
 | `userId` | UUID | ID of the associated user |
 | `role` | MemberRole | Role of the user on the board |
 
+## Behavior
+
+| Method | Description |
+|---|---|
+| `canEdit()` | Determines if the member can make changes in the board |
+| `canManageMembers()` | Determines if the member has permission to manage other users within the board |
+
+
 ## Relationships
 
 - A `BoardMember` belongs to one `Board`.

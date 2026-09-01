@@ -50,4 +50,10 @@ export class BoardMember {
         return this.props.role
     }
 
+    public canEdit() {
+
+    }
+    public canManageMembers() {
+
+    }
 }
