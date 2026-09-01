@@ -10,11 +10,15 @@ export class LoginController {
   }
   async handler(req: Request, res: Response) {
     try {
-      const { username, email, password } = userSchema.parse(req.body);
+      const result = userSchema.safeParse(req.body);
 
-      if (!username || !email || !password) {
+      if (!result.success) {
         return res.status(400).json({ message: "Your data is not valid" });
       }
+
+      const username = result.data.username;
+      const email = result.data.email;
+      const password = result.data.password;
 
       const user = await this.userService.findUser(username);
 
@@ -37,10 +41,10 @@ export class LoginController {
 
       res
         .cookie("accessToken", accessToken, {
-          maxAge: 15 * 60 * 1000,
+          maxAge: 30 * 60 * 1000,
           httpOnly: true,
           sameSite: "strict",
-          secure: true,
+          secure: process.env.NODE_ENV === "production",
         })
         .status(200)
         .json({ message: "Login successful" });
