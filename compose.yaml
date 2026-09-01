@@ -25,6 +25,18 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  migrations:
+    image: amacneil/dbmate:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://user:12345@db:5432/mint?sslmode=disable
+    volumes:
+      - ./db:/db
+    command: up
+
   db:
   #creates a postgres instance
     image: postgres:18-bookworm
