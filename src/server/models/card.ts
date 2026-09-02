@@ -25,29 +25,37 @@ export class Card {
         const status = String(this.props.status).trim()
         const position = String(this.props.position).trim()
         const version = Number(this.props.version)
-        if (!id) {
-            throw new Error("Id is null")
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!listId) {
-            throw new Error("ListId is empty")
+        if (typeof listId !== "string" || !listId) {
+            throw new Error("ListId is invalid")
         }
+        if (typeof title !== "string" || !title) {
+            throw new Error("Title is invalid")
+        }
+
         if (title.length > 40) {
             throw new Error("Title is too long (40 characters)")
         }
         if (title.length < 2) {
             throw new Error("Title is too short (2 characters)")
         }
+        if (typeof description !== "string" || !description) {
+            throw new Error("Description is invalid")
+        }
+
         if (description.length > 400) {
             throw new Error("Description is too long (400 characters")
         }
-        if (!status) {
+        if (typeof status !== "string" || !status) {
             throw new Error("Status is invalid")
         }
-        if (!position) {
-            throw new Error("Position is empty")
+        if (typeof position !== "string" || !position) {
+            throw new Error("Position is invalid")
         }
-        if (!version || version < 0) {
-            throw new Error("Version has invalid value")
+        if (typeof version !== "number" || isNaN(version) || version < 0) {
+            throw new Error("Version is invalid")
         }
     }
 

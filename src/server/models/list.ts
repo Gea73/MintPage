@@ -18,13 +18,16 @@ export class List {
         const id = String(this.props.id).trim()
         const boardId = String(this.props.boardId).trim()
         const name = String(this.props.name).trim()
-        const position = String(this.props.name).trim()
+        const position = String(this.props.position).trim()
         const version = Number(this.props.version)
-        if (!id) {
-            throw new Error("Id is null")
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!boardId) {
-            throw new Error("OwnerId is empty")
+        if (typeof boardId !== "string" || !boardId) {
+            throw new Error("OwnerId is invalid")
+        }
+        if (typeof name !== "string" || !name) {
+            throw new Error("Name is invalid")
         }
         if (name.length > 40) {
             throw new Error("Name is too long (40 characters)")
@@ -32,11 +35,11 @@ export class List {
         if (name.length < 4) {
             throw new Error("Name is too short (4 characters)")
         }
-        if (!position) {
-            throw new Error("Position is empty")
+        if (typeof position !== "string" || !position) {
+            throw new Error("Position is invalid")
         }
-        if (!version || version < 0) {
-            throw new Error("Version has invalid value")
+        if (typeof version !== "number" || isNaN(version) || version < 0) {
+            throw new Error("Version is invalid")
         }
     }
 
@@ -63,14 +66,14 @@ export class List {
     public renameList() {
 
     }
-    public createCard(){
+    public createCard() {
 
     }
-    public deleteCard(){
+    public deleteCard() {
 
     }
-    public moveCard(){
-        
+    public moveCard() {
+
     }
-   
+
 }

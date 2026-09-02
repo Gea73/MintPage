@@ -18,11 +18,14 @@ export class Board {
         const ownerId = String(this.props.ownerId).trim()
         const name = String(this.props.name).trim()
         const version = Number(this.props.version)
-        if (!id) {
-            throw new Error("Id is null")
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!ownerId) {
-            throw new Error("OwnerId is empty")
+        if (typeof ownerId !== "string" || !ownerId) {
+            throw new Error("OwnerId is invalid")
+        }
+        if (typeof name !== "string" || !name) {
+            throw new Error("Name is invalid")
         }
         if (name.length > 40) {
             throw new Error("Name is too long (40 characters)")
@@ -30,8 +33,8 @@ export class Board {
         if (name.length < 4) {
             throw new Error("Name is too short (4 characters)")
         }
-        if (!version || version < 0) {
-            throw new Error("Version has invalid value")
+        if (typeof version !== "number" || isNaN(version) || version < 0) {
+            throw new Error("Version is invalid")
         }
     }
 

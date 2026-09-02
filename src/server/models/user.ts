@@ -17,12 +17,12 @@ export class User {
         const id = String(this.props.id).trim()
         const username = String(this.props.username).trim()
         const email = String(this.props.email).toLowerCase().trim()
-        const status = this.props.status
-        if (!id) {
-            throw new Error("Id is null")
+        const status = String(this.props.status).trim()
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!username) {
-            throw new Error("Username is empty")
+        if (typeof username !== "string" || !username) {
+            throw new Error("Username is invalid")
         }
         if (username.length > 40) {
             throw new Error("Username is too long (40 characters)")
@@ -30,8 +30,8 @@ export class User {
         if (username.length < 4) {
             throw new Error("Username is too short (4 characters)")
         }
-        if (!email) {
-            throw new Error("Email is empty")
+        if (typeof email !== "string" || !email) {
+            throw new Error("Email is invalid")
         }
         if (email.length > 50) {
             throw new Error("Email is too long (50 characters)")
@@ -42,8 +42,8 @@ export class User {
         if (!email.includes("@")) {
             throw new Error("Email doesn't contain @")
         }
-        if (!status) {
-            throw new Error("Status is empty")
+        if (typeof status !== "string" || !status) {
+            throw new Error("Status is invalid")
         }
     }
 

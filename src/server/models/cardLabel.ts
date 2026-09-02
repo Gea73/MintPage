@@ -20,18 +20,18 @@ export class CardLabel {
         const labelId = String(this.props.labelId).trim()
         const version = Number(this.props.version)
 
-        if (!id) {
-            throw new Error("Id is null")
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!cardId) {
-            throw new Error("CardId is empty")
+        if (typeof cardId !== "string" || !cardId) {
+            throw new Error("CardId is invalid")
         }
-        if (!labelId) {
-            throw new Error("LabelId is empty")
+        if (typeof labelId !== "string" || !labelId) {
+            throw new Error("LabelId is invalid")
         }
 
-        if (!version || version < 0) {
-            throw new Error("Version has invalid value")
+        if (typeof version !== "string" || isNaN(version) || version < 0) {
+            throw new Error("Version is invalid")
         }
     }
 

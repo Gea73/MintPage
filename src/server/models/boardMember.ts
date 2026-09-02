@@ -19,16 +19,16 @@ export class BoardMember {
         const boardId = String(this.props.boardId).trim()
         const userId = String(this.props.userId).trim()
         const role = String(this.props.role).trim()
-        if (!id) {
-            throw new Error("Id is null")
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!boardId) {
+        if (typeof boardId !== "string" || !boardId) {
             throw new Error("BoardId is invalid")
         }
-        if (!userId) {
+        if (typeof userId !== "string" || !userId) {
             throw new Error("UserId is invalid")
         }
-        if (!role) {
+        if (typeof role !== "string" || !role) {
             throw new Error("Role is invalid")
         }
     }

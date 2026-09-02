@@ -24,11 +24,14 @@ export class Label {
 
         const colorHexRegex: RegExp = /^#[0-9A-Fa-f]{6}$/i;
 
-        if (!id) {
-            throw new Error("Id is null")
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!boardId) {
-            throw new Error("BoardId is empty")
+        if (typeof boardId !== "string" || !boardId) {
+            throw new Error("BoardId is invalid")
+        }
+        if (typeof name !== "string" || !name) {
+            throw new Error("Name is invalid")
         }
         if (name.length > 40) {
             throw new Error("Name is too long (40 characters)")
@@ -36,15 +39,15 @@ export class Label {
         if (name.length < 2) {
             throw new Error("Name is too short (2 characters)")
         }
-        if (!colorHex) {
-            throw new Error("Colorhex is empty")
+        if (typeof colorHex !== "string" || !colorHex) {
+            throw new Error("Colorhex is invalid")
         }
 
         if (!colorHexRegex.test(colorHex)) {
             throw new Error("Colorhex is not a valid hex")
         }
-        if (!version || version < 0) {
-            throw new Error("Version has invalid value")
+        if (typeof version !== "string" || isNaN(version) || version < 0) {
+            throw new Error("Version is invalid")
         }
     }
 
