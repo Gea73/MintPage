@@ -1,6 +1,7 @@
 //DOM elements
-const changeTheme = document.querySelector(".change-theme");
 const root = document.documentElement;
+const changeTheme = document.querySelector(".change-theme");
+
 //get localstorage
 const savedTheme = localStorage.getItem("theme");
 
@@ -16,7 +17,12 @@ if (savedTheme === "dark") {
 
 //Change theme when clicked
 changeTheme.addEventListener("click", () => {
+  if (!changeTheme) {
+    return;
+  }
+
   const html = document.documentElement;
+
   html.classList.add("theme-transition");
   if (root.classList.contains("light")) {
     root.classList.remove("light");

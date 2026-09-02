@@ -2,11 +2,6 @@
 const loaderOverlay = document.querySelector(".loader-overlay");
 const errorMessageBox = document.querySelector(".error-message-box");
 
-if(!loaderOverlay || !errorMessageBox){
-    throw new Error("Components not loaded")
-}
-
-
 //Show the spinning loading wheel
 function showLoader() {
   //Shows loader and reset message
