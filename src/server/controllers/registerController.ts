@@ -9,12 +9,15 @@ export class RegisterController {
   }
   async handler(req: Request, res: Response) {
     try {
-      const { username, email, password } = userSchema.parse(req.body);
+      const result = userSchema.safeParse(req.body);
       //request the variables from body html
-
-      if (!username || !email || !password) {
+      if (!result.success) {
         return res.status(400).json({ message: "Your data is not valid" });
       }
+      const username = result.data.username
+      const email = result.data.email
+      const password = result.data.email
+
       //insert the new user on DB
       const newUser = await this.userService.createUser(
         username,
@@ -25,8 +28,10 @@ export class RegisterController {
       if (!newUser) {
         return res.status(500).json({ message: "User register failed" });
       }
+      
       return res.status(201).json({ message: "User Registred Successfully" });
-    } catch (error:any) {
+
+    } catch (error: any) {
       //if a user or email is already in db
       if (error.code === "23505") {
         return res.status(409).json({ message: "User or email already used" });
