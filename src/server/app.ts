@@ -13,6 +13,8 @@ import { router as resetPasswordRouter } from "./routes/resetPasswordRoutes.js";
 import { router as dashboardRouter } from "./routes/dashboardRoutes.js";
 import { slowDowner } from "./middleware/slowDown.js";
 import { rateLimiter } from "./middleware/rateLimit.js";
+import { notFoundHandler } from "./middleware/notFoundHandler.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 const __dirname = import.meta.dirname;
 
@@ -23,8 +25,8 @@ app.use(
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'"],
       objectSrc: ["'none'"],
-      styleSrc: ["'self'","https://cdnjs.cloudflare.com","https://fonts.googleapis.com"],
-      fontSrc: ["'self'","https://fonts.gstatic.com","https://cdnjs.cloudflare.com" ],
+      styleSrc: ["'self'", "https://cdnjs.cloudflare.com", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
       imgSrc: ["'self'", "data:"],
       connectSrc: ["'self'", String(process.env.API_URL)],
       frameAncestors: ["'none'"],
@@ -86,13 +88,8 @@ app.use("/reset-password", requestLimiter, resetPasswordRouter);
 
 app.use("/dashboard", requestLimiter, dashboardRouter);
 
-app.use((req, res) => {
-  res.status(404).json({ message: "Not Found" });
-});
-// eslint-disable-next-line no-unused-vars
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error(err);
-  res.status(500).json({ message: "Server Error" });
-});
+app.use(notFoundHandler);
+
+app.use(errorHandler);
 
 export { app };
