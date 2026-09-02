@@ -14,7 +14,7 @@ ALTER TABLE
 ALTER TABLE
     cards ADD CONSTRAINT cards_list_id_foreign FOREIGN KEY(list_id) REFERENCES lists(id) ON DELETE CASCADE;
 ALTER TABLE
-    lists ADD CONSTRAINT list_cards_position_unique UNIQUE (list_id, position);
+    cards ADD CONSTRAINT list_cards_position_unique UNIQUE (list_id, position);
 
 -- migrate:down
 DROP TABLE IF EXISTS cards CASCADE
