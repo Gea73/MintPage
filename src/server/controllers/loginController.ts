@@ -2,6 +2,8 @@ import { generateAccessToken } from "../utils/accessToken.js";
 import { userSchema } from "../schemas/zodSchemas.js";
 import { UserService } from "../services/userService.js";
 import { Request, Response } from "express";
+import { ValidationError } from "../errors/httpErrors.js";
+
 
 export class LoginController {
   userService
@@ -9,48 +11,49 @@ export class LoginController {
     this.userService = userService;
   }
   async handler(req: Request, res: Response) {
-    try {
-      const result = userSchema.safeParse(req.body);
 
-      if (!result.success) {
-        return res.status(400).json({ message: "Your data is not valid" });
-      }
+    const result = userSchema.safeParse(req.body);
 
-      const username = result.data.username;
-      const email = result.data.email;
-      const password = result.data.password;
+    if (!result.success) {
+      throw new ValidationError("One or more fields failed validation checks.", result.error.issues.map((issue) => ({
+        field: issue.path.join(".") || "body",
+        message: issue.message
 
-      const user = await this.userService.findUser(username);
-
-      if (!user)
-        return res.status(401).json({ message: "Invalid credentials" });
-
-      if (user.email !== email)
-        return res.status(401).json({ message: "Invalid credentials" });
-
-      const IsValidPassword = await this.userService.verifyUserPassword(
-        user.password_hash,
-        password,
-      );
-
-      if (!IsValidPassword) {
-        return res.status(401).json({ message: "Invalid credentials" });
-      }
-
-      const accessToken = await generateAccessToken(user.id);
-
-      res
-        .cookie("accessToken", accessToken, {
-          maxAge: 30 * 60 * 1000,
-          httpOnly: true,
-          sameSite: "strict",
-          secure: process.env.NODE_ENV === "production",
-        })
-        .status(200)
-        .json({ message: "Login successful" });
-    } catch (error: any) {
-      console.error(error.message);
-      res.status(500).json({ message: "Server Error" });
+      })))
     }
+
+    const username = result.data.username;
+    const email = result.data.email;
+    const password = result.data.password;
+
+    const user = await this.userService.findUser(username);
+
+    if (!user)
+      return res.status(401).json({ message: "Invalid credentials" });
+
+    if (user.email !== email)
+      return res.status(401).json({ message: "Invalid credentials" });
+
+    const IsValidPassword = await this.userService.verifyUserPassword(
+      user.password_hash,
+      password,
+    );
+
+    if (!IsValidPassword) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const accessToken = await generateAccessToken(user.id);
+
+    res
+      .cookie("accessToken", accessToken, {
+        maxAge: 30 * 60 * 1000,
+        httpOnly: true,
+        sameSite: "strict",
+        secure: process.env.NODE_ENV === "production",
+      })
+      .status(200)
+      .json({ message: "Login successful" });
+
   }
 }
