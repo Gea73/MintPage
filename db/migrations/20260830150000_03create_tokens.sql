@@ -19,7 +19,7 @@ CREATE TABLE password_reset_tokens(
     "status" token_status NOT NULL,
     created_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL DEFAULT NOW(),
     expires_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL DEFAULT NOW() + INTERVAL '1 hour',
-    used_at TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL);
+    used_at TIMESTAMP(0) WITHOUT TIME ZONE);
 ALTER TABLE
     password_reset_tokens ADD PRIMARY KEY(id);
 ALTER TABLE
