@@ -15,7 +15,7 @@ export class ResetTokenRepo {
 
   async findOne(userId: string) {
     const tokenQuery = await this.pool.query(
-      "SELECT * FROM password_reset_tokens WHERE user_id = $1 AND expires > NOW() ORDER BY created DESC LIMIT 1",
+      "SELECT * FROM password_reset_tokens WHERE user_id = $1 AND expires_at > NOW() ORDER BY created_at DESC LIMIT 1",
       [userId],
     );
     return tokenQuery.rows[0];
