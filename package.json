@@ -8,7 +8,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "build": "tsc",
     "start": "node ./dist/server/server.js",
-    "dev": "tsx watch ./server/src/server.ts"
+    "dev": "tsx watch ./src/server/server.ts"
   },
   "dependencies": {
     "argon2": "^0.45.1",
