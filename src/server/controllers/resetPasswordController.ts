@@ -29,7 +29,7 @@ export class ResetPasswordController {
       //validate the token
       const isValid = await this.resetTokenService.verifyResetToken(
         token,
-        dbToken.token_hash,
+        dbToken.hash,
       );
       if (!isValid) {
         return res.status(400).json({ message: "Invalid token" });

@@ -18,23 +18,21 @@ export class PasswordResetToken {
         const userId = String(this.props.userId).trim()
         const hash = String(this.props.hash).trim()
         const status = String(this.props.status).trim()
-        if (!id) {
-            throw new Error("Id is null")
+        if (typeof id !== "string" || !id) {
+            throw new Error("Id is invalid")
         }
-        if (!userId) {
-            throw new Error("UserId is empty")
-        }
-
-        if (!hash) {
-            throw new Error("Hash is empty")
-        }
-        if (!status) {
-            throw new Error("Status is empty")
+        if (typeof userId !== "string" || !userId) {
+            throw new Error("UserId is invalid")
         }
 
+        if (typeof hash !== "string" || !hash) {
+            throw new Error("Hash is invalid")
+        }
+        if (typeof status !== "string" || !status) {
+            throw new Error("Status is invalid")
+        }
 
     }
-
 
     get id(): string {
         return this.props.id

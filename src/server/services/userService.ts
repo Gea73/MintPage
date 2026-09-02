@@ -45,7 +45,7 @@ export class UserService {
       newPassword,
     );
     if (isEqualPassword) {
-      throw new Error("The new password is equal to the old");
+      throw new Error("The new password is equal to the old password");
     }
 
     const newPasswordHash = await this.hashUserPassword(newPassword);
