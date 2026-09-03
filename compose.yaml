@@ -10,12 +10,12 @@ services:
       #Expose the internal port of each server instance to a external random port
     environment:
     #server .env
-      NODE_ENV: development
-      API_URL: http://localhost:5000
-      JWT_SECRET: secret
-      DATABASE_URL: postgres://user:12345@db:5432/mint?sslmode=disable
-      EMAIL_USER: email
-      EMAIL_PASS: 12345
+      NODE_ENV: ${NODE_ENV}
+      API_URL: ${API_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      DATABASE_URL: ${DATABASE_URL}
+      EMAIL_USER: ${EMAIL_USER}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
 
   #run server only when db is healthy
     depends_on:
