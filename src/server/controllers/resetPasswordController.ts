@@ -38,8 +38,7 @@ export class ResetPasswordController {
       //update the user password with the same email
       await this.userService.resetUserPassword(newPassword, email);
 
-      //delete the token from DB after be used
-      await this.resetTokenService.deleteResetToken(email);
+     
 
       res.json({ message: "Password successfully reset" });
     } catch (error) {

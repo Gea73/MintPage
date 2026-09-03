@@ -36,8 +36,5 @@ export class ResetTokenService {
     return crypto.timingSafeEqual(Buffer.from(tokenHash), Buffer.from(dbTokenHash))
 
   }
-
-  async deleteResetToken(userId: string) {
-    return await this.resetTokenRepo.deleteOne(userId);
-  }
+  
 }
