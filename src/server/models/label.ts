@@ -46,7 +46,7 @@ export class Label {
         if (!colorHexRegex.test(colorHex)) {
             throw new Error("Colorhex is not a valid hex")
         }
-        if (typeof version !== "string" || isNaN(version) || version < 0) {
+        if (typeof version !== "number" || isNaN(version) || version < 0) {
             throw new Error("Version is invalid")
         }
     }

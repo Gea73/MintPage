@@ -30,7 +30,7 @@ export class CardLabel {
             throw new Error("LabelId is invalid")
         }
 
-        if (typeof version !== "string" || isNaN(version) || version < 0) {
+        if (typeof version !== "number" || isNaN(version) || version < 0) {
             throw new Error("Version is invalid")
         }
     }
