@@ -1,6 +1,5 @@
+import { error } from "node:console";
 import { Pool } from "pg";
-
-const __dirname = import.meta.dirname;
 
 
 if (
@@ -10,22 +9,21 @@ if (
   throw new Error("NODE_ENV undefined");
 }
 
-let pool:Pool;
 
-if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") {
-  pool = new Pool({
-    user: process.env.DB_USER,
-    host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
-    password: process.env.DB_PASS,
-    port: Number(process.env.DB_PORT),
-  });
-} else {
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  });
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 5000,
+  ssl: {
+    rejectUnauthorized: process.env.NODE_ENV === "production" ? true : false,
+  },
+});
+
+pool.on("error", (err) => {
+  console.error("Error in the Database", err)
+})
+
+
+
 export { pool };
