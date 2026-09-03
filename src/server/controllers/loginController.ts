@@ -3,6 +3,7 @@ import { userSchema } from "../schemas/zodSchemas.js";
 import { UserService } from "../services/userService.js";
 import { Request, Response } from "express";
 import { ValidationError } from "../errors/httpErrors.js";
+import { InvalidCredentialsError } from "../errors/domainErrors.js";
 
 
 export class LoginController {
@@ -15,7 +16,7 @@ export class LoginController {
     const result = userSchema.safeParse(req.body);
 
     if (!result.success) {
-      throw new ValidationError("One or more fields failed validation checks.", result.error.issues.map((issue) => ({
+      throw new ValidationError(undefined, result.error.issues.map((issue) => ({
         field: issue.path.join(".") || "body",
         message: issue.message
 
@@ -28,11 +29,10 @@ export class LoginController {
 
     const user = await this.userService.findUser(username);
 
-    if (!user)
-      return res.status(401).json({ message: "Invalid credentials" });
+    if (!user || user.email !== email) {
+      throw new InvalidCredentialsError()
 
-    if (user.email !== email)
-      return res.status(401).json({ message: "Invalid credentials" });
+    }
 
     const IsValidPassword = await this.userService.verifyUserPassword(
       user.password_hash,
@@ -40,7 +40,8 @@ export class LoginController {
     );
 
     if (!IsValidPassword) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      throw new InvalidCredentialsError()
+
     }
 
     const accessToken = await generateAccessToken(user.id);

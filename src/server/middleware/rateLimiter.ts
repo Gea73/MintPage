@@ -17,7 +17,7 @@ export const authRateLimiter = rateLimit({
   },
 
   handler: () => {
-    throw new TooManyRequestError("Too Many Requests")
+    throw new TooManyRequestError()
   },
 
 })
@@ -35,6 +35,6 @@ export const apiRateLimiter = rateLimit({
   },
 
   handler: () => {
-    throw new TooManyRequestError("Too Many Requests")
+    throw new TooManyRequestError()
   },
 });

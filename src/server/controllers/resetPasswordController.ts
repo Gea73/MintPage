@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { resetPasswordSchema } from "../schemas/zodSchemas.js";
 import { ResetTokenService } from "../services/resetTokenService.js";
 import { UserService } from "../services/userService.js";
+import { UnauthorizedError } from "../errors/httpErrors.js";
 
 export class ResetPasswordController {
   userService;
@@ -32,13 +33,14 @@ export class ResetPasswordController {
         dbToken.hash,
       );
       if (!isValid) {
-        return res.status(400).json({ message: "Invalid token" });
+        throw new UnauthorizedError("Invalid Token")
+
       }
 
       //update the user password with the same email
       await this.userService.resetUserPassword(newPassword, email);
 
-     
+
 
       res.json({ message: "Password successfully reset" });
     } catch (error) {
