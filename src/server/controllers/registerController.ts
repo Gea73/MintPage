@@ -16,7 +16,7 @@ export class RegisterController {
       }
       const username = result.data.username
       const email = result.data.email
-      const password = result.data.email
+      const password = result.data.password
 
       //insert the new user on DB
       const newUser = await this.userService.createUser(

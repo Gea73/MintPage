@@ -1,8 +1,6 @@
 import nodemailer from "nodemailer";
 
 
-const __dirname = import.meta.dirname;
-
 try {
   if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     throw new Error("EMAIL_USER or EMAIL_PASSWORD undefined");
