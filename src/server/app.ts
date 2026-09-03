@@ -12,7 +12,7 @@ import { router as forgotPasswordRouter } from "./routes/forgotPasswordRoutes.js
 import { router as resetPasswordRouter } from "./routes/resetPasswordRoutes.js";
 import { router as dashboardRouter } from "./routes/dashboardRoutes.js";
 import { slowDowner } from "./middleware/slowDown.js";
-import { rateLimiter } from "./middleware/rateLimit.js";
+import { apiRateLimiter, authRateLimiter } from "./middleware/rateLimiter.js";
 import { notFoundHandler } from "./middleware/notFoundHandler.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
@@ -72,21 +72,21 @@ app.use(
   express.static(path.join(__dirname, "../client/public"), { index: false }),
 );
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../client/public/landing-page.html"));
 });
 
-const requestLimiter = [slowDowner, rateLimiter];
 
-app.use("/register", requestLimiter, registerRouter);
 
-app.use("/login", requestLimiter, loginRouter);
+app.use("/register", authRateLimiter, slowDowner, registerRouter);
 
-app.use("/forgot-password", requestLimiter, forgotPasswordRouter);
+app.use("/login", authRateLimiter, slowDowner, loginRouter);
 
-app.use("/reset-password", requestLimiter, resetPasswordRouter);
+app.use("/forgot-password", authRateLimiter, slowDowner, forgotPasswordRouter);
 
-app.use("/dashboard", requestLimiter, dashboardRouter);
+app.use("/reset-password", authRateLimiter, slowDowner, resetPasswordRouter);
+
+app.use("/dashboard", apiRateLimiter, slowDowner, dashboardRouter);
 
 app.use(notFoundHandler);
 
