@@ -111,7 +111,7 @@ form.addEventListener("submit", async (e) => {
         messageLoader("Password reset successful! You can now login.");
         window.location.href = "login.html";
       } else {
-        messageLoader(String(data.message));
+        messageLoader(String(data.detail));
       }
     } catch (error) {
       console.error(error);

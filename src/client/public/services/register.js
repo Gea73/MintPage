@@ -78,12 +78,12 @@ form.addEventListener("submit", async (e) => {
       const data = await response.json();
 
       if (response.ok) {
-        messageLoader(String(data.message));
+        messageLoader(String(data.detail));
         location.href = "/login.html";
       } else if (response.status === 409) {
-        messageLoader(String(data.message));
+        messageLoader(String(data.detail));
       } else {
-        messageLoader(String(data.message));
+        messageLoader(String(data.detail));
       }
     } catch (error) {
       console.error(error);

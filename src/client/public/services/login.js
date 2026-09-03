@@ -66,10 +66,10 @@ form.addEventListener("submit", async (e) => {
 
       const data = await response.json();
       if (response.ok) {
-        messageLoader(String(data.message));
+        messageLoader(String(data.detail));
         window.location.href = "/dashboard";
       } else {
-        messageLoader(String(data.message));
+        messageLoader(String(data.detail));
       }
     } catch (error) {
       console.error(error);

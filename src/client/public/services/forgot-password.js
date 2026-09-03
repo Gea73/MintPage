@@ -44,10 +44,10 @@ form.addEventListener("submit", async (e) => {
       const data = await response.json();
 
       if (response.ok) {
-        messageLoader(String(data.message));
+        messageLoader(String(data.detail));
       } else {
         messageLoader("Email failed");
-        messageLoader(String("Error: " + data.message));
+        messageLoader(String("Error: " + data.detail));
       }
     } catch (error) {
       console.error(error);
