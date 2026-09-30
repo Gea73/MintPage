@@ -1,6 +1,7 @@
+import { uuidv7 } from "uuidv7"
 import { CardStatus } from "../types/enums.js"
 
-
+/*
 interface CardProps {
     id: string
     listId: string
@@ -9,22 +10,28 @@ interface CardProps {
     status: CardStatus
     position: string
     version: number
-}
+}*/
 
 export class Card {
 
-    constructor(private props: CardProps) {
+    constructor(id: string | null,
+        listId: string,
+        title: string,
+        description: string,
+        status: CardStatus,
+        position: string,
+        version: number) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const listId = String(this.props.listId).trim()
-        const title = String(this.props.title).trim()
-        const description = String(this.props.description).trim()
-        const status = String(this.props.status).trim()
-        const position = String(this.props.position).trim()
-        const version = Number(this.props.version)
+        const id = String(this.id ?? uuidv7()).trim()
+        const listId = String(this.listId).trim()
+        const title = String(this.title).trim()
+        const description = String(this.description).trim()
+        const status = String(this.status).trim()
+        const position = String(this.position).trim()
+        const version = Number(this.version)
         if (typeof id !== "string" || !id) {
             throw new Error("Id is invalid")
         }
@@ -61,28 +68,28 @@ export class Card {
 
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get listId(): string {
-        return this.props.listId
+        return this.listId
     }
 
     get title(): string {
-        return this.props.title
+        return this.title
     }
     get description(): string {
-        return this.props.description
+        return this.description
     }
     get status(): CardStatus {
-        return this.props.status
+        return this.status
     }
     get position(): string {
-        return this.props.position
+        return this.position
     }
 
     get version(): number {
-        return this.props.version
+        return this.version
     }
 
     public renameCard() {

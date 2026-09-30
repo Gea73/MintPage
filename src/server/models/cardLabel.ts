@@ -1,24 +1,28 @@
+import { uuidv7 } from "uuidv7"
 
-
+/*
 
 interface CardLabelProps {
     id: string
     cardId: string
     labelId: string
     version: number
-}
+}*/
 
 export class CardLabel {
 
-    constructor(private props: CardLabelProps) {
+    constructor(id: string | null,
+        cardId: string,
+        labelId: string,
+        version: number) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const cardId = String(this.props.cardId).trim()
-        const labelId = String(this.props.labelId).trim()
-        const version = Number(this.props.version)
+        const id = String(this.id ?? uuidv7()).trim()
+        const cardId = String(this.cardId).trim()
+        const labelId = String(this.labelId).trim()
+        const version = Number(this.version)
 
         if (typeof id !== "string" || !id) {
             throw new Error("Id is invalid")
@@ -37,19 +41,19 @@ export class CardLabel {
 
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get cardId(): string {
-        return this.props.cardId
+        return this.cardId
     }
 
     get labelId(): string {
-        return this.props.labelId
+        return this.labelId
     }
 
     get version(): number {
-        return this.props.version
+        return this.version
     }
 
 }

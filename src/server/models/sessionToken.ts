@@ -1,23 +1,21 @@
+import { uuidv7 } from "uuidv7";
 import { TokenStatus } from "../types/enums.js";
 
-interface SessionTokenProps {
-    id: string
-    userId: string
-    hash: string
-    status: TokenStatus
-}
 
 export class SessionToken {
 
-    constructor(private props: SessionTokenProps) {
+    constructor(id: string | null,
+        userId: string,
+        hash: string,
+        status: TokenStatus) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const userId = String(this.props.userId).trim()
-        const hash = String(this.props.hash).trim()
-        const status = String(this.props.status).trim()
+        const id = String(this.id ?? uuidv7()).trim()
+        const userId = String(this.userId).trim()
+        const hash = String(this.hash).trim()
+        const status = String(this.status).trim()
         if (typeof id !== "string" || !id) {
             throw new Error("Id is invalid")
         }
@@ -35,18 +33,18 @@ export class SessionToken {
     }
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get userId(): string {
-        return this.props.userId
+        return this.userId
     }
 
     get hash(): string {
-        return this.props.hash
+        return this.hash
     }
     get status(): TokenStatus {
-        return this.props.status
+        return this.status
     }
 
     public isValid() {

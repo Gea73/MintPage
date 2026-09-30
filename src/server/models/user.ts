@@ -1,23 +1,26 @@
+import { uuidv7 } from "uuidv7";
 import { UserStatus } from "../types/enums.js";
 
+/*
 interface UserProps {
     id: string
     username: string
     email: string
     status: UserStatus
 }
-
+*/
 export class User {
 
-    constructor(private props: UserProps) {
+    constructor(id: string | null, username: string, email: string, passwordHash: string, status: UserStatus) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const username = String(this.props.username).trim()
-        const email = String(this.props.email).toLowerCase().trim()
-        const status = String(this.props.status).trim()
+        const id = String(this.id ?? uuidv7()).trim()
+        const username = String(this.username).trim()
+        const email = String(this.email).toLowerCase().trim()
+        const passwordHash = String(this.passwordHash).trim()
+        const status = String(this.status).trim()
         if (typeof id !== "string" || !id) {
             throw new Error("Id is invalid")
         }
@@ -42,6 +45,9 @@ export class User {
         if (!email.includes("@")) {
             throw new Error("Email doesn't contain @")
         }
+        if (typeof passwordHash !== "string" || !passwordHash) {
+            throw new Error("PasswordHash is invalid")
+        }
         if (typeof status !== "string" || !status) {
             throw new Error("Status is invalid")
         }
@@ -49,19 +55,23 @@ export class User {
 
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get username(): string {
-        return this.props.username
+        return this.username
     }
 
     get email(): string {
-        return this.props.email
+        return this.email
+    }
+
+    get passwordHash(): string {
+        return this.passwordHash
     }
 
     get status(): UserStatus {
-        return this.props.status
+        return this.status
     }
 
 

@@ -1,24 +1,28 @@
+import { uuidv7 } from "uuidv7"
 import { MemberRole } from "../types/enums.js"
 
-
+/*
 interface BoardMemberProps {
     id: string
     boardId: string
     userId: string
     role: MemberRole
-}
+}*/
 
 export class BoardMember {
 
-    constructor(private props: BoardMemberProps) {
+    constructor(id: string | null,
+    boardId: string,
+    userId: string,
+    role: MemberRole) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const boardId = String(this.props.boardId).trim()
-        const userId = String(this.props.userId).trim()
-        const role = String(this.props.role).trim()
+        const id = String(this.id ?? uuidv7()).trim()
+        const boardId = String(this.boardId).trim()
+        const userId = String(this.userId).trim()
+        const role = String(this.role).trim()
         if (typeof id !== "string" || !id) {
             throw new Error("Id is invalid")
         }
@@ -35,19 +39,19 @@ export class BoardMember {
 
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get boardId(): string {
-        return this.props.boardId
+        return this.boardId
     }
 
     get userId(): string {
-        return this.props.userId
+        return this.userId
     }
 
     get role(): MemberRole {
-        return this.props.role
+        return this.role
     }
 
     public canEdit() {

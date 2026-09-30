@@ -1,26 +1,31 @@
-import { CardStatus } from "../types/enums.js"
+import { uuidv7 } from "uuidv7"
 
 
+/*
 interface LabelProps {
     id: string
     boardId: string
     name: string
     colorHex: string
     version: number
-}
+}*/
 
 export class Label {
 
-    constructor(private props: LabelProps) {
+    constructor(  id: string | null,
+    boardId: string,
+    name: string,
+    colorHex: string,
+    version: number) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const boardId = String(this.props.boardId).trim()
-        const name = String(this.props.name).trim()
-        const colorHex = String(this.props.colorHex).trim()
-        const version = Number(this.props.version)
+        const id = String(this.id ?? uuidv7()).trim()
+        const boardId = String(this.boardId).trim()
+        const name = String(this.name).trim()
+        const colorHex = String(this.colorHex).trim()
+        const version = Number(this.version)
 
         const colorHexRegex: RegExp = /^#[0-9A-Fa-f]{6}$/i;
 
@@ -53,22 +58,22 @@ export class Label {
 
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get boardId(): string {
-        return this.props.boardId
+        return this.boardId
     }
 
     get name(): string {
-        return this.props.name
+        return this.name
     }
     get colorHex(): string {
-        return this.props.colorHex
+        return this.colorHex
     }
 
     get version(): number {
-        return this.props.version
+        return this.version
     }
 
     public renameLabel() {

@@ -1,25 +1,31 @@
 
-
+/*
 interface ListProps {
     id: string
     boardId: string
     name: string
     position: string
     version: number
-}
+}*/
+
+import { uuidv7 } from "uuidv7"
 
 export class List {
 
-    constructor(private props: ListProps) {
+    constructor(id: string | null,
+        boardId: string,
+        name: string,
+        position: string,
+        version: number) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const boardId = String(this.props.boardId).trim()
-        const name = String(this.props.name).trim()
-        const position = String(this.props.position).trim()
-        const version = Number(this.props.version)
+        const id = String(this.id ?? uuidv7()).trim()
+        const boardId = String(this.boardId).trim()
+        const name = String(this.name).trim()
+        const position = String(this.position).trim()
+        const version = Number(this.version)
         if (typeof id !== "string" || !id) {
             throw new Error("Id is invalid")
         }
@@ -45,22 +51,22 @@ export class List {
 
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get boardId(): string {
-        return this.props.boardId
+        return this.boardId
     }
 
     get name(): string {
-        return this.props.name
+        return this.name
     }
     get position(): string {
-        return this.props.position
+        return this.position
     }
 
     get version(): number {
-        return this.props.version
+        return this.version
     }
 
     public renameList() {

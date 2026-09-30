@@ -1,23 +1,27 @@
+import { uuidv7 } from "uuidv7"
 
-
+/*
 interface BoardProps {
     id: string
     ownerId: string
     name: string
     version: number
-}
+}*/
 
 export class Board {
 
-    constructor(private props: BoardProps) {
+    constructor(id: string | null,
+        ownerId: string,
+        name: string,
+        version: number) {
         this.validateFields()
     }
 
     private validateFields() {
-        const id = String(this.props.id).trim()
-        const ownerId = String(this.props.ownerId).trim()
-        const name = String(this.props.name).trim()
-        const version = Number(this.props.version)
+        const id = String(this.id ?? uuidv7()).trim()
+        const ownerId = String(this.ownerId).trim()
+        const name = String(this.name).trim()
+        const version = Number(this.version)
         if (typeof id !== "string" || !id) {
             throw new Error("Id is invalid")
         }
@@ -40,19 +44,19 @@ export class Board {
 
 
     get id(): string {
-        return this.props.id
+        return this.id
     }
 
     get ownerId(): string {
-        return this.props.ownerId
+        return this.ownerId
     }
 
     get name(): string {
-        return this.props.name
+        return this.name
     }
 
     get version(): number {
-        return this.props.version
+        return this.version
     }
 
     public addMember() {
