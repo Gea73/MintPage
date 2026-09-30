@@ -130,106 +130,95 @@ PUT /boards/{boardId}/members/{userId}
 DELETE /boards/{boardId}/members/{userId}
 ```
 
-### Get board labels
+### Get labels
 
 ```
-GET /boards/{boardId}/labels
+GET /labels
 ```
 
 ### Create a new label
 
 ```
-POST /boards/{boardId}/labels
+POST /labels
 ```
 
 ### Update a label
 
 ```
-PUT /boards/{boardId}/labels/{labelId}
+PUT /labels/{labelId}
 ```
 
 ### Delete a label
 
 ```
-DELETE /boards/{boardId}/labels/{labelId}
+DELETE /labels/{labelId}
 ```
 
 ### Get lists
 
 ```
-GET /boards/{boardId}/lists
+GET /lists
 ```
 
 ### Create a list
 
 ```
-POST /boards/{boardId}/lists
+POST /lists
 ```
 
-### Update a list
+### Update or move a list
 
 ```
-PUT /boards/{boardId}/lists/{listId}
+PUT /lists/{listId}
 ```
 
 ### Delete a list
 
 ```
-DELETE /boards/{boardId}/lists/{listId}
+DELETE /lists/{listId}
 ```
 
-### Change the position of a list
+
+### Get all cards
 
 ```
-PUT /boards/{boardId}/lists/{listId}/position
-```
-
-### Get all card
-
-```
-GET /boards/{boardId}/lists/{listId}/cards
+GET /cards
 ```
 
 ### Create a card
 
 ```
-POST /boards/{boardId}/lists/{listId}/cards
+POST /cards
 ```
 
-### Update a card
+### Update or move a card
 
 ```
-PUT /boards/{boardId}/lists/{listId}/cards/{cardId}
+PUT /cards/{cardId}
 ```
 
 ### Delete a card
 
 ```
-DELETE /boards/{boardId}/lists/{listId}/cards/{cardId}
-```
-
-### Change the position or reorder a card
-
-```
-PUT /boards/{boardId}/lists/{listId}/cards/{cardId}/position
+DELETE /cards/{cardId}
 ```
 
 ### Get the card labels
 
 ```
-GET /boards/{boardId}/lists/cards/{cardId}/labels
+GET /cards/{cardId}/labels
 ```
 
 ### Add a label in the card
 
 ```
-POST /boards/{boardId}/lists/cards/{cardId}/labels
+POST /cards/{cardId}/labels
 ```
 
 ### Remove a label from the card
 
 ```
-DELETE /boards/{boardId}/lists/cards/{cardId}/labels/{cardLabelId}
+DELETE /cards/{cardId}/labels/{cardLabelId}
 ```
 
 ## WebSocket
